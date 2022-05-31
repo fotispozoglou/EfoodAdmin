@@ -86,7 +86,12 @@ app.get('/admin/login', admins.renderLogin );
 app.use('/admin', adminRoutes);
 
 // LISTEN
-app.listen(8080, () => {
+
+const port = process.env.PORT;
+
+app.listen(port, () => {
+
+  console.log(process.env);
 
   console.log("Admin Server Started");
 

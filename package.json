@@ -3,16 +3,9 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "start": "concurrently --kill-others \"nodemon ./admin/app.js\" \"nodemon ./client/app.js \" \"nodemon ./api/app.js\"",
-    "startAdmin": "concurrently --kill-others \"nodemon ./admin/app.js\" \"nodemon ./api/app.js\"",
-    "startClient": "concurrently --kill-others \"nodemon ./client/app.js\" \"nodemon ./api/app.js\""
+    "start": "node app.js"
   },
   "nodemonConfig": {
-    "ignore": [
-      "/home/fotis/Projects/Efood/admin/public/fontawesome/svgs/solid/*.svg",
-      "/home/fotis/Projects/Efood/admin/public/fontawesome/svgs/brands/*.svg",
-      "/home/fotis/Projects/Efood/admin/public/fontawesome/svgs/regular/*.svg"
-    ]
   },
   "author": "fotis",
   "license": "ISC",

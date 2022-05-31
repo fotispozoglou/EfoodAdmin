@@ -1,0 +1,27 @@
+<%- include('./partials/header.ejs'); %>
+<link rel="stylesheet" href="/styles/menu.css">
+
+<%- include('./partials/navbar.ejs'); %>
+
+<div id="main">
+  <div id="main_left">
+    <%- include('./partials/mobile_navbar.ejs'); %>
+  </div>
+  <div id="main_center">
+  </div>
+  <div id="main_right">
+    
+  </div>
+</div>
+
+<%- include('./partials/rootClose.ejs'); %>
+
+<%- include('./partials/scripts.ejs'); %>
+
+<script type="module" src="/scripts/controllers/menu/main.js"></script>
+
+<script type="module" src="/scripts/controllers/orders/main.js"></script>
+
+<script type="module" src="/scripts/controllers/main.js"></script>
+
+<%- include('./partials/footer.ejs'); %>

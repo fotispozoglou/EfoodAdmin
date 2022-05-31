@@ -1,0 +1,10 @@
+<script>
+  const navbar = document.querySelector("#navbar");
+  const resizeOps = () => {
+    document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
+    document.documentElement.style.setProperty('--navbar-height', `${navbar.getClientRects()[0].height}px`);
+  };
+
+  resizeOps();
+  window.addEventListener("resize", resizeOps);
+</script>

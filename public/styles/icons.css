@@ -1,0 +1,111 @@
+::before, ::after {
+  box-sizing: border-box;
+  margin: auto;
+  height: min-content;
+}
+
+.icon {
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  font-size: 25px;
+  display: flex;
+  height: 100%;
+  color: #6b6969;
+}
+
+.icon:hover {
+  cursor: pointer;
+}
+
+.icon-fw::before {
+  width: 1.25em;
+  /* height: 1.25em; */
+  text-align: center;
+}
+
+.icon::before {
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+.reg-icon {
+  font-weight: 400!important;
+}
+
+.fa-check-square {
+  color: #c44b4b;
+}
+
+.fa-times::before {
+  margin: auto;
+}
+
+.fa-plus {
+  border: none;
+}
+
+.back_btn {
+  margin-left: 10px;
+}
+
+.spinner_container {
+  height: 40px;
+  background-color: red;
+  border: 2px solid black;
+  transition: .25s height;
+}
+
+.spinner {
+  height: max-content;
+  width: max-content;
+  margin: 10px auto;
+  font-size: 35px;
+}
+
+.fa-spinner {
+  animation-name: spin;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+.collapsed {
+  height: 0.5px!important;
+  overflow: hidden;
+}
+
+.notification_actions .icon {
+  padding: 0px 8px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate( 0deg );
+  } 
+  100% {
+    transform: rotate( 360deg );
+  }
+}
+
+.icon_element {
+  display: flex;
+  flex-direction: row;
+  padding: 6px;
+  transition: .25s background-color;
+}
+
+.icon_text {
+  padding: 4px;
+  height: max-content;
+  margin: auto;
+  font-weight: bold;
+}
+
+.icon_element_icon {
+  padding: 4px;
+}
+
+.icon_element:hover {
+  cursor: pointer;
+  background-color: #f0eeee;
+}

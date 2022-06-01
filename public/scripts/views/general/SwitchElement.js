@@ -6,6 +6,7 @@ export default class SwitchElement extends DOMElement {
   _selectedValue;
   _selectedSelection;
   _onSwitch;
+  _errorText;
   _selectionsElements = [  ];
 
   constructor( selections, onSwitch = () => {} ) {
@@ -18,7 +19,21 @@ export default class SwitchElement extends DOMElement {
 
   getValue() { return this._selectedValue };
 
+  onError( message ) {
+
+    this._errorText.setText( message );
+
+  }
+
+  resetError(  ) {
+
+    this._errorText.setText( '' );
+
+  }
+
   _generateSelections() {
+
+    const selectionsContainer = new DOMElement("div").setClass('switch_element_selections');
 
     for ( const selection of this._selections ) {
 
@@ -44,23 +59,31 @@ export default class SwitchElement extends DOMElement {
 
         this._selectedSelection.select();
 
+        this.resetError();
+
         this._onSwitch( this._selectedValue );
 
       });
 
-      this._selectionsElements.push( selectionElement.build() );
+      selectionsContainer.append( selectionElement.build() );
 
     }
+
+    return selectionsContainer.getElement();
 
   }
 
   build() {
 
-    this._generateSelections();
+    const selectionsContainer = this._generateSelections();
 
     this.setClass('switch_selection');
 
-    this.append( ...this._selectionsElements );
+    this._errorText = new DOMElement("p").setClass('switch_selection_error_text');
+
+    const errorContainer = new DOMElement("div").setClass('switch_selection_error').append( this._errorText.getElement() ).getElement();
+
+    this.append( selectionsContainer, errorContainer );
 
     return this;
 

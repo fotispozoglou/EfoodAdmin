@@ -16,7 +16,7 @@ const Admin = require('./models/admin.js');
 const MongoDBStore = require("connect-mongo");
 
 // MONGO STUFF 
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/efood-admin';
+const dbUrl = 'mongodb://localhost:27017/efood-admin'; // process.env.DB_URL
 
 const admins = require('./controllers/admins.js');
 

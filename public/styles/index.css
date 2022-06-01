@@ -1067,10 +1067,25 @@ tbody {
 .switch_selection {
   width: 90%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   border-radius: 2px;
   margin: 10px auto;
-  background-color: rgb(211, 210, 210);
+  background-color: rgb(247, 247, 247);
+}
+
+.switch_element_selections {
+  display: flex;
+  flex-direction: row;
+}
+
+.switch_selection_error {
+  background-color: #e6e6e6;
+}
+
+.switch_selection_error_text {
+  color: #c17272;
+  font-size: 0.85em;
+  padding: 6px 0;
 }
 
 .switch_case {
@@ -1081,18 +1096,17 @@ tbody {
 
 .switch_case:hover {
   cursor: pointer;
-  background-color: #c8c7c7;
 }
 
 .switch_case_text {
   width: 100%;
   text-align: center;
-  padding: 6px;
-  border-radius: 4px;
+  padding: 8px;
 }
 
 .selected_case_text {
-  background-color: rgb(181, 180, 180);
+  background-color: rgb(236, 236, 236);
+  border: 1px solid #cecece;
 }
 
 .list_item_name {

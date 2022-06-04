@@ -310,6 +310,10 @@ td {
   display: none;
 }
 
+#header_logout_link {
+  text-decoration: none;
+}
+
 #header_logout {
   transition: .25s color;
 }
@@ -914,6 +918,10 @@ td {
 
 #confirm_action_calcel {
   margin: 5px 8px 5px 8px;
+  background-color: #eaeaea;
+  border: none;
+  color: #333;
+  border: 1px solid #dbdbdb;
 }
 
 #confirm_action_confirm {
@@ -1135,9 +1143,63 @@ tbody {
   margin: auto 5px;
 }
 
-@media only screen and (min-width: 500px) {
+.available_product {
+  padding: 4px;
+  background-color: #45d930ad;
+  border: 1px solid #5CB54F;
+  border-radius: 4px;
+  color: #f9f9f9;
+}
 
-  
+.unvailable_product {
+  padding: 4px;
+  background-color: #f7e5e5;
+  border: 1px solid var( --red-theme-main );
+  border-radius: 4px;
+  color: #c85656;
+}
+
+.navigation_btn {
+  width: max-content;
+  background-color: #dbdbdb;
+  margin: 40px 0 0 0;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1.6px solid #b5b5b5;
+  display: flex;
+  flex-direction: row;
+}
+
+.navigation_btn:hover {
+  cursor: pointer;
+}
+
+.navigation_text {
+  height: max-content;
+  padding: 6px;
+  margin: auto 10px;
+}
+
+@media only screen and (max-width: 500px) {
+
+  .list_item_name {
+    width: 100%;
+    text-align: center;
+  }
+
+  .unvailable_product {
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  #effected_items .list_item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .unvailable_product {
+    margin-top: 5px;
+  }
 
 }
 

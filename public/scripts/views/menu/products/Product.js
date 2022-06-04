@@ -97,7 +97,7 @@ export default class Product extends ListItem {
 
     const actionsBtn = new DOMElement("div")
       .setClass('icon available_btn fa-ellipsis-vertical')
-      .on('click', () => {
+      .on('click', e => {
 
         if ( this._expandedActions ) {
 
@@ -106,6 +106,8 @@ export default class Product extends ListItem {
           removeBtn.classList.add('hidden');
 
           this._selection.removeClass('hidden');
+
+          e.target.classList.remove('selected_actions_btn');
 
           if ( !this._available ) this.addClass('unavailable');
           
@@ -116,6 +118,8 @@ export default class Product extends ListItem {
           if ( this._selection.isSelected() ) this.onSelect(  );
 
           this.style(['backgroundColor', '#f0eeee']);
+
+          e.target.classList.add('selected_actions_btn');
 
           removeBtn.classList.remove('hidden');
 

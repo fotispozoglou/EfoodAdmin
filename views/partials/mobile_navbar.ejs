@@ -3,7 +3,7 @@
     <div id="mnavbar_header">
       <div id="close_mnavbar" class="icon"></div>
       <% if( currentUser ) { %>
-        <a title="logout" href="/admin/logout"><div id="header_logout" class="icon fa-door-open"></div></a>
+        <a id="header_logout_link" title="logout" href="/admin/logout"><div id="header_logout" class="icon fa-arrow-right-from-bracket"></div></a>
       <% } %>
     </div>
     <div id="mnavbar_options">
@@ -46,11 +46,10 @@
       
       <div id="menu_mnavbar_option" class="mnavbar_main_option">
         <div class="mnavbar_main_option_name">
-          <p class="mnavbar_main_option_name_text">Admins</p>
+          <p class="mnavbar_main_option_name_text">Analytics</p>
         </div>
         <div class="mnavbar_main_option_items">
-          <p id="mnavbar_admins_all" class="mnavbar_sub_option">All</p>
-          <p id="mnavbar_admins_register" class="mnavbar_sub_option">Register</p>
+          <p id="mnavbar_anayltics_orders" class="mnavbar_sub_option">Orders</p>
         </div>
       </div>
     </div>

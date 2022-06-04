@@ -21,19 +21,27 @@ export default class ProductAvailabilityElement extends ListItem {
 
     this.setClass('list_item product_availability').getElement();
 
-    const currentState = new DOMElement("div").setClass( ICONS.CIRCLE );
+    // const currentState = new DOMElement("div").setClass( ICONS.CIRCLE );
 
-    const arrow = new DOMElement("div").setClass( `state_arrow ${ICONS.ANGLE_RIGHT}` ).getElement();
+    // const arrow = new DOMElement("div").setClass( `state_arrow ${ICONS.ANGLE_RIGHT}` ).getElement();
 
-    const nextState = new DOMElement("div").setClass( ICONS.CIRCLE );
+    // const nextState = new DOMElement("div").setClass( ICONS.CIRCLE );
 
-    this._available ? currentState.addClass('available_circle') : currentState.addClass('unavailable_circle');
+    // this._available ? currentState.addClass('available_circle') : currentState.addClass('unavailable_circle');
 
-    this._available ? nextState.addClass('unavailable_circle') : nextState.addClass('available_circle');
+    // this._available ? nextState.addClass('unavailable_circle') : nextState.addClass('available_circle');
 
-    const stateContainer = new DOMElement("div").setClass('product_state_container').append( currentState.getElement(), arrow, nextState.getElement() ).getElement();
+    const stateText = new DOMElement("p")
+      .setClass(`product_state_text ${ this._available ? 'unvailable_product' : 'available_product' }`)
+      .setText( this._available ? 'not available' : 'available')
+      .getElement();
 
-    this.append( name, stateContainer );
+    const stateContainer = new DOMElement("div")
+      .setClass('product_state_container')
+      // .append( currentState.getElement(), arrow, nextState.getElement() )
+      .getElement();
+
+    this.append( name, stateText );
 
     return this._element;
 

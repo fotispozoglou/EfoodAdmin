@@ -8,6 +8,7 @@ import ConfirmActionView from "../views/general/ConfirmActionView.js";
 import { controlRenderAdminBar } from "./admin/admin.js";
 import { initMenu } from "./menu/main.js";
 import { initOrders } from "./orders/main.js";
+import { initAnalytics } from "./analytics/main.js";
 import { controlRenderProducts } from "./menu/products.js";
 import { addNotification } from "./general/notifications.js";
 import { MESSAGE } from "../config/types.js";
@@ -79,6 +80,8 @@ const init = async () => {
   await initMenu();
 
   await initOrders();
+
+  await initAnalytics();
 
   controlRenderAdminBar();
 

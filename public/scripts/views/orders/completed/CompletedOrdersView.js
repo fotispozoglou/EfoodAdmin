@@ -4,6 +4,7 @@ import InputElement from '../../general/inputs/InputElement.js';
 import CompletedOrder from './CompletedOrder.js';
 import EmptyListItem from '../../base/EmptyListItem.js';
 import AnalyticsTable from '../../general/AnalyticsTable.js';
+import NavigationButton from '../../general/NavigationButton.js';
 
 export default new class CompletedOrdersView extends ListView {
   _itemComponent = CompletedOrder;
@@ -21,7 +22,7 @@ export default new class CompletedOrdersView extends ListView {
 
   setAnalytics( analytics ) {
 
-    this._analyticsTable.update( analytics );
+    // this._analyticsTable.update( analytics );
 
   }
 
@@ -43,7 +44,7 @@ export default new class CompletedOrdersView extends ListView {
 
     if ( this._hasRendered ) return this._element;
 
-    this._analyticsTable = new AnalyticsTable( this._data.analytics );
+    const navigateAnalytics = new NavigationButton('orders analytics', 'fa-chart-line');
 
     this._searchable = this._data.searchable;
 
@@ -65,7 +66,7 @@ export default new class CompletedOrdersView extends ListView {
 
     this._hasRendered = true;
 
-    return new DOMElement("div").setID( this.id ).setClass('list').append( this._analyticsTable.build(), header, this._body.getElement() ).getElement();
+    return new DOMElement("div").setID( this.id ).setClass('list').append( navigateAnalytics.build(), header, this._body.getElement() ).getElement();
 
   }
 

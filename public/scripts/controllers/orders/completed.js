@@ -57,7 +57,8 @@ export const controlRenderCompletedOrders = async () => {
   ViewManager.render( CompletedOrdersView, {
     items: [  ],
     methods: {
-      onIntersect: controlLoadNextCompletedOrders
+      onIntersect: controlLoadNextCompletedOrders,
+      onRenderAnalytics: () => {  }
     },
     itemMethods: {
     },

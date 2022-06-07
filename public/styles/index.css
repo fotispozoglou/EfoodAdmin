@@ -1180,6 +1180,24 @@ tbody {
   margin: auto 10px;
 }
 
+#barChart {
+  display: block;
+  box-sizing: border-box;
+  margin: 20px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+canvas {
+  max-width: 100%;
+}
+
+.chart_element {
+  background-color: white;
+  margin: 20px;
+  border-radius: 6px;
+}
+
 @media only screen and (max-width: 500px) {
 
   .list_item_name {

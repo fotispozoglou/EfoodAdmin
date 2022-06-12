@@ -11,18 +11,11 @@ export default new class CompletedOrdersView extends ListView {
   _parent = document.querySelector("#main_center");
   _rerender = true;
   title = "completed orders";
-  _analyticsTable;
   _noItemsItem = new EmptyListItem({ _id: 1, name: 'No Completed Orders', icon: 'fa-check-double' }, {  });
 
   removeOrder( orderID ) {
 
     this._ordersCarousel.remove( orderID );
-
-  }
-
-  setAnalytics( analytics ) {
-
-    // this._analyticsTable.update( analytics );
 
   }
 
@@ -44,7 +37,8 @@ export default new class CompletedOrdersView extends ListView {
 
     if ( this._hasRendered ) return this._element;
 
-    const navigateAnalytics = new NavigationButton('orders analytics', 'fa-chart-line');
+    const navigateAnalytics = new NavigationButton('orders analytics', 'fa-chart-line')
+      .on('click', () => { this._data.methods.onRenderAnalytics(); });
 
     this._searchable = this._data.searchable;
 

@@ -1,4 +1,4 @@
-const ordersAnalyticsBtn = document.querySelector("#mnavbar_anayltics_orders");
+export const ordersAnalyticsBtn = document.querySelector("#mnavbar_anayltics_orders");
 
 import { controlRenderOrdersAnalytics } from "./orders.js";
 

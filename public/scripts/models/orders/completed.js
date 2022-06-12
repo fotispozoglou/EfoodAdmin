@@ -30,7 +30,7 @@ export const loadCompletedOrders = async () => {
 
   if ( !error ) {
 
-    state.orders.push( data.orders );
+    state.orders.push( ...data.orders );
 
     state.currentPage += 1;
 

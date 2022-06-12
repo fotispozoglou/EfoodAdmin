@@ -51,200 +51,237 @@
   color: white;
 }
 
-.cuisine_order_preview {
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  border-radius: 4px;
-  border: 2px solid #ddd;
-}
-
-.cuisine_order_preview_header {
-  box-shadow: 0 4px 8px -5px rgba(0, 0, 0, 0.2);
-}
-
-.cuisine_order_preview_header_title {
-  text-align: center;
-  padding: 12px;
-  color: #c44b4b;
-  font-weight: bolder;
-}
-
-.cuisine_order_product_preview_quantity {
-  background-color: inherit!important;
-}
-
-.cuisine_order_product_preview_name {
-  padding: 6px;
-}
-
-.cuisine_order_product_preview_row {
-  margin: 10px 0;
-}
-
-.cuisine_order_preview_footer {
-  display: flex;
-  flex-direction: row;
-  box-shadow: 0 -4px 8px -5px rgba(0, 0, 0, 0.2);
-}
-
-.cuisine_order_preview_footer_action {
-  margin: 10px;
-  width: auto;
-  flex: 1;
-}
-
-.cuisine_orders {
+#cuisine_orders_container {
   width: 100%;
-  flex: 1;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #444444cf;
+  z-index: 12345;
   display: flex;
   flex-direction: column;
+} 
+
+#cuisine_hint {
+  margin: auto;
+}
+
+.cuisine_hint_icon {
+  height: max-content;
+  margin-top: 30px;
+}
+
+.cuisine_hint_text {
+  padding: 6px;
+  background-color: #c44b4b;
+  border-radius: 6px;
+  color: white;
+}
+
+#right_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.close_cuisine_orders {
+  width: max-content;
+  height: max-content!important;
+  color: #eee!important;
+  margin: 20px auto!important;
+}
+
+#all_cuisine_orders {
+  width: max-content;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  margin-top: auto;
+  height: max-content;
+  background-color: #88858582;
+  margin: 10px;
+  border-radius: 6px;
+  padding: 0 10px;
 }
 
 .cuisine_order {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  margin: 0 auto;
+  background-color: #dbdbdb;
+  margin: 8px;
+  border-radius: 6px;
+  padding: 4px 8px;
 }
 
-.cuisine_order_header {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  margin: 10px;
-  border-radius: 4px;
+.cuisine_order {
+  cursor: pointer;
 }
 
-.cuisine_order_header_back {
-  border-radius: 4px;
-  padding: 4px 6px 4px 10px;
-  margin: 0!important;
-  height: min-content!important;
-  position: absolute;
-}
-
-.cuisine_order_header_title {
-  border-radius: 4px;
-  flex: 1;
-  height: max-content;
-  padding: 8px;
-  text-align: center;
-  margin: auto;
+.cuisine_order_number {
   font-weight: bolder;
 }
 
-.cuisine_order_products {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+.cuisine_order_products .list_item {
+  color: grey;
+  font-size: 0.85em;
 }
 
-.cuisine_order_product {
-  width: 95%;
+#left_container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+#cuisine_orders_header {
+  display: flex;
+  flex-direction: row;
+}
+
+#cuisine_orders_body {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+}
+
+#selected_cuisine_order_manage {
+  margin: 5px auto;
+  max-width: 35em;
+  display: flex;
+  flex-direction: row;
+}
+
+.cuisine_order_manage_btn {
+  border-radius: 4px;
+  margin-left: 10px;
+  transition: .25s color, .25s background-color;
+}
+
+.ready_order_btn {
+  background-color: #37df3730;
+  border: 2px solid #37df37;
+  color: #37df37;
+}
+
+.making_order_btn {
+  background-color: #e4a31830;
+  border: 2px solid #e09d21;
+  color: #e09d21; 
+}
+
+.making_order {
+  background-color: #e09d21!important;
+}
+
+.cancel_order_btn {
+  background-color: #e4181830;
+  border: 2px solid #e02121;
+  color: #e02121;
+}
+
+.cuisine_order_manage_btn .icon {
+  color: inherit;
+}
+
+.cuisine_order_manage_btn .icon_text {
+  color: inherit;
+}
+
+.cuisine_order_manage_btn:hover {
+  color: white;
+}
+
+.ready_order_btn:hover {
+  background-color: #37df37!important;
+}
+
+.making_order_btn:hover {
+  background-color: #e09d21!important;
+}
+
+.cancel_order_btn:hover {
+  background-color: #e02121!important;
+}
+
+#cuisine_orders_title {
   margin: 10px auto;
-  padding: 0;
-  border-radius: 6px;
+  font-size: 1.4em;
+  color: #eee;
+  background-color: #88858582;
+  padding: 10px;
+  border-radius: 2px;
+  width: 90%;
+  text-align: center;
+}
+
+.selected_cuisine_order {
   background-color: white;
 }
 
-.cuisine_order_product_header {
-  width: 100%;
+.cuisine_order_container {
   display: flex;
-  border-radius: 4px 4px 0 0;
-  box-shadow: 0 4px 8px -5px rgba(0, 0, 0, 0.2);
+  flex-direction: column;
 }
 
-.cuisine_order_product_header_info {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-}
-
-.cuisine_order_product_header_quantity {
-  font-weight: bolder;
-  padding: 6px;
-  height: max-content;
-  margin: auto;
-}
-
-.cuisine_order_product_header_name {
-  font-weight: bolder;
-  padding: 8px;
-  flex: 1;
+.cuisine_order_username {
   text-align: center;
 }
 
-.cuisine_order_product_name {
-  width: 100%;
-  padding: 8px;
+#selected_cuisine_order_container {
+  flex: 1;
+  overflow: auto;
+}
+
+#selected_cuisine_order {
+  overflow: auto;
+}
+
+.selected_cuisine_order_product {
+  background-color: #e8e5e5;
+  margin: 10px;
+  border-radius: 6px;
+}
+
+.selected_cuisine_order_product_quantity {
+  text-align: center;
   font-weight: bolder;
-  text-align: left;
-  font-size: 1.0em;
+  padding: 6px;
+  margin-left: 5px;
+}
+
+.selected_cuisine_order_ingredients {
+  height: max-content;
+}
+
+.selected_cuisine_order_ingredients .list_item {
+  padding: 4px;
+  color: gray;
+}
+
+.selected_cuisine_order_ingredients .list_empty {
+  margin-top: 10px;
+}
+
+.selected_cuisine_order_product_comments {
+  padding: 6px;
+  color: #c42121;
   font-weight: bolder;
 }
 
-.cuisine_order_product_body {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 1px;
+.selected_cuisine_order_product_name {
+  flex: 1;
+  text-align: center;
+  font-weight: bolder;
   padding: 6px;
 }
 
-.cuisine_order_product_ingredient {
-  color: #afb1b3;
+.selected_cuisine_order_product_icon {
+  margin-right: 5px;
+  color: #d52525!important;
 }
 
-.cuisine_order_product_body_title {
-  font-weight: bolder;
-  margin-bottom: 6px;
-}
-
-.cuisine_order_product_comments_title {
-  padding: 0 6px 6px 6px;
-  font-weight: bolder;
-}
-
-.cuisine_order_product_body:empty {
-  display: none;
-}
-
-.cuisine_order_product_tier_name {
-  padding: 4px;
-  border-radius: 6px;
-  margin-top: 4px;
-  border: 2px solid rgba(0, 0, 0, 0.09);
-}
-
-.cuisine_order_product_comments {
-  padding: 0 6px 6px 6px;
-  border-radius: 4px;
-  color: #bb1c1c;
-  font-weight: bolder;
-}
-
-.cuisine_order_product_comments:empty {
-  display: none;
-}
-
-.cuisine_order_footer {
+.selected_cuisine_order_product_header {
   display: flex;
-}
-
-.cuisine_order_action {
-  color: #369f20;
-  border: 2px solid #369f20;
-  margin: auto;
-  width: 95%;
-  margin: 10px auto;
-}
-
-.cuisine_order_action:hover {
-  color: white;
-  background-color: #369f20;
+  flex-direction: row;
 }
 
 .delivery_order {

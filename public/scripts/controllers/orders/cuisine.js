@@ -3,13 +3,14 @@ import * as model from '../../models/orders/cuisine.js';
 import { closeMobileNavbar } from '../main.js';
 import CuisineOrdersView from '../../views/orders/cuisine/CuisineOrdersView.js';
 import ViewManager from '../../views/ViewManager.js';
-import CuisineOrderView from '../../views/orders/cuisine/CuisineOrderView.js';
 import { addNotification } from '../general/notifications.js';
 
 import { MESSAGE } from '../../config/types.js';
 import { cuisineOrdersNumber } from './main.js';
 import { ORDER } from '../../config/statusCodes.js';
 import { addToCorrectList } from './checker.js';
+import CuisineHint from '../../views/orders/cuisine/CuisineHint.js';
+import { pushToPreference, removeFromPreference } from '../../models/preferences.js';
 
 const controlReadyOrder = async orderID => {
 
@@ -19,22 +20,21 @@ const controlReadyOrder = async orderID => {
 
   CuisineOrdersView.removeItems( orderID );
 
+  CuisineOrdersView.showSuccess('order is ready');
+
   addToCorrectList({ status: data.actualStatus, _id: orderID });
 
 };
 
-const controlShowOrder = async orderID => {
+const controlCancelOrder = async orderID => {
 
-  const { data, error } = await model.loadOrder( orderID );
+  const { data, error } = await model.cancelOrder( orderID );
 
-  if ( error ) return addNotification({ text: "Error loading order", type: MESSAGE.ERROR, duration: 4 });
+  if ( error ) return addNotification({ text: "Failed to cancel order", type: MESSAGE.ERROR, duration: 4 });
 
-  ViewManager.render( CuisineOrderView, {
-    order: data.order,
-    methods: {
-      onGoBack: controlRenderCuisineOrders
-    }
-  }, true);
+  CuisineOrdersView.removeItems( orderID );
+
+  CuisineOrdersView.showSuccess('order is canceled');
 
 };
 
@@ -68,17 +68,39 @@ export const controlNotifyNewCuisineOrder = order => {
 
 }
 
-export const controlRenderCuisineOrders = async () => {
+const controlRenderSelectedOrder = async orderID => {
 
-  ViewManager.setRenderPrevious( controlRenderCuisineOrders );
+  const { data, error } = await model.loadOrder( orderID );
 
-  ViewManager.render( CuisineOrdersView, {
-    items: model.state.orders,
-    itemMethods: {
-      onOrderReady: orderID => { controlReadyOrder( orderID ) },
-      onShowOrder: orderID => { controlShowOrder( orderID ); }
-    }
-  }, true);
+  const { order } = data;
+
+  CuisineOrdersView.renderSelectedOrder( order );
+
+};
+
+const controlToggleMakingOrder = orderID => {
+
+  if ( model.state.makingOrders.includes( orderID ) ) {
+
+    model.state.makingOrders.splice( model.state.makingOrders.indexOf( orderID ), 1 );
+
+    removeFromPreference( 'making', orderID );
+
+    CuisineOrdersView.removeMaking( orderID );
+
+  } else {
+
+    model.state.makingOrders.push( orderID );
+
+    pushToPreference( 'making', orderID );
+
+    CuisineOrdersView.addMaking( orderID );
+
+  }
+
+};
+
+const controlRenderCuisineManagement = async () => {
 
   if ( model.state.toLoadIDS.length > 0 ) {
     
@@ -88,9 +110,33 @@ export const controlRenderCuisineOrders = async () => {
 
   }
 
+  CuisineOrdersView.addMaking( ...model.state.makingOrders );
+
+  document.querySelector("#cuisine_orders_container").classList.remove('hidden');
+
   model.state.newOrdersCount = 0;
 
   cuisineOrdersNumber.textContent = ``;
+
+};
+
+export const controlRenderCuisineOrders = async () => {
+
+  ViewManager.setRenderPrevious( controlRenderCuisineOrders );
+
+  ViewManager.render( CuisineHint, {
+    onRenderManagement: () => { controlRenderCuisineManagement(); }
+  }, true);
+
+  CuisineOrdersView.render({
+    items: model.state.orders,
+    itemMethods: {
+      onOrderReady: orderID => { controlReadyOrder( orderID ); },
+      onCancelOrder: orderID => { controlCancelOrder( orderID ); },
+      onLoadOrder: orderID => { controlRenderSelectedOrder( orderID ); },
+      onMakingOrder: orderID => { controlToggleMakingOrder( orderID ); }
+    }
+  });
 
   closeMobileNavbar();
 

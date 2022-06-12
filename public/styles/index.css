@@ -12,10 +12,12 @@
   --red-theme-deep: #913737;
 
   --success-main: #1EB413;
-  --info-main: #4B5EC4;
+  --info-main: #F4BE1E;
+  --primary-main: #4B5EC4;
 
   --success-main-watered: #3bc13625;
-  --info-main-watered: #4b5dc42a;
+  --info-main-watered: #F4BE1E24;
+  --primary-main-watered: #4b5dc42a;
 
 }
 
@@ -178,6 +180,25 @@ td {
 .info_btn:hover {
   background-color: var( --info-main )!important;
   color: white!important;
+}
+
+.primary_btn {
+  background-color: var( --primary-main-watered )!important;
+  border-color: var( --primary-main )!important;
+  color: var( --primary-main )!important;
+}
+
+.primary_btn:hover {
+  background-color: var( --primary-main )!important;
+  color: white!important;
+}
+
+.success_watered {
+  background-color: #4cfb6882!important;
+}
+
+.errored_watered {
+  background-color: #d01f1f82!important;
 }
 
 .input_error, .selections_error  {
@@ -1162,7 +1183,7 @@ tbody {
 .navigation_btn {
   width: max-content;
   background-color: #dbdbdb;
-  margin: 40px 0 0 0;
+  margin: 40px 0 0 2.5%;
   padding: 12px;
   border-radius: 6px;
   border: 1.6px solid #b5b5b5;

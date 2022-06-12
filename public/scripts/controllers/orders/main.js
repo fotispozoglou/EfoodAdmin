@@ -17,6 +17,7 @@ import { controlRenderDeliveryOrders } from "./delivery.js";
 import { controlRenderPendingOrders } from "./pending.js";
 
 import { checkForNewOrders } from '../../models/orders/checker.js';
+import { initializeMakingOrders } from "../../models/orders/cuisine.js";
 
 const initialiazeListeners = () => {
 
@@ -55,6 +56,8 @@ const initialiazeListeners = () => {
 };
 
 export const initOrders = async () => {
+
+  initializeMakingOrders();
 
   initialiazeListeners();
 

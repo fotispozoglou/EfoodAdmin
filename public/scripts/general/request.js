@@ -67,8 +67,6 @@ export const GET = async url => {
 
   const { options, error } = await getRequestOptions('GET');
 
-  console.log( options );
-
   if ( error ) return { error: Error("Cannot Get Options") };
 
   return await fetch( url, options )
@@ -91,8 +89,6 @@ export const GET = async url => {
 export const POST = async ( url, body ) => {
 
   const { options, error } = await getRequestOptions('POST', body);
-
-  console.log( options );
 
   if ( error ) return { error: Error("Cannot Get Options") };
 

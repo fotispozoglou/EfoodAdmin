@@ -12,9 +12,11 @@ export const classes = {
     CHECK_CIRCLE: "icon fa-check-circle",
     SHIELD: "icon fa-shield-halved",
     USER_SHIELD: "icon fa-user-shield",
-    LIST_CHECK: "icon fa-list-check",
+    LIST_CHECK: "icon fa-check-to-slot",
     TIMES: "icon fa-times",
     ROTATE: "icon fa-rotate",
-    CIRCLE: "icon fa-circle"
+    CIRCLE: "icon fa-circle",
+    WARNING: "icon fa-triangle-exclamation",
+    POINTER: "icon fa-hand-pointer"
   }
 };

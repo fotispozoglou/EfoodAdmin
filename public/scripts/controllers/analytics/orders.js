@@ -7,6 +7,9 @@ import { MESSAGE } from '../../config/types.js';
 
 import * as model from '../../models/analytics/orders.js';
 
+import { closeMobileNavbar, controlConfirmAction, setSelectedButton } from "../main.js";
+import { ordersAnalyticsBtn } from './main.js';
+
 export const controlRenderOrdersAnalytics = async () => {
 
   const { data, error } = await model.loadAllOrdersAnalytics();
@@ -20,5 +23,9 @@ export const controlRenderOrdersAnalytics = async () => {
   ViewManager.render( OrdersAnalyticsView, {
     orders
   }, true );
+
+  setSelectedButton( ordersAnalyticsBtn );
+
+  closeMobileNavbar();
 
 };

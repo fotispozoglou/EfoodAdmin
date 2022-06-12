@@ -57,13 +57,13 @@ export default class DeliveryOrder extends DOMElement {
       .setClass('info_btn delivery_order_footer_action')
       .on('click', () => { onOrderClick( this._id ); })
       .setText('details')
-      .getElement()
+      .getElement();
 
     const completeOrderBtn = new DOMElement("button")
-      .setClass('success_btn delivery_order_footer_action')
+      .setClass('primary_btn delivery_order_footer_action')
       .on('click', () => { onOrderComplete( this._id ); })
       .setText('complete')
-      .getElement()
+      .getElement();
 
     const footer = new DOMElement("div").setClass('delivery_order_footer').append( completeOrderBtn, showOrderInfoBtn ).getElement()
 

@@ -27,6 +27,32 @@ export default class ListElement extends DOMElement {
 
   setNoItemsItem( item = EmptyListItem ) { this._noItemsItem = item; }
 
+  hideNoItemsItem() {
+
+    this._noItemsItem.remove();
+
+  }
+
+  showNoItemsItem() {
+
+    if ( !this ) return;
+
+    this.hideNoItemsItem();
+
+    this.append( this._noItemsItem );
+
+  }
+
+  customModify( callback ) {
+
+    for ( const element of this._itemsELS ) {
+
+      callback( element );
+
+    }
+
+  }
+
   updateItem( itemID, itemData ) {
 
     let found = false;
@@ -61,6 +87,8 @@ export default class ListElement extends DOMElement {
 
         this._itemsELS[ itemIndex ].remove();
 
+        this._itemsELS.splice( itemIndex, 1 );
+
         found = true;
 
       }
@@ -70,6 +98,8 @@ export default class ListElement extends DOMElement {
     }
 
     if ( this._itemsELS.length < 1 ) {
+
+      console.log("EMPTY");
 
       this.append( this._noItemsItem );
 
@@ -102,6 +132,14 @@ export default class ListElement extends DOMElement {
 
     }
 
+    if ( items.length <= 0 && this._items.length < 1 ) {
+      
+      return this.showNoItemsItem();
+
+    }
+
+    this.hideNoItemsItem();
+
   }
 
   _generateItems() {
@@ -129,7 +167,7 @@ export default class ListElement extends DOMElement {
     const itemsELS = this._generateItems();
 
     this.setID( this._id );
-    this.setClass(`list`);
+    this.addClass(`list`);
 
     itemsELS.length < 1 ? this.append( this._noItemsItem ) : this.append( ...itemsELS );
 

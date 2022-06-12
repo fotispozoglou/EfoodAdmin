@@ -38,7 +38,6 @@ export class ChartElement extends DOMElement {
           {
             label: this._title,
             data: chartData,
-            fill: true,
             borderColor: `${ color }`,
             backgroundColor: `${ color }a1`
           },

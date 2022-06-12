@@ -7,6 +7,7 @@ import { completedOrdersNumber } from "./main.js";
 import { addNotification } from '../general/notifications.js';
 import { MESSAGE } from '../../config/types.js';
 import { DEFAULT_DURATION, LONG } from '../../views/general/Notification.js';
+import { controlRenderOrdersAnalytics } from "../analytics/orders.js";
 
 export const controlNotifyNewCompletedOrder = order => {
 
@@ -58,29 +59,16 @@ export const controlRenderCompletedOrders = async () => {
     items: [  ],
     methods: {
       onIntersect: controlLoadNextCompletedOrders,
-      onRenderAnalytics: () => {  }
+      onRenderAnalytics: () => { controlRenderOrdersAnalytics(); }
     },
     itemMethods: {
     },
-    intersect: true,
-    analytics: [
-      { label: "today", value: '...' },
-      { label: "today income", value: '...' },
-      { label: "total", value: '...' },
-      { label: "total income", value: '...' }
-    ]
+    intersect: true
   }, true);
 
   if ( !model.state.loadedCompletedOrders ) {
     
     const { data, error } = await model.loadCompletedOrders();
-
-    CompletedOrdersView.setAnalytics([
-      { label: "today", value: data.analytics.todayOrdersCount },
-      { label: "today income", value: data.analytics.todayOrdersPrices },
-      { label: "total", value: data.analytics.totalOrdersCount },
-      { label: "total income", value: data.analytics.totalOrdersPrices }
-    ]);
 
     CompletedOrdersView.add( ...data.orders );
 

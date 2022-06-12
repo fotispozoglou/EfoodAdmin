@@ -40,7 +40,10 @@ const controlCancelOrder = async orderID => {
 
 export const controlNotifyEndOfCheck = async () => {
 
-  if ( ViewManager.getRenderedViewID() === CuisineOrdersView.getID() ) {
+  if ( 
+    ViewManager.getRenderedViewID() === CuisineOrdersView.getID() ||
+    ViewManager.getRenderedViewID() === CuisineHint.getID()
+    ) {
 
     const { data, error } = await model.loadAcceptedOrders();
 
@@ -56,7 +59,7 @@ export const controlNotifyEndOfCheck = async () => {
 
 export const controlNotifyNewCuisineOrder = order => {
 
-  if ( order.status !== ORDER.STATUS_ACCEPTED ) return addToCorrectList( order );
+  if ( order.status.number !== ORDER.STATUS_ACCEPTED ) return addToCorrectList( order );
 
   const { _id } = order;
 

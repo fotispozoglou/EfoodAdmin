@@ -20,7 +20,7 @@ export default class View {
 
     if ( data ) this._data = data;
 
-    if ( !this._element ) this._element = this._generateElement();
+    this._element = this._generateElement();
 
     this._parent.insertAdjacentElement('beforeend', this._element);
 

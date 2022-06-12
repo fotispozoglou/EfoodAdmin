@@ -64,7 +64,7 @@ export const controlNotifyEndOfCheck = async () => {
 
 export const controlNotifyNewDeliveryOrder = order => {
 
-  if ( order.status !== ORDER.STATUS_DELIVERING ) return addToCorrectList( order );
+  if ( order.status.number !== ORDER.STATUS_DELIVERING ) return addToCorrectList( order );
 
   const { _id } = order;
 

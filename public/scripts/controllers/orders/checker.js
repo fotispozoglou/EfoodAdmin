@@ -12,11 +12,11 @@ export const controlCheckOrders = async data => {
 
     for ( const order of orders ) {
 
-      if ( order.status === ORDER.STATUS_PENDING ) controlNotifyNewPendingOrder( order );
+      if ( order.status.number === ORDER.STATUS_PENDING ) controlNotifyNewPendingOrder( order );
 
-      if ( order.status === ORDER.STATUS_ACCEPTED ) controlNotifyNewCuisineOrder( order );
+      if ( order.status.number === ORDER.STATUS_ACCEPTED ) controlNotifyNewCuisineOrder( order );
 
-      if ( order.status === ORDER.STATUS_DELIVERING ) controlNotifyNewDeliveryOrder( order );
+      if ( order.status.number === ORDER.STATUS_DELIVERING ) controlNotifyNewDeliveryOrder( order );
       
     }
 
@@ -32,11 +32,11 @@ export const controlCheckOrders = async data => {
 
 export const addToCorrectList = order => {
 
-  if ( order.status === ORDER.STATUS_PENDING ) controlNotifyNewPendingOrder( order );
+  if ( order.status.number === ORDER.STATUS_PENDING ) controlNotifyNewPendingOrder( order );
 
-  if ( order.status === ORDER.STATUS_ACCEPTED ) controlNotifyNewCuisineOrder( order );
+  if ( order.status.number === ORDER.STATUS_ACCEPTED ) controlNotifyNewCuisineOrder( order );
 
-  if ( order.status === ORDER.STATUS_DELIVERING ) controlNotifyNewDeliveryOrder( order );
+  if ( order.status.number === ORDER.STATUS_DELIVERING ) controlNotifyNewDeliveryOrder( order );
 
 };
 

@@ -58,7 +58,7 @@ export default new class DeliveryOrderView extends View {
 
     const productsContainer = new DOMElement("div").setID("full_delivery_products_container").append( productsTitle, productsList, totalPriceElement ).getElement();
 
-    const completeOrderBtn = new DOMElement("button").setID('full_delivery_order_complete_btn').setClass('success_btn').setText('completed').on('click', () => { onCompleteOrder( _id ); }).getElement();
+    const completeOrderBtn = new DOMElement("button").setID('full_delivery_order_complete_btn').setClass('primary_btn').setText('completed').on('click', () => { onCompleteOrder( _id ); }).getElement();
 
     const footer = new DOMElement("div").setID('full_delivery_order_footer').append( completeOrderBtn ).getElement();
 

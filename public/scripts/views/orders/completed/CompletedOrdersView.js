@@ -11,6 +11,7 @@ export default new class CompletedOrdersView extends ListView {
   _parent = document.querySelector("#main_center");
   _rerender = true;
   title = "completed orders";
+  _loadAPIOrders = async () => {}
   _noItemsItem = new EmptyListItem({ _id: 1, name: 'No Completed Orders', icon: 'fa-check-double' }, {  });
 
   removeOrder( orderID ) {
@@ -19,9 +20,55 @@ export default new class CompletedOrdersView extends ListView {
 
   }
 
+  async filter( value ) {
+
+    this._searching = value.length > 0;
+
+    if ( this._itemsElements.length < 1 ) return;
+
+    value = value.toUpperCase();
+
+    let found = false;
+
+    const exclude = [  ];
+
+    for ( const itemElement of this._itemsElements ) {
+
+      if ( itemElement.getSearchable().toUpperCase().indexOf( value ) > -1 ) {
+
+        found = true;
+
+        exclude.push( itemElement.getID() );
+
+        itemElement.getElement().style.display = 'flex';
+
+      } else { itemElement.getElement().style.display = 'none'; }
+
+    }
+
+    if ( value.length > 0 ) {
+
+      const { data } = await this._loadAPIOrders( value, exclude );
+
+      this.add( ...data.orders );
+
+    }
+
+    if ( found ) return this.hideNoSearched();
+
+    if ( !this._noSearchRendered ) this.showNoSearched();
+
+  }
+
   _generateHeader() {
 
-    this._searchInput = new InputElement("", "", value => { this.filter( value ); });
+    this._searchInput = new InputElement("", "", value => { 
+      
+      this.filter( value ); 
+    
+    });
+
+    this._searchInput.setTimeoutDuration( 1000 );
 
     this._searchInput.build();
     
@@ -34,6 +81,10 @@ export default new class CompletedOrdersView extends ListView {
   }
 
   _generateElement() {
+
+    const { loadAPIOrders } = this._data.methods;
+
+    this._loadAPIOrders = loadAPIOrders;
 
     if ( this._hasRendered ) return this._element;
 

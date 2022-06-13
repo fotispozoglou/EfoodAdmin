@@ -51,6 +51,20 @@ const controlLoadNextCompletedOrders = async () => {
 
 };
 
+const controlSearchCompletedOrders = async ( value, excluded ) => {
+
+  const { data, error } = await model.searchCompletedOrders( value, excluded );
+
+  if ( !error ) {
+
+    model.addOrders( ...data.orders );
+
+    return { data };
+
+  }
+
+};
+
 export const controlRenderCompletedOrders = async () => {
 
   ViewManager.setRenderPrevious( controlRenderCompletedOrders );
@@ -59,7 +73,8 @@ export const controlRenderCompletedOrders = async () => {
     items: [  ],
     methods: {
       onIntersect: controlLoadNextCompletedOrders,
-      onRenderAnalytics: () => { controlRenderOrdersAnalytics(); }
+      onRenderAnalytics: () => { controlRenderOrdersAnalytics(); },
+      loadAPIOrders: controlSearchCompletedOrders
     },
     itemMethods: {
     },

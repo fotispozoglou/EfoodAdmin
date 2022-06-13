@@ -9,6 +9,7 @@ export default class InputElement extends DOMElement {
   _errorText;
   _onInput;
   _inputTimeout;
+  _inputTimeoutValue = 250;
   _type = "text";
   _defaultListener = true;
 
@@ -85,6 +86,8 @@ export default class InputElement extends DOMElement {
 
   }
 
+  setTimeoutDuration( duration ) { this._inputTimeoutValue = duration };
+
   build() {
 
     const header = this._generateHeader();
@@ -105,7 +108,7 @@ export default class InputElement extends DOMElement {
   
         this.resetError();
 
-        this._inputTimeout = setTimeout(() => { this._onInput( this._value ); }, 250);
+        this._inputTimeout = setTimeout(() => { this._onInput( this._value ); }, this._inputTimeoutValue);
   
       });
 

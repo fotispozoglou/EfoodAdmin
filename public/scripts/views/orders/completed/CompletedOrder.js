@@ -4,6 +4,7 @@ import InfoIcon from "../../general/InfoIcon.js";
 const getFormattedNumber = number => number.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
 
 export default class CompletedOrder extends DOMElement {
+  _id;
   _client;
   _totalPrice;
   _sendAt;
@@ -11,9 +12,10 @@ export default class CompletedOrder extends DOMElement {
   _productsLength;
   _methods;
 
-  constructor({ client, totalPrice, time, orderID, products }, methods) {
+  constructor({ _id, client, totalPrice, time, orderID, products }, methods) {
     super("div");
 
+    this._id = _id;
     this._client = client;
     this._totalPrice = totalPrice;
     this._sendAt = time.sendAt;

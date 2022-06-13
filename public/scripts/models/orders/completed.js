@@ -14,6 +14,26 @@ export const state = {
   loadedCompletedOrders: false
 };
 
+const isInOrders = orderID => {
+
+  return state.orders.findIndex(order => order._id === orderID);
+
+};
+
+export const addOrders = ( ...orders ) => {
+
+  for ( const order of orders ) {
+
+    if ( !isInOrders( order._id ) ) {
+
+      state.orders.push( order );
+  
+    }
+
+  }
+
+};
+
 export const loadOrder = async orderID => {
 
   const { data, error } = await GET(`${ ORDERS_API_URL }/${ orderID }/products`);
@@ -21,6 +41,20 @@ export const loadOrder = async orderID => {
   if ( error ) return { error };
 
   return { data };
+
+};
+
+export const searchCompletedOrders = async ( value, excluded ) => {
+
+  const { data, error } = await POST(`${ ORDERS_API_URL }/completed/search`, { value, excluded });
+
+  if ( !error ) {
+
+    return { data };
+
+  }
+
+  return { error };
 
 };
 

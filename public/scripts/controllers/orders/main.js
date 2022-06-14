@@ -8,6 +8,8 @@ export const pendingOrdersNumber = document.querySelector("#mnavbar_orders_pendi
 export const cuisineOrdersNumber = document.querySelector("#mnavbar_orders_cuisine_number");
 export const deliveryOrdersNumber = document.querySelector("#mnavbar_orders_delivery_number");
 
+const ordersErrorIcon = document.querySelector("#orders_error_icon");
+
 import { setSelectedButton } from "../main.js";
 import { start, controlCheckOrders } from "./checker.js";
 import { controlRenderCompletedOrders } from "./completed.js";
@@ -18,6 +20,16 @@ import { controlRenderPendingOrders } from "./pending.js";
 
 import { checkForNewOrders } from '../../models/orders/checker.js';
 import { initializeMakingOrders } from "../../models/orders/cuisine.js";
+
+export const setOrdersError = error => {
+
+  ordersErrorIcon.setAttribute('title', error);
+
+  ordersErrorIcon.classList.remove('hidden');
+
+};
+
+export const hideOrdersError = () => { ordersErrorIcon.classList.add('hidden'); };
 
 const initialiazeListeners = () => {
 

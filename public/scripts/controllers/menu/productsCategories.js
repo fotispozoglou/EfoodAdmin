@@ -4,7 +4,7 @@ import { closeMobileNavbar, controlConfirmAction } from "../main.js";
 import * as model from "../../models/menu/productsCategories.js";
 import EditProductsCategoryView from '../../views/menu/productsCategories/EditProductsCategoriesView.js';
 import { GENERAL, ITEM } from '../../config/statusCodes.js';
-import { addNotification } from '../general/notifications.js';
+import { addNotification, showNotification } from '../general/notifications.js';
 import { DEFAULT_DURATION, LONG } from '../../views/general/Notification.js';
 import { MESSAGE } from '../../config/types.js';
 import ViewManager from '../../views/ViewManager.js';
@@ -16,13 +16,9 @@ const controlUpdateProductsCategory = async productsCategoryID => {
 
   const { data, error } = await model.updateProductsCategory( productsCategoryID, productsCategoryData );
 
-  const { status } = data;
+  if ( error || data.status === ITEM.UPDATING_ERROR ) return showNotification( "error updating products category", MESSAGE.MESSAGE_ERROR );
 
-  const updatingError = { text: "error updating products category", type: MESSAGE.MESSAGE_ERROR, duration: LONG };
-
-  if ( error || status === ITEM.UPDATING_ERROR ) return addNotification( updatingError );
-
-  if ( status === GENERAL.SUCCESS ) {
+  if ( data.status === GENERAL.SUCCESS ) {
 
     ProductsCategoriesView.updateProductsCategoryName( productsCategoryID, productsCategoryData.name );
 
@@ -42,11 +38,7 @@ const controlRenderEditProductsCategory = async productsCategoryID => {
 
   const { data, error } = await model.loadProductsCategory( productsCategoryID );
 
-  const { status } = data;
-
-  const loadingError = { text: "error loading products category", type: MESSAGE.MESSAGE_ERROR, duration: LONG };
-
-  if ( error || status === ITEM.LOADING_ERROR ) return addNotification( loadingError );
+  if ( error || data.status === ITEM.LOADING_ERROR ) return showNotification( "error loading products category", MESSAGE.MESSAGE_ERROR );
 
   if ( !error ) {
 
@@ -70,11 +62,7 @@ const controlAddProductsCategory = async () => {
 
   const { data, error } = await model.addProductsCategory( productsCategoryData );
 
-  const { status } = data;
-
-  const addingError = { text: "error adding products category", type: MESSAGE.MESSAGE_ERROR, duration: LONG };
-
-  if ( error || status === ITEM.ADDING_ERROR ) return addNotification( addingError );
+  if ( error || data.status === ITEM.ADDING_ERROR ) return showNotification( "error adding products category", MESSAGE.MESSAGE_ERROR );
 
   if ( status === GENERAL.SUCCESS ) {
 
@@ -114,11 +102,7 @@ const controlRemoveProductsCategory = async productsCategoryID => {
 
   const { data, error } = await model.deleteProductsCategories( productsCategoryID );
 
-  const { status } = data;
-
-  const removingError = { text: "error removing products category", type: MESSAGE.MESSAGE_ERROR, duration: LONG };
-
-  if ( error || status === ITEM.DELETING_ERROR ) return addNotification( removingError );
+  if ( error || data.status === ITEM.DELETING_ERROR ) return showNotification( "error deleting products category", MESSAGE.MESSAGE_ERROR );
 
   ProductsCategoriesView.removeItems( productsCategoryID );
 
@@ -130,7 +114,9 @@ const controlRemoveSelectedProductsCategories = async () => {
 
   const { selectedProductsCategories } = model.state;
 
-  await model.deleteSelectedProductsCategories(  );
+  const { data, error } = await model.deleteSelectedProductsCategories(  );
+
+  if ( error || data.status === ITEM.DELETING_ERROR ) return showNotification("error deleting products categories", MESSAGE.MESSAGE_ERROR);
 
   ProductsCategoriesView.removeItems( ...selectedProductsCategories );
 

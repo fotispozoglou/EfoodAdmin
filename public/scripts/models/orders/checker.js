@@ -16,9 +16,11 @@ export const checkForNewOrders = async responseCallback => {
 
     state.lastCheckTime = data.time;
 
-    responseCallback( data );
+    return responseCallback({ data });
 
   }
+
+  return responseCallback({ error });
 
 };
 

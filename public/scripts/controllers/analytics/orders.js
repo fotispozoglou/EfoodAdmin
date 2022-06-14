@@ -1,7 +1,7 @@
 import ViewManager from '../../views/ViewManager.js';
 import OrdersAnalyticsView from "../../views/analytics/OrdersAnalyticsView.js";
 
-import { addNotification } from '../general/notifications.js';
+import { addNotification, showNotification } from '../general/notifications.js';
 import { LONG } from '../../views/general/Notification.js';
 import { MESSAGE } from '../../config/types.js';
 
@@ -14,9 +14,7 @@ export const controlRenderOrdersAnalytics = async () => {
 
   const { data, error } = await model.loadAllOrdersAnalytics();
 
-  const notification = { text: "Error Loading Analytics", type: MESSAGE.MESSAGE_ERROR, duration: LONG };
-
-  if ( error ) return addNotification( notification );
+  if ( error ) return showNotification( "Error Loading Analytics", MESSAGE.MESSAGE_ERROR );
 
   const { orders } = data;
 

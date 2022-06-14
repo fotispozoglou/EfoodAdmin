@@ -3,7 +3,7 @@ import * as model from '../../models/orders/cuisine.js';
 import { closeMobileNavbar } from '../main.js';
 import CuisineOrdersView from '../../views/orders/cuisine/CuisineOrdersView.js';
 import ViewManager from '../../views/ViewManager.js';
-import { addNotification } from '../general/notifications.js';
+import { addNotification, showNotification } from '../general/notifications.js';
 
 import { MESSAGE } from '../../config/types.js';
 import { cuisineOrdersNumber } from './main.js';
@@ -16,7 +16,7 @@ const controlReadyOrder = async orderID => {
 
   const { data, error } = await model.readyOrder( orderID );
 
-  if ( error ) return addNotification({ text: "Failed to ready order", type: MESSAGE.ERROR, duration: 4 });
+  if ( error ) return showNotification("error readying order", MESSAGE.ERROR);
 
   CuisineOrdersView.removeItems( orderID );
 
@@ -30,7 +30,7 @@ const controlCancelOrder = async orderID => {
 
   const { data, error } = await model.cancelOrder( orderID );
 
-  if ( error ) return addNotification({ text: "Failed to cancel order", type: MESSAGE.ERROR, duration: 4 });
+  if ( error ) return showNotification("error canceling order", MESSAGE.ERROR);
 
   CuisineOrdersView.removeItems( orderID );
 
@@ -75,6 +75,8 @@ const controlRenderSelectedOrder = async orderID => {
 
   const { data, error } = await model.loadOrder( orderID );
 
+  if ( error ) return showNotification("error loading order", MESSAGE.MESSAGE_ERROR);
+
   const { order } = data;
 
   CuisineOrdersView.renderSelectedOrder( order );
@@ -109,7 +111,9 @@ const controlRenderCuisineManagement = async () => {
     
     const { data, error } = await model.loadAcceptedOrders();
 
-    CuisineOrdersView.add( ...data.orders );
+    if ( error ) showNotification("error loading new orders");
+
+    if ( !error ) CuisineOrdersView.add( ...data.orders );
 
   }
 

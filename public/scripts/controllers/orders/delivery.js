@@ -7,6 +7,9 @@ import ViewManager from '../../views/ViewManager.js';
 import { deliveryOrdersNumber } from './main.js';
 import { ORDER } from '../../config/statusCodes.js';
 import { addToCorrectList } from './checker.js';
+import { showNotification } from '../general/notifications.js';
+import { MESSAGE } from '../../config/types.js';
+import { SHORT } from '../../views/general/Notification.js';
 
 // const controlReadyOrder = async orderID => {
 
@@ -20,11 +23,13 @@ const controlCompleteOrder = async orderID => {
 
   const { data, error } = await model.completeOrder( orderID );
 
-  if ( error ) return addNotification({ text: "Error completing order", type: MESSAGE.ERROR, duration: 4 });
+  if ( error ) return showNotification("error completing order", MESSAGE.MESSAGE_ERROR);
 
   DeliveryOrdersView.removeItems( orderID );
 
   addToCorrectList({ status: data.actualStatus, _id: orderID });
+
+  showNotification("order completed", MESSAGE.MESSAGE_SUCCESS, SHORT);
 
 }
 
@@ -32,17 +37,15 @@ const controlRenderDeliveryOrder = async orderID => {
 
   const { order, error } = await model.loadDeliveryOrder( orderID );
 
-  if ( !error ) {
+  if ( error ) return showNotification("error loading order", MESSAGE.MESSAGE_ERROR);
 
-    ViewManager.render( DeliveryOrderView, {
-      order,
-      methods: {
-        onGoBack: controlRenderDeliveryOrders,
-        onCompleteOrder: controlCompleteOrder
-      }
-    }, true);
-
-  }
+  ViewManager.render( DeliveryOrderView, {
+    order,
+    methods: {
+      onGoBack: controlRenderDeliveryOrders,
+      onCompleteOrder: controlCompleteOrder
+    }
+  }, true);
 
 };
 
@@ -92,6 +95,14 @@ export const controlRenderDeliveryOrders = async () => {
     
     const { data, error } = await model.loadDeliveryOrders();
 
+    if ( error ) {
+
+      closeMobileNavbar();
+
+      return showNotification("error loading orders", MESSAGE.MESSAGE_ERROR);
+
+    }
+
     DeliveryOrdersView.add( ...data.orders );
 
   }
@@ -99,7 +110,5 @@ export const controlRenderDeliveryOrders = async () => {
   model.state.newOrdersCount = 0;
 
   deliveryOrdersNumber.textContent = ``;
-
-  closeMobileNavbar();
 
 };

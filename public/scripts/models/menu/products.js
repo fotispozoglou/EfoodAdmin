@@ -111,9 +111,17 @@ export const deleteProducts = async ( ...productsIDS ) => {
 
 export const deleteSelectedProducts = async () => {
 
-  await deleteProducts( ...state.selectedProducts );
+  const { data, error } = await deleteProducts( ...state.selectedProducts );
 
-  removeStateProducts( ...state.selectedProducts );
+  if ( !error ) {
+
+    removeStateProducts( ...state.selectedProducts );
+
+    return { data };
+
+  }
+
+  return { error };
 
 };
 

@@ -4,7 +4,7 @@ import * as model from '../../models/orders/completed.js';
 import { closeMobileNavbar } from "../main.js";
 import ViewManager from "../../views/ViewManager.js";
 import { completedOrdersNumber } from "./main.js";
-import { addNotification } from '../general/notifications.js';
+import { addNotification, showNotification } from '../general/notifications.js';
 import { MESSAGE } from '../../config/types.js';
 import { DEFAULT_DURATION, LONG } from '../../views/general/Notification.js';
 import { controlRenderOrdersAnalytics } from "../analytics/orders.js";
@@ -33,11 +33,7 @@ const controlLoadNextCompletedOrders = async () => {
 
     if ( error ) {
 
-      const loadingError = { text: "error loading orders", type: MESSAGE.MESSAGE_ERROR, duration: LONG };
-
-      console.log("HIDDING ERROR");
-
-      return addNotification( loadingError );
+      return showNotification( "error loading orders", MESSAGE.MESSAGE_ERROR );
 
     }
 
@@ -63,6 +59,10 @@ const controlSearchCompletedOrders = async ( value, excluded ) => {
 
   }
 
+  showNotification("error while searching", MESSAGE.MESSAGE_ERROR);
+
+  return { error };
+
 };
 
 export const controlRenderCompletedOrders = async () => {
@@ -84,6 +84,14 @@ export const controlRenderCompletedOrders = async () => {
   if ( !model.state.loadedCompletedOrders ) {
     
     const { data, error } = await model.loadCompletedOrders();
+
+    if ( error ) {
+
+      closeMobileNavbar();
+
+      return showNotification("can't load completed orders", MESSAGE.MESSAGE_ERROR);
+
+    }
 
     CompletedOrdersView.add( ...data.orders );
 

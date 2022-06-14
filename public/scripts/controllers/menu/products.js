@@ -8,7 +8,7 @@ import * as tiersState from '../../models/menu/tiers.js';
 import * as productsCategoriesState from '../../models/menu/productsCategories.js';
 
 import { GENERAL, ITEM } from '../../config/statusCodes.js';
-import { addNotification } from '../general/notifications.js';
+import { addNotification, showNotification } from '../general/notifications.js';
 import { LONG } from '../../views/general/Notification.js';
 import { MESSAGE } from '../../config/types.js';
 import ViewManager from '../../views/ViewManager.js';
@@ -20,13 +20,9 @@ const controlUpdateProduct = async productID => {
 
   const { data, error } = await model.updateProduct( productID, productData );
 
-  const { status } = data;
+  if ( error || data.status === ITEM.UPDATING_ERROR ) return showNotification("error updating product", MESSAGE.MESSAGE_ERROR);
 
-  const updatingError = { text: "error updating product", type: MESSAGE.MESSAGE_ERROR, duration: LONG };
-
-  if ( error || status === ITEM.UPDATING_ERROR ) return addNotification( updatingError );
-
-  if ( status === GENERAL.SUCCESS ) {
+  if ( data.status === GENERAL.SUCCESS ) {
 
     ProductsView.updateProductName( productID, productData.name );
 
@@ -46,9 +42,7 @@ const controlRenderEditProduct = async productID => {
 
   const { data: { data: product, status }, error } = await model.loadProduct( productID );
 
-  const loadingError = { text: "error loading product", type: MESSAGE.MESSAGE_ERROR, duration: LONG };
-
-  if ( error || status === ITEM.LOADING_ERROR ) return addNotification( loadingError );
+  if ( error || status === ITEM.LOADING_ERROR ) return showNotification("error loading product", MESSAGE.MESSAGE_ERROR);
 
   EditProductView.setTitle('edit product');
 
@@ -73,13 +67,9 @@ const controlAddProduct = async () => {
 
   const { data, error } = await model.addProduct( productData );
 
-  const { status } = data;
+  if ( error || data.status === ITEM.ADDING_ERROR ) return showNotification("error adding product", MESSAGE.MESSAGE_ERROR);
 
-  const addingError = { text: "error adding product", type: MESSAGE.MESSAGE_ERROR, duration: LONG };
-
-  if ( error || status === ITEM.ADDING_ERROR ) return addNotification( addingError );
-
-  if ( status === GENERAL.SUCCESS ) {
+  if ( data.status === GENERAL.SUCCESS ) {
 
     const { newProduct } = data;
 
@@ -122,11 +112,7 @@ const controlRemoveProduct = async productID => {
 
   const { data, error } = await model.deleteProducts( productID );
 
-  const { status } = data;
-
-  const removingError = { text: "error deleting product", type: MESSAGE.MESSAGE_ERROR, duration: LONG };
-
-  if ( error || status === ITEM.DELETING_ERROR ) return addNotification( removingError );
+  if ( error || data.status === ITEM.DELETING_ERROR ) return showNotification("error deleting product", MESSAGE.MESSAGE_ERROR);
 
   ProductsView.removeItems( productID );
 
@@ -140,9 +126,11 @@ const controlRemoveProduct = async productID => {
 
 const controlRemoveSelectedProducts = async () => {
 
-  const { selectedProducts } = model.state;
+  const selectedProducts = [ ...model.state.selectedProducts ];
 
-  await model.deleteSelectedProducts(  );
+  const { data, error } = await model.deleteSelectedProducts(  );
+
+  if ( error || data.status === ITEM.DELETING_ERROR ) return showNotification("error deleting products", MESSAGE.MESSAGE_ERROR);
 
   ProductsView.removeItems( ...selectedProducts );
 
@@ -196,9 +184,7 @@ const controlChangeProductAvailability = async ( id, available ) => {
 
   const { data, error } = await model.updateProductAvailability( id, available );
 
-  const availabilityError = { text: "error setting availability", type: MESSAGE.MESSAGE_ERROR, duration: LONG };
-
-  if ( error ) return addNotification( availabilityError );
+  if ( error ) return showNotification("error setting availability", MESSAGE.MESSAGE_ERROR);
 
   ProductsView.updateProductAvailability( id, available );
 
@@ -210,9 +196,7 @@ const controlSwitchSelectedAvailability = async (  ) => {
 
   const { data, error } = await model.switchSelectedAvailability();
 
-  const availabilityError = { text: "error setting availability", type: MESSAGE.MESSAGE_ERROR, duration: LONG };
-
-  if ( error ) return addNotification( availabilityError );
+  if ( error ) return showNotification("error setting availability", MESSAGE.MESSAGE_ERROR);
 
   model.updateProductsStateAvailability( data.products );
 

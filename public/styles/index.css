@@ -1055,12 +1055,13 @@ tbody {
 .notification {
   width: 90%;
   position: fixed;
-  top: 10px;
-  left: 5%;
+  bottom: 10px;
+  left: 2%;
   z-index: 10000;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
+  max-width: 25em;
 }
 
 .notification_main {

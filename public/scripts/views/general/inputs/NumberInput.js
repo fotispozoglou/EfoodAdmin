@@ -126,8 +126,6 @@ export default class NumberInput extends InputElement {
 
     this._body = new DOMElement("div").setClass('input_body').append( this._valueElement, numberInputContainer );
 
-    window.test = this._body;
-
     return this._body.getElement();
 
   }

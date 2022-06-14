@@ -21,14 +21,6 @@ export const unselectAllProducts = () => {
 
 };
 
-export const deleteSelectedTiers = async () => {
-
-  await deleteTiers( ...state.selectedTiers );
-
-  removeStateTiers( ...state.selectedTiers );
-
-};
-
 export const getTiersData = ( ...tiersIDS ) => {
 
   const tiers = [  ];
@@ -74,6 +66,22 @@ export const updateTier = async ( id, data ) => {
 export const deleteTiers = async ( ...tiersIDS ) => {
 
   return await DELETE(`${ TIERS_URL }`, { tiersIDS });
+
+};
+
+export const deleteSelectedTiers = async () => {
+
+  const { data, error } = await deleteTiers( ...state.selectedTiers );
+
+  if ( !error ) {
+
+    removeStateTiers( ...state.selectedTiers );
+
+    return { data };
+
+  }
+
+  return { error };
 
 };
 

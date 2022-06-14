@@ -1,5 +1,18 @@
-import Notification from "../../views/general/Notification.js";
+import Notification, { DEFAULT_DURATION } from "../../views/general/Notification.js";
 import { SHORT, LONG } from "../../views/general/Notification.js";
+import { MESSAGE } from "../../config/types.js";
+
+export const NETWORK_ERROR_NOTIFICATION = { 
+  text: "You are not connected to a network", 
+  type: MESSAGE.MESSAGE_ERROR, 
+  duration: LONG 
+};
+
+export const SERVER_ERROR_NOTIFICATION = { 
+  text: "An server error occured", 
+  type: MESSAGE.MESSAGE_ERROR, 
+  duration: LONG 
+};
 
 const notifications = [];
 
@@ -32,5 +45,11 @@ export const addNotification = notification => {
   notifications.push( notification );
 
   handleNotificationsQueue();
+
+};
+
+export const showNotification = ( message, type, duration = DEFAULT_DURATION ) => {
+
+  addNotification({ text: message, type, duration });
 
 };

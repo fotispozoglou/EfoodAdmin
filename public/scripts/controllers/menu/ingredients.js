@@ -5,7 +5,7 @@ import * as model from "../../models/menu/ingredients.js";
 import EditIngredientView from '../../views/menu/ingredients/EditIngredientView.js';
 import { DEFAULT_DURATION, LONG } from '../../views/general/Notification.js';
 import { GENERAL, ITEM } from '../../config/statusCodes.js';
-import { addNotification } from '../general/notifications.js';
+import { addNotification, showNotification } from '../general/notifications.js';
 
 import { MESSAGE } from '../../config/types.js';
 import ViewManager from '../../views/ViewManager.js';
@@ -16,13 +16,9 @@ const controlUpdateIngredient = async ingrdientID => {
 
   const { data, error } = await model.updateIngredient( ingrdientID, ingredientData );
 
-  const { status } = data;
+  if ( error || data.status === ITEM.UPDATING_ERROR ) return showNotification( "error updating ingredient", MESSAGE.MESSAGE_ERROR );
 
-  const updatingError = { text: "error updating ingredient", type: MESSAGE.MESSAGE_ERROR, duration: LONG };
-
-  if ( error || status === ITEM.UPDATING_ERROR ) return addNotification( updatingError );
-
-  if ( status === GENERAL.SUCCESS ) {
+  if ( data.status === GENERAL.SUCCESS ) {
 
     IngredientsView.updateIngredientName( ingrdientID, ingredientData.name );
 
@@ -42,11 +38,7 @@ const controlRenderEditIngredient = async ingredientID => {
 
   const { data, error } = await model.loadIngredient( ingredientID );
 
-  const { status } = data;
-
-  const loadingError = { text: "error loading ingredient", type: MESSAGE.MESSAGE_ERROR, duration: LONG };
-
-  if ( error || status === ITEM.LOADING_ERROR ) return addNotification( loadingError );
+  if ( error || data.status === ITEM.LOADING_ERROR ) return showNotification( "error loading ingredient", MESSAGE.MESSAGE_ERROR );
 
   EditIngredientView.setTitle('edit ingredient');
 
@@ -66,13 +58,9 @@ const controlAddIngredient = async () => {
 
   const { data, error } = await model.addIngredient( ingredientData );
 
-  const { status } = data;
+  if ( error || data.status === ITEM.ADDING_ERROR ) return showNotification( "error adding ingredient", MESSAGE.MESSAGE_ERROR );
 
-  const addingError = { text: "error adding ingredient", type: MESSAGE.MESSAGE_ERROR, duration: LONG };
-
-  if ( error || status === ITEM.ADDING_ERROR ) return addNotification( addingError );
-
-  if ( status === GENERAL.SUCCESS ) {
+  if ( data.status === GENERAL.SUCCESS ) {
 
     const { newIngredient } = data;
 
@@ -110,11 +98,7 @@ const controlRemoveIngredient = async ingredientID => {
 
   const { data, error } = await model.deleteIngredients( ingredientID );
 
-  const { status } = data;
-
-  const removingError = { text: "error removing ingredient", type: MESSAGE.MESSAGE_ERROR, duration: LONG };
-
-  if ( error || status === ITEM.DELETING_ERROR ) return addNotification( removingError );
+  if ( error || data.status === ITEM.DELETING_ERROR ) return showNotification( "error deleting ingredient", MESSAGE.MESSAGE_ERROR );
 
   IngredientsView.removeItems( ingredientID );
 
@@ -126,7 +110,9 @@ const controlRemoveSelectedIngredients = async () => {
 
   const { selectedIngredients } = model.state;
 
-  await model.deleteSelectedIngredients(  );
+  const { data, error } = await model.deleteSelectedIngredients(  );
+
+  if ( error || data.status === ITEM.DELETING_ERROR ) return showNotification("error deleting ingredients", MESSAGE.MESSAGE_ERROR);
 
   IngredientsView.removeItems( ...selectedIngredients );
 

@@ -1,6 +1,6 @@
 import DOMElement from '../base/DOMElement.js';
 
-import { GENERAL } from '../../config/statusCodes.js';
+import { MESSAGE } from '../../config/types.js';
 
 export const DEFAULT_DURATION = 4 * 1000;
 export const SHORT = 2 * 1000;
@@ -77,6 +77,8 @@ export default class Notification extends DOMElement {
 
   build() {
 
+    console.log(this);
+
     const textElement = new DOMElement("p").setClass('notification_text').setText( this._text ).getElement();
 
     const actions = new DOMElement("div").setClass('notification_body_actions').getElement();
@@ -93,7 +95,7 @@ export default class Notification extends DOMElement {
 
     const progressContainer = new DOMElement("div").setClass('progress_container').append( this._progressBar ).getElement();
 
-    this.setClass('notification').append( mainContainer, progressContainer ).style(['backgroundColor', this._type === GENERAL.SUCCESS ? SUCCESS_COLOR : ERROR_COLOR ]).getElement();
+    this.setClass('notification').append( mainContainer, progressContainer ).style(['backgroundColor', this._type === MESSAGE.MESSAGE_SUCCESS ? SUCCESS_COLOR : ERROR_COLOR ]).getElement();
 
     return this._element;
 

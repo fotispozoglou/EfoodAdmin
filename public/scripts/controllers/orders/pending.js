@@ -6,12 +6,15 @@ import { pendingOrdersNumber } from './main.js';
 import { state as cuisineState } from '../../models/orders/cuisine.js';
 import { ORDER } from '../../config/statusCodes.js';
 import { addToCorrectList } from './checker.js';
+import { showNotification } from '../general/notifications.js';
+import { MESSAGE } from '../../config/types.js';
+import { SHORT } from '../../views/general/Notification.js';
 
 const controlAcceptOrder = async orderID => {
 
   const { data, error } = await model.acceptOrder( orderID );
 
-  if ( error ) return addNotification({ text: "Error accepting order", type: MESSAGE.ERROR, duration: 4 });
+  if ( error ) return showNotification("error accepting order", MESSAGE.MESSAGE_ERROR);
 
   PendingOrdersView.removeItems( orderID );
 
@@ -23,17 +26,21 @@ const controlAcceptOrder = async orderID => {
 
   pendingOrdersNumber.textContent = `${ pendingText }`;
 
+  showNotification("order accepted", MESSAGE.MESSAGE_SUCCESS, SHORT);
+
 };
 
 const controlRejectOrder = async orderID => {
 
   const { data, error } = await model.rejectOrder( orderID );
 
-  if ( error ) return addNotification({ text: "Error rejecting order", type: MESSAGE.ERROR, duration: 4 });
+  if ( error ) return showNotification("error rejecting order", MESSAGE.MESSAGE_ERROR);
 
   PendingOrdersView.removeItems( orderID );
 
   model.removeStatePendingOrder( orderID );
+
+  showNotification("order rejected", MESSAGE.MESSAGE_SUCCESS, SHORT);
 
 };
 
@@ -80,6 +87,8 @@ export const controlRenderPendingOrders = async () => {
   if ( model.state.toLoadIDS.length > 0 ) {
     
     const { data, error } = await model.loadPendingOrders();
+
+    if ( error ) return showNotification("error loading orders", MESSAGE.MESSAGE_ERROR);
 
     PendingOrdersView.add( ...data.orders );
 

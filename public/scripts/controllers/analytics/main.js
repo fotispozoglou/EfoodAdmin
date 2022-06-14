@@ -2,15 +2,11 @@ export const ordersAnalyticsBtn = document.querySelector("#mnavbar_anayltics_ord
 
 import { controlRenderOrdersAnalytics } from "./orders.js";
 
-import { setSelectedButton } from "../main.js";
-
 const initializeListeners = () => {
 
   ordersAnalyticsBtn.addEventListener('click', () => {
 
     controlRenderOrdersAnalytics();
-
-    setSelectedButton( ordersAnalyticsBtn );
 
   });
 

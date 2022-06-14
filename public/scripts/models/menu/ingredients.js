@@ -33,14 +33,6 @@ export const removeStateIngredients = ( ...ingredientsIDS ) => {
 
 };
 
-export const deleteSelectedIngredients = async () => {
-
-  await deleteIngredients( ...state.selectedIngredients );
-
-  removeStateIngredients( ...state.selectedIngredients );
-
-};
-
 export const addIngredient = async ingredientData => {
 
   return await PUT(`${ INGREDIENTS_API_URL }/add`, ingredientData);
@@ -56,6 +48,22 @@ export const updateIngredient = async ( id, ingredientData ) => {
 export const deleteIngredients = async ( ...ingredientsIDS ) => {
 
   return await DELETE(`${ INGREDIENTS_API_URL }/`, { ingredientsIDS });
+
+};
+
+export const deleteSelectedIngredients = async () => {
+
+  const { data, error } = await deleteIngredients( ...state.selectedIngredients );
+
+  if ( !error ) {
+
+    removeStateIngredients( ...state.selectedIngredients );
+
+    return { data };
+
+  }
+
+  return { error };
 
 };
 

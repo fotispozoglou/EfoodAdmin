@@ -48,8 +48,6 @@ export class ChartElement extends DOMElement {
 
     this._chart = new Chart( this._context, config );
 
-    window.test = this._chart;
-
     this.append( this._chartCanvas ).setClass('chart_element');
 
     return this.getElement();

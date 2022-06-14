@@ -6,7 +6,7 @@ import EditTiersView from '../../views/menu/tiers/EditTiersView.js';
 
 import { state as ingredientsState, loadIngredients } from '../../models/menu/ingredients.js';
 import { GENERAL, ITEM } from '../../config/statusCodes.js';
-import { addNotification } from '../general/notifications.js';
+import { addNotification, showNotification } from '../general/notifications.js';
 import { DEFAULT_DURATION, LONG } from '../../views/general/Notification.js';
 import { MESSAGE } from '../../config/types.js';
 import ViewManager from '../../views/ViewManager.js';
@@ -17,11 +17,9 @@ const controlUpdateTier = async tierID => {
 
   const { data, error } = await model.updateTier( tierID, tierData );
 
-  const { status } = data;
+  if ( error || data.status === ITEM.UPDATING_ERROR ) return showNotification( "error updating tier", MESSAGE.MESSAGE_ERROR );
 
-  const updatingError = { text: "error updating tier", type: MESSAGE.MESSAGE_ERROR, duration: LONG };
-
-  if ( status === GENERAL.SUCCESS ) {
+  if ( data.status === GENERAL.SUCCESS ) {
 
     TiersView.updateTierName( tierID, tierData.name );
 
@@ -43,11 +41,7 @@ const controlRenderEditTier = async tierID => {
 
   const { data, error } = await model.loadTier( tierID );
 
-  const { status } = data;
-
-  const loadingError = { text: "error loading tier", type: MESSAGE.MESSAGE_ERROR, duration: LONG };
-
-  if ( error || status === ITEM.LOADING_ERROR ) return addNotification( loadingError );
+  if ( error || data.status === ITEM.LOADING_ERROR ) return showNotification( "error loading tier", MESSAGE.MESSAGE_ERROR );
 
   ViewManager.render( EditTiersView, {
     item: data,
@@ -68,13 +62,9 @@ const controlAddTier = async () => {
 
   const { data, error } = await model.addTier( tierData );
 
-  const { status } = data;
+  if ( error || data.status === ITEM.ADDING_ERROR ) return showNotification( "error adding tier", MESSAGE.MESSAGE_ERROR );
 
-  const addingError = { text: "error adding tier", type: MESSAGE.MESSAGE_ERROR, duration: LONG };
-
-  if ( error || status === ITEM.ADDING_ERROR ) return addNotification( addingError );
-
-  if ( status === GENERAL.SUCCESS ) {
+  if ( data.status === GENERAL.SUCCESS ) {
 
     const { newTier } = data;
 
@@ -115,11 +105,7 @@ const controlRemoveTier = async tierID => {
 
   const { data, error } = await model.deleteTiers( tierID );
 
-  const { status } = data;
-
-  const removingError = { text: "error removing tier", type: MESSAGE.MESSAGE_ERROR, duration: LONG };
-
-  if ( error || status === ITEM.DELETING_ERROR ) return addNotification( removingError );
+  if ( error || data.status === ITEM.DELETING_ERROR ) return showNotification( "error deleting tier", MESSAGE.MESSAGE_ERROR );
 
   TiersView.removeItems( tierID );
 
@@ -131,7 +117,9 @@ const controlRemoveSelectedTiers = async () => {
 
   const { selectedTiers } = model.state;
 
-  await model.deleteSelectedTiers(  );
+  const { data, error } = await model.deleteSelectedTiers(  );
+
+  if ( error || data.status === ITEM.DELETING_ERROR ) return showNotification("error deleting tiers", MESSAGE.MESSAGE_ERROR);
 
   TiersView.removeItems( ...selectedTiers );
 

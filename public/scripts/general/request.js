@@ -92,6 +92,8 @@ export const POST = async ( url, body ) => {
 
   if ( error ) return { error: Error("Cannot Get Options") };
 
+  if ( !navigator.onLine ) return { error: new Error("NetworkError") };
+
   return await fetch( url, options )
     .then(response => {
 
@@ -105,7 +107,11 @@ export const POST = async ( url, body ) => {
       return { data };
 
     })
-    .catch(error => { return { error }; });
+    .catch(error => { 
+
+      return { error };
+    
+    });
 
 };
 

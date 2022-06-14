@@ -1,3 +1,14 @@
+.mnavbar_main_option_name {
+  display: flex;
+  flex-direction: row;
+}
+
+#orders_error_icon {
+  font-size: 1em;
+  margin: auto 0px 0 1px;
+  color: #db4747;
+}
+
 .pending_order {
   width: 95%;
   display: flex;
@@ -58,7 +69,7 @@
   top: 0;
   left: 0;
   background-color: #444444cf;
-  z-index: 12345;
+  z-index: 4000;
   display: flex;
   flex-direction: column;
 } 

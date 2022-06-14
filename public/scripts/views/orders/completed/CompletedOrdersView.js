@@ -48,9 +48,9 @@ export default new class CompletedOrdersView extends ListView {
 
     if ( value.length > 0 ) {
 
-      const { data } = await this._loadAPIOrders( value, exclude );
+      const { data, error } = await this._loadAPIOrders( value, exclude );
 
-      this.add( ...data.orders );
+      if ( !error ) this.add( ...data.orders );
 
     }
 

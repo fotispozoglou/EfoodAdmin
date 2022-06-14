@@ -4,7 +4,13 @@ import { controlNotifyNewPendingOrder, controlNotifyEndOfCheck as notifyPendingE
 import { controlNotifyNewCuisineOrder, controlNotifyEndOfCheck as notifyCuisineEnd } from './cuisine.js';
 import { controlNotifyNewDeliveryOrder, controlNotifyEndOfCheck as notifyDeliveryEnd } from './delivery.js';
 
-export const controlCheckOrders = async data => {
+import { hideOrdersError, setOrdersError } from './main.js';
+
+export const controlCheckOrders = async ({ data, error }) => {
+
+  if ( error ) return setOrdersError("Error loading orders");
+
+  hideOrdersError();
 
   const { orders } = data;
 

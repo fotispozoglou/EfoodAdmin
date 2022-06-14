@@ -1,7 +1,7 @@
 import { API_SERVER_URL } from "../../config/config.js";
 const PRODUCTS_CATEGORIES_URL = `${ API_SERVER_URL }/productsCategories`;
 
-import { GET, DELETE, PUT } from "../../general/request.js";
+import { GET, DELETE, PUT, POST } from "../../general/request.js";
 
 export const state = {
   loadedProductsCategories: false,
@@ -35,7 +35,7 @@ export const removeStateProductsCategories = ( ...productsCategoriesIDS ) => {
  
 export const addProductsCategory = async data => {
 
-  return await PUT(`${ PRODUCTS_CATEGORIES_URL }/add`, data);
+  return await POST(`${ PRODUCTS_CATEGORIES_URL }/add`, data);
 
 };
 
@@ -53,9 +53,17 @@ export const deleteProductsCategories = async ( ...productsCategoriesIDS ) => {
 
 export const deleteSelectedProductsCategories = async () => {
 
-  await deleteProductsCategories( ...state.selectedProductsCategories );
+  const { data, error } = await deleteProductsCategories( ...state.selectedProductsCategories );
 
-  removeStateProductsCategories( ...state.selectedProductsCategories );
+  if ( !error ) {
+
+    removeStateProductsCategories( ...state.selectedProductsCategories );
+
+    return { data };
+
+  }
+
+  return { error };
 
 };
 

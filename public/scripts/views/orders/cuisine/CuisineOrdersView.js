@@ -20,6 +20,22 @@ export default new class CuisineOrdersView extends View {
   _parent = document.querySelector("#main_center");
   _ordersEmptyElement = new EmptyListItem({ _id: 1, name: 'no cuisine orders', icon: 'fa-utensils' }, {  }).build();
 
+  render( data ) {
+
+    if ( data ) this._data = data;
+
+    if ( !this._hasRendered ) {
+
+      this._element = this._generateElement();
+
+      this._parent.insertAdjacentElement('beforeend', this._element);
+
+    }
+
+    this._hasRendered = true;
+
+  }
+
   add( ...items ) {
 
     this._ordersElement.add( ...items );

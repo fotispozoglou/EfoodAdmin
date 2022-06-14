@@ -1241,6 +1241,11 @@ canvas {
     margin-top: 5px;
   }
 
+  .notification {
+    max-width: 90%;
+    left: 5%;
+  }
+
 }
 
 @media only screen and (min-width: 600px) {

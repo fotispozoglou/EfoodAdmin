@@ -99,21 +99,34 @@
   width: max-content;
   height: max-content!important;
   color: #eee!important;
-  margin: 20px auto!important;
+  font-size: 1em;
+  margin: auto 10px!important;
 }
 
-#all_cuisine_orders {
+.open_cuisine_orders {
   width: max-content;
-  max-width: 100%;
+  height: max-content!important;
+  color: #eee!important;
+  font-size: 1.25em;
+  margin: auto 10px!important;
+}
+
+.close_all_cuisine_orders {
+  width: max-content;
+  height: max-content !important;
+  margin: 10px 10px auto auto;
+  color: white!important;
+  font-size: 1em;
+}
+
+#all_cuisine_orders_container {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
   display: flex;
+  top: 0;
   flex-direction: column;
-  overflow-y: auto;
-  margin-top: auto;
-  height: max-content;
-  background-color: #88858582;
-  margin: 10px;
-  border-radius: 6px;
-  padding: 0 10px;
+  background-color: rgba(51, 51, 51, 0.84);
 }
 
 .cuisine_order {
@@ -145,6 +158,7 @@
 #cuisine_orders_header {
   display: flex;
   flex-direction: row;
+  background-color: #88858582;
 }
 
 #cuisine_orders_body {
@@ -217,10 +231,9 @@
   margin: 10px auto;
   font-size: 1.4em;
   color: #eee;
-  background-color: #88858582;
-  padding: 10px;
   border-radius: 2px;
-  width: 90%;
+  flex: 1;
+  text-align: center;
   text-align: center;
 }
 
@@ -240,6 +253,7 @@
 #selected_cuisine_order_container {
   flex: 1;
   overflow: auto;
+  margin-top: 20px;
 }
 
 #selected_cuisine_order {
@@ -591,4 +605,27 @@
   padding: 4px;
   flex: 1;
   color: grey;
+}
+
+@media only screen and ( min-width: 721px ) {
+
+  #all_cuisine_orders_container {
+    position: static;
+    width: max-content;
+    max-width: 100%;
+    display: flex!important;
+    flex-direction: column;
+    overflow-y: auto;
+    margin-top: auto;
+    height: max-content;
+    background-color: #88858582;
+    margin: 10px;
+    border-radius: 6px;
+    padding: 0 10px;
+  }
+
+  .close_all_cuisine_orders {
+    display: none!important;
+  }
+
 }

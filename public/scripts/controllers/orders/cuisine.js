@@ -20,9 +20,9 @@ const controlReadyOrder = async orderID => {
 
   CuisineOrdersView.removeItems( orderID );
 
-  CuisineOrdersView.showSuccess('order is ready');
-
   addToCorrectList({ status: data.actualStatus, _id: orderID });
+
+  showNotification("order is ready", MESSAGE.MESSAGE_SUCCESS);
 
 };
 
@@ -34,7 +34,7 @@ const controlCancelOrder = async orderID => {
 
   CuisineOrdersView.removeItems( orderID );
 
-  CuisineOrdersView.showSuccess('order is canceled');
+  showNotification("order is canceled", MESSAGE.MESSAGE_SUCCESS);
 
 };
 

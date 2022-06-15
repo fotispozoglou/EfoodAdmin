@@ -163,12 +163,27 @@ export default new class CuisineOrdersView extends View {
 
     this._ordersElement.setNoItemsItem( this._ordersEmptyElement );
 
+    const hideOrdersBtn = new DOMElement("div")
+      .addClass( `${ ICONS.TIMES } close_all_cuisine_orders` )
+      .on('click', () => { ordersContainer.classList.add('hidden'); })
+      .getElement();
+
+    const ordersContainer = new DOMElement("div")
+      .setID("all_cuisine_orders_container")
+      .addClass('hidden')
+      .append( hideOrdersBtn, this._ordersElement.build() )
+      .getElement();
+
     this._selectedOrderContainer = new DOMElement("div")
       .setID("selected_cuisine_order_container")
 
+    const showOrdersBtn = new DOMElement("div")
+      .addClass( `${ ICONS.ORDERS } open_cuisine_orders` )
+      .on('click', () => { ordersContainer.classList.remove('hidden'); })
+      .getElement();
+
     const closeBtn = new DOMElement("div")
-      .addClass( ICONS.TIMES )
-      .addClass('close_cuisine_orders')
+      .addClass( `${ ICONS.TIMES } close_cuisine_orders` )
       .on('click', () => { this._element.classList.add('hidden'); })
       .getElement();
 
@@ -176,12 +191,12 @@ export default new class CuisineOrdersView extends View {
 
     const header = new DOMElement("div")
       .setID("cuisine_orders_header")
-      .append( this._title, closeBtn )
+      .append( showOrdersBtn, this._title, closeBtn )
       .getElement();
 
     const body = new DOMElement("div")
       .setID("cuisine_orders_body")
-      .append( this._selectedOrderContainer.getElement(), this._ordersElement.build() )
+      .append( this._selectedOrderContainer.getElement(), ordersContainer )
       .getElement();
 
     return new DOMElement("div").append( header, body ).setClass('hidden').setID('cuisine_orders_container').getElement();

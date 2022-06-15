@@ -17,6 +17,7 @@ export const classes = {
     ROTATE: "icon fa-rotate",
     CIRCLE: "icon fa-circle",
     WARNING: "icon fa-triangle-exclamation",
-    POINTER: "icon fa-hand-pointer"
+    POINTER: "icon fa-hand-pointer",
+    ORDERS: "fa-solid fa-boxes-stacked"
   }
 };

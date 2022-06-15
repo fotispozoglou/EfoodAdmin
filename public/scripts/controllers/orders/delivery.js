@@ -111,4 +111,6 @@ export const controlRenderDeliveryOrders = async () => {
 
   deliveryOrdersNumber.textContent = ``;
 
+  closeMobileNavbar();
+
 };

@@ -607,6 +607,10 @@
   color: grey;
 }
 
+.full_delivery_order_client_info_phone {
+  margin: 10px 10px 0 10px;
+}
+
 @media only screen and ( min-width: 721px ) {
 
   #all_cuisine_orders_container {
@@ -625,6 +629,10 @@
   }
 
   .close_all_cuisine_orders {
+    display: none!important;
+  }
+
+  .open_cuisine_orders {
     display: none!important;
   }
 

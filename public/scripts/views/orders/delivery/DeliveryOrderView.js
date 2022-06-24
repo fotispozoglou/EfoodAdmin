@@ -29,7 +29,7 @@ export default new class DeliveryOrderView extends View {
 
     const { _id, client, totalPrice, products, user } = this._data.order;
 
-    const { onCompleteOrder } = this._data.methods;
+    const { onCompleteOrder, onCallClient } = this._data.methods;
 
     const header =  this._generateHeader();
 
@@ -39,7 +39,11 @@ export default new class DeliveryOrderView extends View {
 
     const clientAddress = new InfoIcon( 'location-dot', client.address ).getElement();
 
-    const clientPhone = new InfoIcon( 'square-phone', client.phone ).getElement();
+    const clientPhone = new DOMElement("button")
+      .setClass('full_delivery_order_client_info_phone')
+      .setText('call')
+      .on('click', () => { onCallClient( _id ); })
+      .getElement();
 
     const commentsElement = new DOMElement("p").setClass('full_delivery_order_footer_commnets').setText( client.comments ).getElement();
 

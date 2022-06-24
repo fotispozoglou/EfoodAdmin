@@ -12,6 +12,16 @@ export const state = {
   orders: []
 }
 
+export const getClientPhone = async orderID => {
+
+  const { data, error } = await GET(`${ ORDERS_API_URL }/${ orderID }/phone`);
+
+  if ( !error ) return { data };
+
+  return { error };
+
+};
+
 export const loadDeliveryOrders = async () => {
 
   if ( state.toLoadIDS < 1 ) return { error: "Nothing To Load" };

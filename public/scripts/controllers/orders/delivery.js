@@ -33,6 +33,16 @@ const controlCompleteOrder = async orderID => {
 
 }
 
+const controlCallClient = async orderID => {
+
+  const { data, error } = await model.getClientPhone( orderID );
+
+  if ( error ) return showNotification("error getting client's phone", MESSAGE.MESSAGE_ERROR);
+
+  window.open(`tel:${ data.phone }`, '_self');
+
+};
+
 const controlRenderDeliveryOrder = async orderID => {
 
   const { order, error } = await model.loadDeliveryOrder( orderID );
@@ -43,7 +53,8 @@ const controlRenderDeliveryOrder = async orderID => {
     order,
     methods: {
       onGoBack: controlRenderDeliveryOrders,
-      onCompleteOrder: controlCompleteOrder
+      onCompleteOrder: controlCompleteOrder,
+      onCallClient: controlCallClient
     }
   }, true);
 
@@ -88,7 +99,7 @@ export const controlRenderDeliveryOrders = async () => {
     itemMethods: {
       onOrderClick: controlRenderDeliveryOrder,
       onOrderComplete: controlCompleteOrder
-    }
+    } 
   }, true);
 
   if ( model.state.toLoadIDS.length > 0 ) {

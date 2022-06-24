@@ -16,6 +16,8 @@ const Admin = require('./models/admin.js');
 
 const MongoDBStore = require("connect-mongo");
 
+const logger = require('./utils/logger.js');
+
 // MONGO STUFF 
 const dbUrl = 'mongodb://localhost:27017/efood-admin'; // process.env.DB_URL
 
@@ -87,12 +89,24 @@ app.get('/admin/login', admins.renderLogin );
 
 app.use('/admin', adminRoutes);
 
+app.use((err, req, res, next) => {
+  
+  const { statusCode = 500 } = err;
+
+  if (!err.message) err.message = 'Server Error';
+  
+  res.status( statusCode ).send(JSON.stringify({ status: GENERAL.ERROR }));
+
+});
+
 // LISTEN
 
 const port = process.env.PORT || 8080;
 
 app.listen(port, () => {
 
-  console.log("Admin Server Started");
+  logger.info("Admin Server Started")
+
+  // console.log("Admin Server Started");
 
 });

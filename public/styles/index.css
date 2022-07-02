@@ -1183,7 +1183,7 @@ tbody {
 
 .navigation_btn {
   width: max-content;
-  background-color: #dbdbdb;
+  background-color: #fbfbfb;
   margin: 40px 0 0 2.5%;
   padding: 12px;
   border-radius: 6px;
@@ -1216,8 +1216,9 @@ canvas {
 
 .chart_element {
   background-color: white;
-  margin: 20px;
   border-radius: 6px;
+  max-width: 35em;
+  margin: 30px auto;
 }
 
 @media only screen and (max-width: 500px) {

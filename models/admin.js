@@ -19,4 +19,26 @@ const AdminSchema = new Schema({
 
 AdminSchema.plugin(passportLocalMongoose);
 
+AdminSchema.statics.serializeUser = function() {
+
+  return function(user, cb) {
+
+    cb(null, user.id);
+
+  }
+
+};
+
+AdminSchema.statics.deserializeUser = function() {
+
+  const self = this;
+
+  return function(id, cb) {
+
+    self.findOne({ _id: id }, cb);
+  
+  }
+
+};
+
 module.exports = mongoose.model('Admin', AdminSchema);

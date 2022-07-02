@@ -599,16 +599,58 @@
 
 .complete_order_body {
   display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.completed_order_id {
+  height: max-content;
+  width: 100%;
+  text-align: center;
+  font-weight: bolder;
+  padding: 4px;
 }
 
 .complete_order_body_text {
   padding: 4px;
-  flex: 1;
+  margin: auto;
   color: grey;
+}
+
+.complete_order_body_info {
+  display: flex;
+  flex-direction: row;
 }
 
 .full_delivery_order_client_info_phone {
   margin: 10px 10px 0 10px;
+}
+
+.complete_order_header, .complete_order_footer {
+  width: 80px;
+  display: flex;
+  padding: 4px 0 0 0;
+}
+
+.complete_order_footer {
+  box-shadow: 0 0 4px 1px #e1e1e1;
+  background-color: #8080800a;
+}
+
+.complete_order_footer:hover {
+  cursor: pointer;
+}
+
+.completed_order_user, .show_completed_order_btn {
+  margin: auto;
+}
+
+.complete_order_header .icon {
+  height: max-content;
+}
+
+.show_completed_order_btn .icon {
+  height: max-content;
 }
 
 @media only screen and ( min-width: 721px ) {

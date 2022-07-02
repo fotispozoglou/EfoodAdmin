@@ -2,11 +2,11 @@ const { PERMISSIONS } = require('../config/permissions.js');
 
 module.exports.isAdmin = async ( req, res, next ) => {
 
-  if ( !req.user ) return res.redirect('/admin/login');
+  if ( !req.user ) return res.redirect( 303, '/admin/login');
 
-  if ( !req.user.isAdmin ) return res.redirect('/admin/login');
+  if ( !req.user.isAdmin ) return res.redirect( 303, '/admin/login');
 
-  if ( req.user.isAdmin === false ) return res.redirect('/admin/login');
+  if ( req.user.isAdmin === false ) return res.redirect( 303, '/admin/login');
 
   next();
 

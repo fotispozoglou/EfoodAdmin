@@ -38,6 +38,7 @@ db.once("open", () => {
 const indexRoutes = require('./routes/index.js');
 const adminRoutes = require('./routes/admins.js');
 const { isAdmin } = require('./middlewares/admin.js');
+const { GENERAL } = require('./config/statusCodes.js');
 
 // EJS STUFF
 app.engine('ejs', ejsMate)
@@ -94,6 +95,8 @@ app.use((err, req, res, next) => {
   const { statusCode = 500 } = err;
 
   if (!err.message) err.message = 'Server Error';
+
+  console.log(err);
   
   res.status( statusCode ).send(JSON.stringify({ status: GENERAL.ERROR }));
 

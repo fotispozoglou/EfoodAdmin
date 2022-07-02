@@ -118,8 +118,6 @@ export const controlRenderDeliveryOrders = async () => {
 
   }
 
-  model.state.newOrdersCount = 0;
-
   deliveryOrdersNumber.textContent = ``;
 
   closeMobileNavbar();

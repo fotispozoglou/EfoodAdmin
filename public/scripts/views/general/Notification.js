@@ -77,8 +77,6 @@ export default class Notification extends DOMElement {
 
   build() {
 
-    console.log(this);
-
     const textElement = new DOMElement("p").setClass('notification_text').setText( this._text ).getElement();
 
     const actions = new DOMElement("div").setClass('notification_body_actions').getElement();

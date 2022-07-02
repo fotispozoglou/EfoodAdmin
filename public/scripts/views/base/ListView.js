@@ -31,8 +31,6 @@ export default class ListView extends View {
 
   hideNoItemsItem() {
 
-    console.log("HIDDING");
-
     this._noItemsItem.remove();
 
   }
@@ -40,8 +38,6 @@ export default class ListView extends View {
   showNoItemsItem() {
 
     if ( !this._body ) return;
-
-    console.log("SHOWING");
 
     this.hideNoItemsItem();
 

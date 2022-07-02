@@ -3,8 +3,6 @@ import PendingOrdersView from '../../views/orders/pending/PendingOrdersView.js';
 import ViewManager from '../../views/ViewManager.js';
 import { closeMobileNavbar } from '../main.js';
 import { pendingOrdersNumber } from './main.js';
-import { state as cuisineState } from '../../models/orders/cuisine.js';
-import { ORDER } from '../../config/statusCodes.js';
 import { addToCorrectList } from './checker.js';
 import { showNotification } from '../general/notifications.js';
 import { MESSAGE } from '../../config/types.js';
@@ -93,8 +91,6 @@ export const controlRenderPendingOrders = async () => {
     PendingOrdersView.add( ...data.orders );
 
   }
-
-  model.state.newOrdersCount = 0;
 
   pendingOrdersNumber.textContent = ``;
 

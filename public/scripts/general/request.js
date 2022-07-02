@@ -1,3 +1,6 @@
+import { MESSAGE } from "../config/types.js";
+import { showNotification } from "../controllers/general/notifications.js";
+
 const ensureAPIToken = async () => {
 
   const localCookie = getCookie('auth_token');
@@ -41,7 +44,28 @@ const getCookie = name => {
   if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
+let hasInternet = true;
+let hasInternetError = false;
+
+const handleNoConnection = () => {
+
+  hasInternetError = true;
+
+  showNotification("no internet connection", MESSAGE.MESSAGE_ERROR);
+
+};
+
 const getRequestOptions = async ( method, body = {}) => {
+
+  if ( !navigator.onLine ) {
+
+    handleNoConnection();
+
+    return { error: Error("No Internet") };
+
+  };
+
+  hasInternetError = false;
 
   const { error = undefined } = await ensureAPIToken();
 

@@ -38,7 +38,7 @@ const controlUpdateProduct = async productID => {
 
 };
 
-const controlRenderEditProduct = async productID => {
+export const controlRenderEditProduct = async ({productID}) => {
 
   const { data: { data: product, status }, error } = await model.loadProduct( productID );
 
@@ -89,7 +89,7 @@ const controlAddProduct = async () => {
 
 };
 
-const controlRenderAddProduct = () => {
+export const controlRenderAddProduct = () => {
 
   EditProductView.setTitle('add product');
 

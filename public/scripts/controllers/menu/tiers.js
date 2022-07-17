@@ -35,7 +35,7 @@ const controlUpdateTier = async tierID => {
 
 };
 
-const controlRenderEditTier = async tierID => {
+export const controlRenderEditTier = async ({tierID}) => {
 
   if ( !ingredientsState.loadedIngredients ) await loadIngredients();
 
@@ -84,7 +84,7 @@ const controlAddTier = async () => {
 
 };
 
-const controlRenderAddTier = async () => {
+export const controlRenderAddTier = async () => {
 
   if ( !ingredientsState.loadedIngredients ) await loadIngredients();
 

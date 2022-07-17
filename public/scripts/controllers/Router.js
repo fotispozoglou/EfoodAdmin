@@ -43,7 +43,14 @@ export default class Router {
       };
     });
 
-    const match = potentialMatches.find(potentialMatch => potentialMatch.result !== null);
+    let match = potentialMatches.find(potentialMatch => potentialMatch.result !== null);
+
+    if (!match) {
+      match = {
+        route: this._routes[0],
+        result: [location.pathname]
+      };
+    }
 
     await match.route.render( this.getParams( match ) );
 
@@ -87,7 +94,11 @@ export default class Router {
 
     });
 
-    window.addEventListener('popstate', () => { this.handleRoute(  ) });
+    window.addEventListener('popstate', event => { 
+      
+      this.handleRoute(  ) 
+    
+    });
 
   }
 

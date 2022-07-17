@@ -1,6 +1,7 @@
 import ListItem from "../../base/ListItem.js";
 import DOMElement from "../../base/DOMElement.js";
 import SelectionInput from "../../general/inputs/SelectionInput.js";
+import { router } from "../../../controllers/main.js";
 
 export default class ProductsCategory extends ListItem {
   _nameElement;
@@ -36,7 +37,13 @@ export default class ProductsCategory extends ListItem {
 
     const { onClick, onRemove } = this._methods;
 
-    this._nameElement = new DOMElement("p").setClass('menu_item_name').setText( this._name ).on('click', () => { onClick( this._id ); }).getElement();
+    this._nameElement = new DOMElement("a")
+      .setClass('menu_item_name')
+      .setText( this._name )
+      .attributes(['title', 'add product'], ['href', `/productsCategories/${ this._id }`], ['role', 'link'])
+      .getElement();
+
+    router.addLinkClick( this._nameElement );
 
     const removeBtn = new DOMElement("div")
       .setClass('icon remove_item_btn fa-trash')

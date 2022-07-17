@@ -11,6 +11,8 @@ export default new class TiersView extends MenuItemsView {
   title = "tiers";
   _noSearchText = "No Tiers Found";
   _noItemsItem = new EmptyListItem({ _id: 1, name: 'No Tiers', icon: 'fa-list' }, {  });
+  _backURL = "/tiers";
+  _addURL = "/tiers/add";
 
   updateTierName( tierID, name ) {
 

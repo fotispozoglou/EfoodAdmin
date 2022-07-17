@@ -6,6 +6,7 @@ import Product from './Product.js';
 import InputElement from "../../general/inputs/InputElement.js";
 
 import { classes } from '../../../config/strings.js';
+import { router } from "../../../controllers/main.js";
 
 const { ICONS } = classes;
 
@@ -90,10 +91,11 @@ export default new class ProductsView extends MenuItemsView {
       .attributes(['title', 'make unavailable'])
       .on('click', () => { onSwitchAvailability(  ); }) 
 
-    this._addProductBtn = new DOMElement("div")
+    this._addProductBtn = new DOMElement("a")
       .setClass(`${ ICONS.PLUS } icon-fw list_action`)
-      .attributes(['title', 'add product'])
-      .on('click', () => { onAddItem(  ); })
+      .attributes(['title', 'add product'], ['href', '/products/add'], ['role', 'link']);
+
+    router.addLinkClick( this._addProductBtn.getElement() );
 
     this._selectAllBtn = new DOMElement("div")
       .setClass(`${ ICONS.LIST_CHECK } icon-fw list_action`)

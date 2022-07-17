@@ -69,6 +69,10 @@ input:focus, textarea:focus, select:focus{
   outline: none;
 }
 
+a {
+  text-decoration: none;
+}
+
 button {
   width: 190px;
   margin: 0 10px;
@@ -1170,6 +1174,10 @@ tbody {
 
 .state_arrow {
   margin: auto 5px;
+}
+
+#edit_item {
+  /* margin-top: 25px; */
 }
 
 .available_product {

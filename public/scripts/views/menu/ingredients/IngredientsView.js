@@ -11,6 +11,8 @@ export default new class IngredientsView extends MenuItemsView {
   title = "ingredients";
   _noSearchText = "No Ingredients Found";
   _noItemsItem = new EmptyListItem({ _id: 1, name: 'No Ingredients', icon: 'fa-pepper-hot' }, {  });
+  _backURL = "/ingredients";
+  _addURL = "/ingredients/add";
 
   updateIngredientName( ingredientID, name ) {
 

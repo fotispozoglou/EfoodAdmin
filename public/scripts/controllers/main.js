@@ -9,15 +9,15 @@ import { controlRenderAdminBar, controlRenderEditAdminInfo } from "./admin/admin
 import { initMenu } from "./menu/main.js";
 import { initOrders } from "./orders/main.js";
 import { initAnalytics } from "./analytics/main.js";
-import { controlRenderProducts } from "./menu/products.js";
+import { controlRenderAddProduct, controlRenderEditProduct, controlRenderProducts } from "./menu/products.js";
 import { addNotification } from "./general/notifications.js";
 import { MESSAGE } from "../config/types.js";
 import { LONG } from "../views/general/Notification.js";
 import ListItem from "../views/base/ListItem.js";
 import Router from "./Router.js";
-import { controlRenderIngredients } from "./menu/ingredients.js";
-import { controlRenderTiers } from "./menu/tiers.js";
-import { controlRenderProductsCategories } from "./menu/productsCategories.js";
+import { controlRenderAddIngredient, controlRenderEditIngredient, controlRenderIngredients } from "./menu/ingredients.js";
+import { controlRenderAddTier, controlRenderEditTier, controlRenderTiers } from "./menu/tiers.js";
+import { controlRenderAddProductsCategory, controlRenderEditProductsCategory, controlRenderProductsCategories } from "./menu/productsCategories.js";
 import { controlRenderCompletedOrders } from "./orders/completed.js";
 import { controlRenderPendingOrders } from "./orders/pending.js";
 import { controlRenderCuisineOrders } from "./orders/cuisine.js";
@@ -101,9 +101,17 @@ const init = async () => {
 
   router.route(
     { path: '/products', render: controlRenderProducts },
+    { path: '/products/add', render: controlRenderAddProduct },
+    { path: '/products/:productID', render: controlRenderEditProduct },
     { path: '/ingredients', render: controlRenderIngredients },
+    { path: '/ingredients/add', render: controlRenderAddIngredient },
+    { path: '/ingredients/:ingredientID', render: controlRenderEditIngredient },
     { path: '/tiers', render: controlRenderTiers },
+    { path: '/tiers/add', render: controlRenderAddTier },
+    { path: '/tiers/:tierID', render: controlRenderEditTier },
     { path: '/productsCategories', render: controlRenderProductsCategories },
+    { path: '/productsCategories/add', render: controlRenderAddProductsCategory },
+    { path: '/productsCategories/:productsCategoryID', render: controlRenderEditProductsCategory },
     { path: '/completed', render: controlRenderCompletedOrders },
     { path: '/pending', render: controlRenderPendingOrders },
     { path: '/cuisine', render: controlRenderCuisineOrders },

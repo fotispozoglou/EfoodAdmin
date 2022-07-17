@@ -6,10 +6,12 @@ import { classes } from '../../config/strings.js';
 const { ICONS } = classes;
 
 import InputElement from "../general/inputs/InputElement.js";
+import { router } from "../../controllers/main.js";
 
 export default class MenuItemsView extends ListView {
   _parent = document.querySelector("#main_center");
   _basicIconsContainer;
+  _addURL = "/products/add";
 
   selectAll() {
 
@@ -65,10 +67,11 @@ export default class MenuItemsView extends ListView {
       .attributes(['title', 'delete selected'])
       .on('click', () => { onRemoveItems(  ); })
 
-    this._addProductBtn = new DOMElement("div")
+    this._addProductBtn = new DOMElement("a")
       .setClass(`${ ICONS.PLUS } icon-fw list_action`)
-      .attributes(['title', 'add product'])
-      .on('click', () => { onAddItem(  ); })
+      .attributes(['title', 'add product'], ['href', this._addURL], ['role', 'link']);
+
+    router.addLinkClick( this._addProductBtn.getElement() );
 
     this._selectAllBtn = new DOMElement("div")
       .setClass(`${ ICONS.LIST_CHECK } icon-fw list_action`)

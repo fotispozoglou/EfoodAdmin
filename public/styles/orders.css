@@ -620,6 +620,7 @@
 .complete_order_body_info {
   display: flex;
   flex-direction: row;
+  margin-top: auto;
 }
 
 .full_delivery_order_client_info_phone {

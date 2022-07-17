@@ -2,6 +2,7 @@ import View from "./View.js";
 import DOMElement from "./DOMElement.js";
 
 import { classes } from '../../config/strings.js';
+import { router } from "../../controllers/main.js";
 
 const { ICONS } = classes;
 
@@ -22,6 +23,7 @@ export default class EditItemView extends View {
   _inputsElements;
   _inputs = [  ];
   _footer;
+  _backURL = '/products';
 
   onSuccess( message ) {
 
@@ -66,9 +68,20 @@ export default class EditItemView extends View {
 
   _generateHeader() {
 
-    const { onGoBack } = this._data.methods;
+    const backBtn = new DOMElement("a")
+      .setClass('edit_item_header_action icon')
+      .attributes(['href', this._backURL], ['role', 'link'])
+      .attributes(['title', 'add product'], ['href', this._backURL], ['role', 'link'])
+      .on('click', event => { 
+        
+        event.preventDefault(); 
 
-    const backBtn = new DOMElement("div").setClass('edit_item_header_action icon').on('click', () => { onGoBack(); }).getElement();
+        window.history.pushState({}, {}, this._backURL);
+
+        router.handleRoute();
+      
+      })
+      .getElement();
 
     return new DOMElement("div").setID("edit_item_header").append( backBtn );
 

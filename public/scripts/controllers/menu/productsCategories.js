@@ -34,7 +34,7 @@ const controlUpdateProductsCategory = async productsCategoryID => {
 
 };
 
-const controlRenderEditProductsCategory = async productsCategoryID => {
+export const controlRenderEditProductsCategory = async ({productsCategoryID}) => {
 
   const { data, error } = await model.loadProductsCategory( productsCategoryID );
 
@@ -84,7 +84,7 @@ const controlAddProductsCategory = async () => {
 
 };
 
-const controlRenderAddProductscategory = () => {
+export const controlRenderAddProductsCategory = () => {
 
   EditProductsCategoryView.setTitle('add products category');
 
@@ -173,7 +173,7 @@ export const controlRenderProductsCategories = async () => {
   ViewManager.render( ProductsCategoriesView, {
     items: model.state.productsCategories,
     methods: {
-      onAddItem: controlRenderAddProductscategory,
+      onAddItem: controlRenderAddProductsCategory,
       onRemoveItems: () => { controlConfirmAction( 
           `Delete ${ model.state.selectedProductsCategories.length } products categories`, 
           { 

@@ -34,7 +34,7 @@ const controlUpdateIngredient = async ingrdientID => {
 
 };
 
-const controlRenderEditIngredient = async ingredientID => {
+export const controlRenderEditIngredient = async ({ingredientID}) => {
 
   const { data, error } = await model.loadIngredient( ingredientID );
 
@@ -80,7 +80,7 @@ const controlAddIngredient = async () => {
 
 };
 
-const controlRenderAddIngredient = () => {
+export const controlRenderAddIngredient = () => {
 
   EditIngredientView.setTitle('add ingredient');
 

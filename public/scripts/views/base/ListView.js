@@ -136,6 +136,8 @@ export default class ListView extends View {
 
     }
 
+    console.log(items);
+
     this.hideNoItemsItem();
 
   }

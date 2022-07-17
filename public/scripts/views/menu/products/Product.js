@@ -2,6 +2,7 @@ import ListItem from "../../base/ListItem.js";
 import DOMElement from "../../base/DOMElement.js";
 import SelectionInput from '../../general/inputs/SelectionInput.js';
 import SwitchElement from '../../general/SwitchElement.js';
+import { router } from "../../../controllers/main.js";
 
 export default class Product extends ListItem {
   _nameElement;
@@ -20,7 +21,9 @@ export default class Product extends ListItem {
 
   }
 
-  getIsSelected() { return this._selection.isSelected(); }
+  hasExpandedActions() { return this._expandedActions; }
+
+  getIsSelected() { return this._expandedActions || this._selection.isSelected(); }
 
   updateName( name ) {
 
@@ -37,7 +40,7 @@ export default class Product extends ListItem {
 
   }
 
-  setSelected( selected ) { this._selection.update( selected ); }
+  setSelected( selected ) { console.log("TRUE"); this._selection.update( selected ); }
 
   updateAvailabilityColors(  ) {
 
@@ -61,7 +64,13 @@ export default class Product extends ListItem {
 
     this._nameElement = new DOMElement("p").setClass('menu_item_name').setText( this._name ).getElement();
 
-    const header = new DOMElement("div").setClass('menu_item_header').on('click', () => { onClick( this._id ); }).append( this._nameElement ).getElement();
+    const header = new DOMElement("a")
+      .setClass('menu_item_header')
+      .attributes(['title', 'add product'], ['href', `/products/${ this._id }`], ['role', 'link'])
+      .append( this._nameElement )
+      .getElement();
+
+    router.addLinkClick( header );
 
     const infoContainer = new DOMElement("div")
       .append( header )

@@ -1,3 +1,4 @@
+import { router } from "../../../controllers/main.js";
 import DOMElement from "../../base/DOMElement.js";
 import InfoIcon from '../../general/InfoIcon.js';
 
@@ -10,7 +11,7 @@ export default class DeliveryOrder extends DOMElement {
   _methods;
 
   constructor({ _id, orderID, client }, methods) {
-    super("div");
+    super("a");
 
     this._id = _id;
     this._client = client;
@@ -55,7 +56,7 @@ export default class DeliveryOrder extends DOMElement {
 
     const showOrderInfoBtn = new DOMElement("button")
       .setClass('info_btn delivery_order_footer_action')
-      .on('click', () => { onOrderClick( this._id ); })
+      .on('click', () => { router.go(`/delivery/${ this._id }`); })
       .setText('details')
       .getElement();
 

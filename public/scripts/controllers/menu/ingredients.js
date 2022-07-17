@@ -168,8 +168,6 @@ export const controlRenderIngredients = async () => {
 
   if ( !model.state.loadedIngredients ) await model.loadIngredients();
 
-  ViewManager.setRenderPrevious( controlRenderIngredients );
-
   ViewManager.render( IngredientsView, {
     items: model.state.ingredients,
     methods: {

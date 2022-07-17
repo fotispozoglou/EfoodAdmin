@@ -175,8 +175,6 @@ export const controlRenderTiers = async () => {
 
   if ( !model.state.loadedTiers ) await model.loadTiers();
 
-  ViewManager.setRenderPrevious( controlRenderTiers );
-
   ViewManager.render( TiersView, {
     items: model.state.tiers,
     methods: {

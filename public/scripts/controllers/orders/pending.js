@@ -72,8 +72,6 @@ export const controlNotifyNewPendingOrder = order => {
 
 export const controlRenderPendingOrders = async () => {
 
-  ViewManager.setRenderPrevious( controlRenderPendingOrders );
-
   ViewManager.render( PendingOrdersView, {
     items: model.state.orders,
     itemMethods: {

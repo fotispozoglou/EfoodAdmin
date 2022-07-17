@@ -19,11 +19,7 @@ const initializeItems = async () => {
 
 const initialiazeListeners = () => {
 
-  setSelectedButton( mobileNavbarProductsBtn );
-
   mobileNavbarProductsBtn.addEventListener('click', () => {
-
-    controlRenderProducts();
 
     setSelectedButton( mobileNavbarProductsBtn )
 
@@ -31,23 +27,17 @@ const initialiazeListeners = () => {
 
   mobileNavbarProductsCategoriesBtn.addEventListener('click', () => { 
       
-    controlRenderProductsCategories();
-
     setSelectedButton ( mobileNavbarProductsCategoriesBtn );
   
   });
 
   mobileNavbarTiersBtn.addEventListener('click', () => {
 
-    controlRenderTiers();
-
     setSelectedButton( mobileNavbarTiersBtn );
 
   });
 
   mobileNavbarIngredientsBtn.addEventListener('click', () => {
-
-    controlRenderIngredients();
 
     setSelectedButton( mobileNavbarIngredientsBtn );
 

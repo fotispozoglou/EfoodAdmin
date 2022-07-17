@@ -1,5 +1,12 @@
 import { MESSAGE } from "../config/types.js";
 import { showNotification } from "../controllers/general/notifications.js";
+let API_TOKEN = null;
+
+export const setAPIToken = ( key, loggedIn ) => {
+
+  API_TOKEN = key;
+
+};
 
 const ensureAPIToken = async () => {
 
@@ -77,7 +84,8 @@ const getRequestOptions = async ( method, body = {}) => {
     method,
     headers: {
       'Authorization': `Bearer ${token}`,
-      'Content-type': 'application/json'
+      'Content-type': 'application/json',
+      'CSRF-Token': API_TOKEN
     }
   }
 

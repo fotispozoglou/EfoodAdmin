@@ -43,7 +43,7 @@ const controlCallClient = async orderID => {
 
 };
 
-const controlRenderDeliveryOrder = async orderID => {
+export const controlRenderDeliveryOrder = async ({ orderID }) => {
 
   const { order, error } = await model.loadDeliveryOrder( orderID );
 
@@ -91,8 +91,6 @@ export const controlNotifyNewDeliveryOrder = order => {
 };
 
 export const controlRenderDeliveryOrders = async () => {
-
-  ViewManager.setRenderPrevious( controlRenderDeliveryOrders );
 
   ViewManager.render( DeliveryOrdersView, {
     items: model.state.orders,

@@ -129,8 +129,6 @@ const controlRenderCuisineManagement = async () => {
 
 export const controlRenderCuisineOrders = async () => {
 
-  ViewManager.setRenderPrevious( controlRenderCuisineOrders );
-
   ViewManager.render( CuisineHint, {
     onRenderManagement: () => { controlRenderCuisineManagement(); }
   }, true);

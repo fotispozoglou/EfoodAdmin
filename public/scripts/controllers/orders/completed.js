@@ -67,8 +67,6 @@ const controlSearchCompletedOrders = async ( value, excluded ) => {
 
 export const controlRenderCompletedOrders = async () => {
 
-  ViewManager.setRenderPrevious( controlRenderCompletedOrders );
-
   ViewManager.render( CompletedOrdersView, {
     items: [  ],
     methods: {

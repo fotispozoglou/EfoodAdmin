@@ -206,8 +206,6 @@ const controlSwitchSelectedAvailability = async (  ) => {
 
 export const controlRenderProducts = async () => {
 
-  ViewManager.setRenderPrevious( controlRenderProducts );
-
   if ( !model.state.loadedProducts ) await model.loadProducts(); 
 
   ViewManager.render( ProductsView, {

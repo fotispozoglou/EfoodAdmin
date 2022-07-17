@@ -170,8 +170,6 @@ export const controlRenderProductsCategories = async () => {
 
   if ( !model.state.loadedProductsCategories ) await model.loadProductsCategories();
 
-  ViewManager.setRenderPrevious( controlRenderProductsCategories );
-
   ViewManager.render( ProductsCategoriesView, {
     items: model.state.productsCategories,
     methods: {

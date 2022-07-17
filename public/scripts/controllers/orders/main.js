@@ -35,31 +35,23 @@ const initialiazeListeners = () => {
 
   mobileNavbarCompletedOrdersBtn.addEventListener('click', () => {
 
-    controlRenderCompletedOrders();    
-
     setSelectedButton ( mobileNavbarCompletedOrdersBtn );
 
   });
 
   mobileNavbarPendingOrdersBtn.addEventListener('click', () => { 
       
-    controlRenderPendingOrders();
-
     setSelectedButton ( mobileNavbarPendingOrdersBtn );
   
   });
 
   mobileNavbarCuisineOrdersBtn.addEventListener('click', () => {
 
-    controlRenderCuisineOrders();
-
     setSelectedButton( mobileNavbarCuisineOrdersBtn );
 
   });
 
   mobileNavbarDeliveryOrdersBtn.addEventListener('click', () => {
-
-    controlRenderDeliveryOrders();
 
     setSelectedButton( mobileNavbarDeliveryOrdersBtn );
 

@@ -64,7 +64,7 @@ module.exports.login = async (req, res) => {
 
   const token = await generateAPIAuthToken( req.user );
   res.cookie('auth_token', token, { expires: new Date( Date.now() + 10000 ) });
-  const redirectUrl = req.session.returnTo || '/';
+  const redirectUrl = req.session.returnTo || '/products';
   delete req.session.returnTo;
   res.redirect(redirectUrl);
 

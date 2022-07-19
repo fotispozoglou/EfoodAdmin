@@ -3,7 +3,6 @@ import DOMElement from '../../base/DOMElement.js';
 import InputElement from '../../general/inputs/InputElement.js';
 import CompletedOrder from './CompletedOrder.js';
 import EmptyListItem from '../../base/EmptyListItem.js';
-import AnalyticsTable from '../../general/AnalyticsTable.js';
 import NavigationButton from '../../general/NavigationButton.js';
 
 export default new class CompletedOrdersView extends ListView {

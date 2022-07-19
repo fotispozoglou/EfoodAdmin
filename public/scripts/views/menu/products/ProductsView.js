@@ -10,6 +10,8 @@ import { router } from "../../../controllers/main.js";
 
 const { ICONS } = classes;
 
+console.log("PRODUCTS");
+
 export default new class ProductsView extends MenuItemsView {
   _itemComponent = Product;
   _removeProductsBtn;

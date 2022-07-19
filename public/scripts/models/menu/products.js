@@ -1,7 +1,7 @@
 import { API_SERVER_URL } from "../../config/config.js";
 const PRODUCTS_URL = `${ API_SERVER_URL }/products`;
 
-import { GET, POST, DELETE, PUT, POST_FORM } from "../../general/request.js";
+import { GET, POST, DELETE, PUT } from "../../general/request.js";
 
 export const state = {
   products: [  ],

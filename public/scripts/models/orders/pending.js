@@ -2,7 +2,7 @@ import { API_SERVER_URL } from "../../config/config.js";
 const ORDERS_API_URL = `${ API_SERVER_URL }/orders/admin`;
 
 import { ORDER } from "../../config/statusCodes.js";
-import { GET, POST } from "../../general/request.js";
+import { POST } from "../../general/request.js";
 
 export const state = {
   orders: [],

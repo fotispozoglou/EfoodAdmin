@@ -1,5 +1,4 @@
 import DOMElement from '../../base/DOMElement.js';
-import SwitchElement from '../SwitchElement.js';
 
 export default class SwitchSelection extends DOMElement {
   _name;

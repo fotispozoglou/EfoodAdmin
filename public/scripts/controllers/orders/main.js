@@ -1,7 +1,7 @@
-const mobileNavbarCompletedOrdersBtn = document.querySelector("#mnavbar_orders_completed");
-const mobileNavbarPendingOrdersBtn = document.querySelector("#mnavbar_orders_pending");
-const mobileNavbarCuisineOrdersBtn = document.querySelector("#mnavbar_orders_cuisine");
-const mobileNavbarDeliveryOrdersBtn = document.querySelector("#mnavbar_orders_delivery");
+export const mobileNavbarCompletedOrdersBtn = document.querySelector("#mnavbar_orders_completed");
+export const mobileNavbarPendingOrdersBtn = document.querySelector("#mnavbar_orders_pending");
+export const mobileNavbarCuisineOrdersBtn = document.querySelector("#mnavbar_orders_cuisine");
+export const mobileNavbarDeliveryOrdersBtn = document.querySelector("#mnavbar_orders_delivery");
 
 export const completedOrdersNumber = document.querySelector("#mnavbar_orders_completed_number");
 export const pendingOrdersNumber = document.querySelector("#mnavbar_orders_pending_number");
@@ -10,15 +10,8 @@ export const deliveryOrdersNumber = document.querySelector("#mnavbar_orders_deli
 
 const ordersErrorIcon = document.querySelector("#orders_error_icon");
 
-import { setSelectedButton } from "../main.js";
-import { start, controlCheckOrders } from "./checker.js";
-import { controlRenderCompletedOrders } from "./completed.js";
-import { controlRenderCuisineOrders } from "./cuisine.js";
-import { controlRenderDeliveryOrders } from "./delivery.js";
+import { start } from "./checker.js";
 
-import { controlRenderPendingOrders } from "./pending.js";
-
-import { checkForNewOrders } from '../../models/orders/checker.js';
 import { initializeMakingOrders } from "../../models/orders/cuisine.js";
 
 export const setOrdersError = error => {
@@ -33,29 +26,29 @@ export const hideOrdersError = () => { ordersErrorIcon.classList.add('hidden'); 
 
 const initialiazeListeners = () => {
 
-  mobileNavbarCompletedOrdersBtn.addEventListener('click', () => {
+  // mobileNavbarCompletedOrdersBtn.addEventListener('click', () => {
 
-    setSelectedButton ( mobileNavbarCompletedOrdersBtn );
+  //   setSelectedButton ( mobileNavbarCompletedOrdersBtn );
 
-  });
+  // });
 
-  mobileNavbarPendingOrdersBtn.addEventListener('click', () => { 
+  // mobileNavbarPendingOrdersBtn.addEventListener('click', () => { 
       
-    setSelectedButton ( mobileNavbarPendingOrdersBtn );
+  //   setSelectedButton ( mobileNavbarPendingOrdersBtn );
   
-  });
+  // });
 
-  mobileNavbarCuisineOrdersBtn.addEventListener('click', () => {
+  // mobileNavbarCuisineOrdersBtn.addEventListener('click', () => {
 
-    setSelectedButton( mobileNavbarCuisineOrdersBtn );
+  //   setSelectedButton( mobileNavbarCuisineOrdersBtn );
 
-  });
+  // });
 
-  mobileNavbarDeliveryOrdersBtn.addEventListener('click', () => {
+  // mobileNavbarDeliveryOrdersBtn.addEventListener('click', () => {
 
-    setSelectedButton( mobileNavbarDeliveryOrdersBtn );
+  //   setSelectedButton( mobileNavbarDeliveryOrdersBtn );
 
-  });
+  // });
 
 };
 

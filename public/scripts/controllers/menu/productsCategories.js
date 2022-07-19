@@ -1,14 +1,13 @@
 import ProductsCategoriesView from '../../views/menu/productsCategories/ProductsCategoriesView.js';
 
-import { closeMobileNavbar, controlConfirmAction } from "../main.js";
+import { closeMobileNavbar, controlConfirmAction, setSelectedButton } from "../main.js";
 import * as model from "../../models/menu/productsCategories.js";
 import EditProductsCategoryView from '../../views/menu/productsCategories/EditProductsCategoriesView.js';
 import { GENERAL, ITEM } from '../../config/statusCodes.js';
-import { addNotification, showNotification } from '../general/notifications.js';
-import { DEFAULT_DURATION, LONG } from '../../views/general/Notification.js';
+import { showNotification } from '../general/notifications.js';
 import { MESSAGE } from '../../config/types.js';
 import ViewManager from '../../views/ViewManager.js';
-import IngredientsView from '../../views/menu/ingredients/IngredientsView.js';
+import { mobileNavbarProductsCategoriesBtn } from './main.js';
 
 const controlUpdateProductsCategory = async productsCategoryID => {
 
@@ -167,6 +166,8 @@ const controlUnselectAllProductsCategories = () => {
 };
 
 export const controlRenderProductsCategories = async () => {
+
+  setSelectedButton( mobileNavbarProductsCategoriesBtn );
 
   if ( !model.state.loadedProductsCategories ) await model.loadProductsCategories();
 

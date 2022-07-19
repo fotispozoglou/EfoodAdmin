@@ -52,7 +52,9 @@ export default class DeliveryOrder extends DOMElement {
 
     const phone = new InfoIcon( 'square-phone', this._client.phone ).getElement();
 
-    const body = new DOMElement("table").setClass('delivery_order_body').append( name, address ).getElement();
+    const comments = new InfoIcon( 'message', this._client.comments ).getElement();
+
+    const body = new DOMElement("table").setClass('delivery_order_body').append( name, address, comments ).getElement();
 
     const showOrderInfoBtn = new DOMElement("button")
       .setClass('info_btn delivery_order_footer_action')

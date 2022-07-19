@@ -1,5 +1,5 @@
 import Notification, { DEFAULT_DURATION } from "../../views/general/Notification.js";
-import { SHORT, LONG } from "../../views/general/Notification.js";
+import { LONG } from "../../views/general/Notification.js";
 import { MESSAGE } from "../../config/types.js";
 
 export const NETWORK_ERROR_NOTIFICATION = { 

@@ -8,7 +8,9 @@ const { ICONS } = classes;
 import InputElement from "../general/inputs/InputElement.js";
 import { router } from "../../controllers/main.js";
 
-export default class MenuItemsView extends ListView {
+console.log("MENU ITEMS");
+
+class MenuItemsView extends ListView {
   _parent = document.querySelector("#main_center");
   _basicIconsContainer;
   _addURL = "/products/add";
@@ -116,3 +118,5 @@ export default class MenuItemsView extends ListView {
   }
 
 };
+
+export default MenuItemsView;

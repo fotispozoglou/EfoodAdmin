@@ -1,5 +1,4 @@
 import DOMElement from "../../base/DOMElement.js";
-import InfoIcon from "../../general/InfoIcon.js";
 
 const getFormattedNumber = number => number.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
 

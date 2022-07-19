@@ -1,10 +1,10 @@
 import * as model from '../../models/orders/delivery.js';
 
-import { closeMobileNavbar } from '../main.js';
+import { closeMobileNavbar, setSelectedButton } from '../main.js';
 import DeliveryOrdersView from '../../views/orders/delivery/DeliveryOrdersView.js';
 import DeliveryOrderView from '../../views/orders/delivery/DeliveryOrderView.js';
 import ViewManager from '../../views/ViewManager.js';
-import { deliveryOrdersNumber } from './main.js';
+import { deliveryOrdersNumber, mobileNavbarDeliveryOrdersBtn } from './main.js';
 import { ORDER } from '../../config/statusCodes.js';
 import { addToCorrectList } from './checker.js';
 import { showNotification } from '../general/notifications.js';
@@ -91,6 +91,8 @@ export const controlNotifyNewDeliveryOrder = order => {
 };
 
 export const controlRenderDeliveryOrders = async () => {
+
+  setSelectedButton( mobileNavbarDeliveryOrdersBtn );
 
   ViewManager.render( DeliveryOrdersView, {
     items: model.state.orders,

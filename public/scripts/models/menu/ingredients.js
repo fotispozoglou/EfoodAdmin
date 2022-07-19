@@ -1,7 +1,7 @@
 import { API_SERVER_URL } from "../../config/config.js";
 const INGREDIENTS_API_URL = `${ API_SERVER_URL }/ingredients`;
 
-import { POST, GET, DELETE, PUT } from "../../general/request.js";
+import { GET, DELETE, PUT } from "../../general/request.js";
 
 export const state = {
   loadedIngredients: false,

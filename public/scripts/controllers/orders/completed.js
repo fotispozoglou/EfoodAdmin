@@ -1,12 +1,11 @@
 import CompletedOrdersView from "../../views/orders/completed/CompletedOrdersView.js";
 
 import * as model from '../../models/orders/completed.js';
-import { closeMobileNavbar } from "../main.js";
+import { closeMobileNavbar, setSelectedButton } from "../main.js";
 import ViewManager from "../../views/ViewManager.js";
-import { completedOrdersNumber } from "./main.js";
-import { addNotification, showNotification } from '../general/notifications.js';
+import { completedOrdersNumber, mobileNavbarCompletedOrdersBtn } from "./main.js";
+import { showNotification } from '../general/notifications.js';
 import { MESSAGE } from '../../config/types.js';
-import { DEFAULT_DURATION, LONG } from '../../views/general/Notification.js';
 import { controlRenderOrdersAnalytics } from "../analytics/orders.js";
 
 export const controlNotifyNewCompletedOrder = order => {
@@ -66,6 +65,8 @@ const controlSearchCompletedOrders = async ( value, excluded ) => {
 };
 
 export const controlRenderCompletedOrders = async () => {
+
+  setSelectedButton( mobileNavbarCompletedOrdersBtn );
 
   ViewManager.render( CompletedOrdersView, {
     items: [  ],

@@ -1,8 +1,8 @@
 import * as model from '../../models/orders/pending.js';
 import PendingOrdersView from '../../views/orders/pending/PendingOrdersView.js';
 import ViewManager from '../../views/ViewManager.js';
-import { closeMobileNavbar } from '../main.js';
-import { pendingOrdersNumber } from './main.js';
+import { closeMobileNavbar, setSelectedButton } from '../main.js';
+import { mobileNavbarPendingOrdersBtn, pendingOrdersNumber } from './main.js';
 import { addToCorrectList } from './checker.js';
 import { showNotification } from '../general/notifications.js';
 import { MESSAGE } from '../../config/types.js';
@@ -71,6 +71,8 @@ export const controlNotifyNewPendingOrder = order => {
 };
 
 export const controlRenderPendingOrders = async () => {
+
+  setSelectedButton( mobileNavbarPendingOrdersBtn );
 
   ViewManager.render( PendingOrdersView, {
     items: model.state.orders,

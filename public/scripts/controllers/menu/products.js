@@ -1,18 +1,18 @@
-import ProductsView from '../../views/menu/products/ProductsView.js';
-import EditProductView from '../../views/menu/products/EditProductView.js';
-
-import { closeMobileNavbar, controlConfirmAction } from "../main.js";
+import { closeMobileNavbar, controlConfirmAction, setSelectedButton } from "../main.js";
 import * as model from "../../models/menu/products.js";
 
 import * as tiersState from '../../models/menu/tiers.js';
 import * as productsCategoriesState from '../../models/menu/productsCategories.js';
 
 import { GENERAL, ITEM } from '../../config/statusCodes.js';
-import { addNotification, showNotification } from '../general/notifications.js';
-import { LONG } from '../../views/general/Notification.js';
+import { showNotification } from '../general/notifications.js';
 import { MESSAGE } from '../../config/types.js';
 import ViewManager from '../../views/ViewManager.js';
 import ProductAvailabilityElement from '../../views/general/ProductAvailabilityElement.js';
+import { mobileNavbarProductsBtn } from './main.js';
+
+import ProductsView from '../../views/menu/products/ProductsView.js';
+import EditProductView from '../../views/menu/products/EditProductView.js';
 
 const controlUpdateProduct = async productID => {
 
@@ -205,6 +205,8 @@ const controlSwitchSelectedAvailability = async (  ) => {
 };
 
 export const controlRenderProducts = async () => {
+
+  setSelectedButton( mobileNavbarProductsBtn );
 
   if ( !model.state.loadedProducts ) await model.loadProducts(); 
 

@@ -1,7 +1,6 @@
 import { ORDER } from "../../config/statusCodes.js";
-import { API_SERVER_URL, SERVER_IP, SERVER_URL } from "../../config/config.js";
+import { API_SERVER_URL } from "../../config/config.js";
 const ORDERS_API_URL = `${ API_SERVER_URL }/orders/admin`;
-const CLIENT_SERVER_URL = `http://${ SERVER_IP }:8000`;
 
 import { GET, POST } from '../../general/request.js';
 

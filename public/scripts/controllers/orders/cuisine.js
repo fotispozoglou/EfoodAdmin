@@ -1,12 +1,12 @@
 import * as model from '../../models/orders/cuisine.js';
 
-import { closeMobileNavbar } from '../main.js';
+import { closeMobileNavbar, setSelectedButton } from '../main.js';
 import CuisineOrdersView from '../../views/orders/cuisine/CuisineOrdersView.js';
 import ViewManager from '../../views/ViewManager.js';
-import { addNotification, showNotification } from '../general/notifications.js';
+import { showNotification } from '../general/notifications.js';
 
 import { MESSAGE } from '../../config/types.js';
-import { cuisineOrdersNumber } from './main.js';
+import { cuisineOrdersNumber, mobileNavbarCuisineOrdersBtn } from './main.js';
 import { ORDER } from '../../config/statusCodes.js';
 import { addToCorrectList } from './checker.js';
 import CuisineHint from '../../views/orders/cuisine/CuisineHint.js';
@@ -128,6 +128,8 @@ const controlRenderCuisineManagement = async () => {
 };
 
 export const controlRenderCuisineOrders = async () => {
+
+  setSelectedButton( mobileNavbarCuisineOrdersBtn );
 
   ViewManager.render( CuisineHint, {
     onRenderManagement: () => { controlRenderCuisineManagement(); }

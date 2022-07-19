@@ -1,14 +1,14 @@
 import IngredientsView from '../../views/menu/ingredients/IngredientsView.js';
 
-import { closeMobileNavbar, controlConfirmAction } from "../main.js";
+import { closeMobileNavbar, controlConfirmAction, setSelectedButton } from "../main.js";
 import * as model from "../../models/menu/ingredients.js";
 import EditIngredientView from '../../views/menu/ingredients/EditIngredientView.js';
-import { DEFAULT_DURATION, LONG } from '../../views/general/Notification.js';
 import { GENERAL, ITEM } from '../../config/statusCodes.js';
-import { addNotification, showNotification } from '../general/notifications.js';
+import { showNotification } from '../general/notifications.js';
 
 import { MESSAGE } from '../../config/types.js';
 import ViewManager from '../../views/ViewManager.js';
+import { mobileNavbarIngredientsBtn } from './main.js';
 
 const controlUpdateIngredient = async ingrdientID => {
 
@@ -165,6 +165,8 @@ const controlUnselectAllIngredients = () => {
 };
 
 export const controlRenderIngredients = async () => {
+
+  setSelectedButton( mobileNavbarIngredientsBtn );
 
   if ( !model.state.loadedIngredients ) await model.loadIngredients();
 

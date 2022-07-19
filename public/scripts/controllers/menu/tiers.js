@@ -1,5 +1,3 @@
-import TiersView from '../../views/menu/tiers/TiersView.js';
-
 import { closeMobileNavbar, controlConfirmAction, setSelectedButton } from "../main.js";
 import * as model from "../../models/menu/tiers.js";
 import EditTiersView from '../../views/menu/tiers/EditTiersView.js';
@@ -10,6 +8,7 @@ import { showNotification } from '../general/notifications.js';
 import { MESSAGE } from '../../config/types.js';
 import ViewManager from '../../views/ViewManager.js';
 import { mobileNavbarTiersBtn } from './main.js';
+import TiersView from '../../views/menu/tiers/TiersView.js';
 
 const controlUpdateTier = async tierID => {
 

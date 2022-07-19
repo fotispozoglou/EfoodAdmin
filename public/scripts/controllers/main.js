@@ -9,18 +9,18 @@ import { controlRenderAdminBar, controlRenderEditAdminInfo } from "./admin/admin
 import { initMenu } from "./menu/main.js";
 import { initOrders } from "./orders/main.js";
 import { initAnalytics } from "./analytics/main.js";
-import { controlRenderAddProduct, controlRenderEditProduct, controlRenderProducts } from "./menu/products.js";
 import ListItem from "../views/base/ListItem.js";
 import Router from "./Router.js";
-import { controlRenderAddIngredient, controlRenderEditIngredient, controlRenderIngredients } from "./menu/ingredients.js";
-import { controlRenderAddTier, controlRenderEditTier, controlRenderTiers } from "./menu/tiers.js";
-import { controlRenderAddProductsCategory, controlRenderEditProductsCategory, controlRenderProductsCategories } from "./menu/productsCategories.js";
 import { controlRenderCompletedOrders } from "./orders/completed.js";
 import { controlRenderPendingOrders } from "./orders/pending.js";
 import { controlRenderCuisineOrders } from "./orders/cuisine.js";
 import { controlRenderDeliveryOrder, controlRenderDeliveryOrders } from "./orders/delivery.js";
 import { controlRenderOrdersAnalytics } from "./analytics/orders.js";
 import { setAPIToken } from "../general/request.js";
+import { controlRenderAddTier, controlRenderEditTier, controlRenderTiers } from "./menu/tiers.js";
+import { controlRenderAddIngredient, controlRenderEditIngredient, controlRenderIngredients } from "./menu/ingredients.js";
+import { controlRenderAddProductsCategory, controlRenderEditProductsCategory, controlRenderProductsCategories } from "./menu/productsCategories.js";
+import { controlRenderAddProduct, controlRenderEditProduct, controlRenderProducts } from "./menu/products.js";
 
 export const openMobileNavbar = () => { mobileNavbar.style.left = '0%'; };
 export const closeMobileNavbar = () => { mobileNavbar.style.left = '-100%'; };

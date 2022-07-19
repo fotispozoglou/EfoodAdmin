@@ -1,5 +1,3 @@
-import ProductsCategoriesView from '../../views/menu/productsCategories/ProductsCategoriesView.js';
-
 import { closeMobileNavbar, controlConfirmAction, setSelectedButton } from "../main.js";
 import * as model from "../../models/menu/productsCategories.js";
 import EditProductsCategoryView from '../../views/menu/productsCategories/EditProductsCategoriesView.js';
@@ -8,6 +6,8 @@ import { showNotification } from '../general/notifications.js';
 import { MESSAGE } from '../../config/types.js';
 import ViewManager from '../../views/ViewManager.js';
 import { mobileNavbarProductsCategoriesBtn } from './main.js';
+
+import ProductsCategoriesView from '../../views/menu/productsCategories/ProductsCategoriesView.js';
 
 const controlUpdateProductsCategory = async productsCategoryID => {
 

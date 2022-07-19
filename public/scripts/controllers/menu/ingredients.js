@@ -1,5 +1,3 @@
-import IngredientsView from '../../views/menu/ingredients/IngredientsView.js';
-
 import { closeMobileNavbar, controlConfirmAction, setSelectedButton } from "../main.js";
 import * as model from "../../models/menu/ingredients.js";
 import EditIngredientView from '../../views/menu/ingredients/EditIngredientView.js';
@@ -9,6 +7,7 @@ import { showNotification } from '../general/notifications.js';
 import { MESSAGE } from '../../config/types.js';
 import ViewManager from '../../views/ViewManager.js';
 import { mobileNavbarIngredientsBtn } from './main.js';
+import IngredientsView from '../../views/menu/ingredients/IngredientsView.js';
 
 const controlUpdateIngredient = async ingrdientID => {
 

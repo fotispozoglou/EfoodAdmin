@@ -28,6 +28,7 @@ export default class SelectionsElement extends DOMElement {
 
     this._selections = selections;
     this._selected = selected;
+
     this._maximumSelections = maximumSelections;
     this._onSelect = onSelect;
 
@@ -36,6 +37,8 @@ export default class SelectionsElement extends DOMElement {
   hasSelected() { return ( this._selected && this._selected.length > 0 ) }
 
   getSelected() { return this._selected; }
+
+  getSelectedCount() { return this._selected.length; }
 
   getSelectedInfo( id ) { return this._selections.find( s => s._id === id ); }
 
@@ -65,7 +68,17 @@ export default class SelectionsElement extends DOMElement {
 
     }
 
-    this._maximumSelections = newSelectionsIDS.length;
+    if ( this._maximumSelections > newSelectionsIDS.length  ) this._maximumSelections = newSelectionsIDS.length;
+
+    this.updateLabel();
+
+  }
+
+  updateMaxSelections( maxSelections ) {
+
+    this._maximumSelections = maxSelections;
+
+    this.updateLabel();
 
   }
 
@@ -122,6 +135,18 @@ export default class SelectionsElement extends DOMElement {
     const title = this.getSelectedTitle();
 
     this._selectionsTitle.textContent = title;
+
+    this.updateLabel();
+
+  }
+
+  updateLabel() {
+
+    if ( this._type === "checkbox" ) {
+
+      this._selectionsLabel.textContent = `${ this._name } - ${ this._selected.length }/${ this._maximumSelections }`;
+
+    }
 
   }
 
@@ -340,6 +365,8 @@ export default class SelectionsElement extends DOMElement {
     const footer = new DOMElement("div").setClass('selections_footer').append( this._errorText.getElement() ).getElement();
 
     this.setClass('selections').append( this._header, this._body, footer ).getElement();
+
+    this.updateLabel();
 
     return this;
 

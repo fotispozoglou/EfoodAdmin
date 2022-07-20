@@ -62,6 +62,8 @@ export const controlNotifyNewPendingOrder = order => {
 
   const { _id } = order;
 
+  if ( model.state.toLoadIDS.includes( _id ) ) return;
+
   model.state.toLoadIDS.push( _id );
 
   model.state.newOrdersCount += 1;

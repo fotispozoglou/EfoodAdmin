@@ -16,11 +16,56 @@ export default new class EditTiersView extends EditItemView {
 
     const nameElement = new InputElement( "name", name ).build().setPlaceholder('name of tier');
 
-    const selectedIngredientsElement = new SelectionsElement( "defualt ingredients", "checkbox", allIngredients.filter(i => ingredients.includes( i._id )), selectedIngredients, ingredients.length ).build();
+    const maximumSelectionsElement = new NumberInput( "maximum selections", maxSelections, 1 , 0, 100 )
+      .build();
 
-    const ingredientsElement = new SelectionsElement( "ingredients", "checkbox", allIngredients, ingredients, allIngredients.length, selections => { selectedIngredientsElement.updateSelections( ...allIngredients.filter(i => selections.includes( i._id )) ) } ).build();
+    const selectedIngredientsElement = new SelectionsElement( 
+      "defualt ingredients", "checkbox", 
+      allIngredients.filter(i => ingredients.includes( i._id )), selectedIngredients, 
+      maxSelections, 
+      selections => { 
+        
+        maximumSelectionsElement.updateMinimumValue( selections.length ); 
 
-    const maximumSelectionsElement = new NumberInput( "maximum selections", maxSelections, 1 , 0, 100 ).build();
+        if ( maximumSelectionsElement.isInRange( selections.length ) ) {
+
+          maximumSelectionsElement.resetError();
+
+        }
+      
+      },
+    ).build();
+
+    const ingredientsElement = new SelectionsElement( 
+      "ingredients", 
+      "checkbox", 
+      allIngredients, 
+      ingredients, 
+      allIngredients.length, 
+      selections => { 
+        
+        selectedIngredientsElement.updateSelections( ...allIngredients.filter(i => selections.includes( i._id )) ) 
+
+        maximumSelectionsElement.updateMaximumValue( selections.length );
+
+      }).build();
+
+    maximumSelectionsElement.setMinimumValueError("can't be lower than number of default ingredients");
+    maximumSelectionsElement.setMaximumValueError("can't be greater than number of available ingredients");
+    maximumSelectionsElement.updateMinimumValue( selectedIngredients.length );
+    maximumSelectionsElement.updateMaximumValue( ingredients.length );
+
+    maximumSelectionsElement.onChange( value => { 
+      
+      if ( value < selectedIngredientsElement.getSelectedCount() ) {
+
+        return maximumSelectionsElement.onError(``);
+
+      }
+
+      selectedIngredientsElement.updateMaxSelections( value ); 
+    
+    });
 
     const minimumSelectionsElement = new NumberInput( "minimum selections", minSelections, 1, 0, 100 ).build();
 

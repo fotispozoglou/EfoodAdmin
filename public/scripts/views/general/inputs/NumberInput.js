@@ -11,6 +11,8 @@ export default class NumberInput extends InputElement {
   _minimumValue;
   _maximumValue;
   _body;
+  _minimumValueError;
+  _maximumValueError;
   _onChange = () => {}
   _defaultListener = false;
 
@@ -24,6 +26,10 @@ export default class NumberInput extends InputElement {
 
   }
 
+  setMinimumValueError( error ) { this._minimumValueError = error; }
+
+  setMaximumValueError( error ) { this._maximumValueError = error; }
+
   updateMaximumValue( newMaximumValue ) {
 
     this._maximumValue = newMaximumValue;
@@ -35,6 +41,8 @@ export default class NumberInput extends InputElement {
   updateMinimumValue( newMinimumValue ) {
 
     this._minimumValue = newMinimumValue;
+
+    if ( this._value < this._minimumValue ) this.update( this._minimumValue );
     
   }
 
@@ -48,9 +56,13 @@ export default class NumberInput extends InputElement {
 
   increase() {
 
+    if ( ( this._value + this._increment ) > this._maximumValue ) return this.onError( this._maximumValueError );
+
     this._value = this.round( this._value + this._increment, 2 );
 
     this.update( this._value );
+
+    if ( this.isInRange() ) this.resetError();
 
     this._onChange( this._value );
 
@@ -58,11 +70,15 @@ export default class NumberInput extends InputElement {
 
   decrease() {
 
+    if ( ( this._value - this._increment ) < this._minimumValue ) return this.onError( this._minimumValueError );
+
     this._value = this.round( this._value - this._increment, 2 );
 
     const fixedValue = Number( this._value ) >= 0 ? Number( this._value ) : 0;
 
     this.update( fixedValue );
+
+    if ( this.isInRange() ) this.resetError();
 
     this._onChange( this._value );
 
@@ -73,6 +89,8 @@ export default class NumberInput extends InputElement {
     this._onChange = newValue => { callback( newValue ); };
 
   }
+
+  isInRange( value = this._value ) { return value <= this._maximumValue && value >= this._minimumValue; }
 
   resetError() {
 

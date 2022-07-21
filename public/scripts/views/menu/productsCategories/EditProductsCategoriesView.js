@@ -3,6 +3,7 @@ import InputElement from "../../general/inputs/InputElement.js";
 
 export default new class EditProductsCategoriesView extends EditItemView {
   title = "edit products category";
+  _backURL = "/productsCategories";
 
   _generateInputs() {
 

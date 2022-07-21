@@ -3,19 +3,31 @@ import View from '../../base/View.js';
 import ListElement from '../../base/ListElement.js';
 import DeliveryOrderProduct from './DeliveryOrderProduct.js';
 import InfoIcon from '../../general/InfoIcon.js';
+import { router } from '../../../controllers/main.js';
 
 export default new class DeliveryOrderView extends View {
   _parent = document.querySelector("#main_center");
   _rerender = true;
+  _backURL = "/delivery";
   title = "delivery order";
 
   _generateHeader() {
 
     const { orderID, client, totalPrice } = this._data.order;
 
-    const { onGoBack } = this._data.methods;
+    const backBtn = new DOMElement("div")
+      .setClass('icon fa-arrow-left')
+      .attributes(['title', 'add product'], ['href', this._backURL], ['role', 'link'])
+      .on('click', event => { 
+        
+        event.preventDefault(); 
 
-    const backBtn = new DOMElement("div").setClass('icon fa-arrow-left').on('click', () => { onGoBack(  ); }).getElement();
+        window.history.pushState({}, {}, this._backURL);
+
+        router.handleRoute();
+      
+      })
+      .getElement();
 
     const title = new DOMElement("p").setText( orderID ).setID("full_delivery_order_header_title").getElement();
 

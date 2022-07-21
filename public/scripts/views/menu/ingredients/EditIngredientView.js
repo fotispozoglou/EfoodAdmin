@@ -5,6 +5,7 @@ import NumberInput from "../../general/inputs/NumberInput.js";
 
 export default new class EditIngredientView extends EditItemView {
   title = "edit ingredients";
+  _backURL = "/ingredients";
 
   _generateInputs() {
 

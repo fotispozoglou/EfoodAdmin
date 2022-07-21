@@ -7,6 +7,7 @@ const TYPES = [{ _id: 'checkbox', name: 'checkbox' }, { _id: 'radio', name: 'rad
 
 export default new class EditTiersView extends EditItemView {
   title = "edit tier";
+  _backURL = "/tiers";
 
   _generateInputs() {
 

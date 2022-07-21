@@ -7,6 +7,7 @@ import SwitchElement from "../../general/SwitchElement.js";
 
 export default new class EditProductView extends EditItemView {
   title = "edit product";
+  _backURL = "/products";
 
   _generateInputs() {
 

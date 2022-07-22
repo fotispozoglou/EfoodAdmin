@@ -89,7 +89,7 @@ app.use(function(req, res, next) {
   
   if ( toobusy() ) {
   
-    res.send(503, "Server Too Busy");
+    res.sendStatus(503, "Server Too Busy");
   
   } else {
   

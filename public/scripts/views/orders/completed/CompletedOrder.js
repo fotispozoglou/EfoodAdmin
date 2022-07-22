@@ -1,3 +1,4 @@
+import { router } from "../../../controllers/main.js";
 import DOMElement from "../../base/DOMElement.js";
 
 const getFormattedNumber = number => number.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
@@ -64,7 +65,10 @@ export default class CompletedOrder extends DOMElement {
 
     const body = new DOMElement("div").setClass('complete_order_body').append( orderID, bodyInformation ).getElement();
 
-    const showOrderIcon = new DOMElement("div").setClass('icon fa-eye').getElement();
+    const showOrderIcon = new DOMElement("div")
+      .setClass('icon fa-eye')
+      .on('click', () => { router.go(`/completed/${ this._id }`); })
+      .getElement();
 
     const showOrderText = new DOMElement("p").setClass('complete_order_body_text').setText('view').getElement();
 

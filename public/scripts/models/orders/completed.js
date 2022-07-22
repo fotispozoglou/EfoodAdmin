@@ -57,6 +57,20 @@ export const searchCompletedOrders = async ( value, excluded ) => {
 
 };
 
+export const loadCompletedOrder = async orderID => {
+
+  const { data, error } = await GET(`${ ORDERS_API_URL }/completed/${ orderID }`);
+
+  if ( !error ) {
+
+    return { data };
+
+  }
+
+  return { error };
+
+};
+
 export const loadCompletedOrders = async () => {
 
   const { data, error } = await GET(`${ ORDERS_API_URL }/completed?page=${ state.currentPage + 1 }&ict=${ state.initialCheckTime }`);

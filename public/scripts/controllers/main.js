@@ -11,7 +11,7 @@ import { initOrders } from "./orders/main.js";
 import { initAnalytics } from "./analytics/main.js";
 import ListItem from "../views/base/ListItem.js";
 import Router from "./Router.js";
-import { controlRenderCompletedOrders } from "./orders/completed.js";
+import { controlRenderCompletedOrder, controlRenderCompletedOrders } from "./orders/completed.js";
 import { controlRenderPendingOrders } from "./orders/pending.js";
 import { controlRenderCuisineOrders } from "./orders/cuisine.js";
 import { controlRenderDeliveryOrder, controlRenderDeliveryOrders } from "./orders/delivery.js";
@@ -110,6 +110,7 @@ const init = async () => {
     { path: '/productsCategories/add', render: controlRenderAddProductsCategory },
     { path: '/productsCategories/:productsCategoryID', render: controlRenderEditProductsCategory },
     { path: '/completed', render: controlRenderCompletedOrders },
+    { path: '/completed/:orderID', render: controlRenderCompletedOrder },
     { path: '/pending', render: controlRenderPendingOrders },
     { path: '/cuisine', render: controlRenderCuisineOrders },
     { path: '/delivery', render: controlRenderDeliveryOrders },

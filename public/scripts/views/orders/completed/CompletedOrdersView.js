@@ -87,9 +87,6 @@ export default new class CompletedOrdersView extends ListView {
 
     if ( this._hasRendered ) return this._element;
 
-    const navigateAnalytics = new NavigationButton('orders analytics', 'fa-chart-line')
-      .on('click', () => { this._data.methods.onRenderAnalytics(); });
-
     this._searchable = this._data.searchable;
 
     const header = this._generateHeader();
@@ -110,7 +107,7 @@ export default new class CompletedOrdersView extends ListView {
 
     this._hasRendered = true;
 
-    return new DOMElement("div").setID( this.id ).setClass('list').append( navigateAnalytics.build(), header, this._body.getElement() ).getElement();
+    return new DOMElement("div").setID( this.id ).setClass('list').append( header, this._body.getElement() ).getElement();
 
   }
 

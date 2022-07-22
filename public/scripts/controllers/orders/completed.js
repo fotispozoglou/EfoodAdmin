@@ -7,6 +7,7 @@ import { completedOrdersNumber, mobileNavbarCompletedOrdersBtn } from "./main.js
 import { showNotification } from '../general/notifications.js';
 import { MESSAGE } from '../../config/types.js';
 import { controlRenderOrdersAnalytics } from "../analytics/orders.js";
+import CompletedOrderView from "../../views/orders/completed/CompletedOrderView.js";
 
 export const controlNotifyNewCompletedOrder = order => {
 
@@ -63,6 +64,21 @@ const controlSearchCompletedOrders = async ( value, excluded ) => {
   return { error };
 
 };
+
+export const controlRenderCompletedOrder = async ({ orderID }) => {
+
+  const { data, error } = await model.loadCompletedOrder( orderID );
+
+  if ( error ) return showNotification("error loading order", MESSAGE.MESSAGE_ERROR );
+
+  ViewManager.render( CompletedOrderView, {
+    order: data.order,
+    methods: {
+
+    }
+  }, true);
+
+}
 
 export const controlRenderCompletedOrders = async () => {
 

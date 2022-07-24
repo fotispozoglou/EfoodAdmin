@@ -32,7 +32,7 @@ export default new class CompletedOrderView extends View {
 
     const title = new DOMElement("p").setText( orderID ).setID("full_delivery_order_header_title").getElement();
 
-    const headerNavigationContainer = new DOMElement("div").setID("full_delivery_order_header_navigation").append( backBtn, title ).getElement();
+    const headerNavigationContainer = new DOMElement("div").setID("full_completed_order_header_navigation").append( backBtn, title ).getElement();
 
     const userIcon = new DOMElement("div").setClass('fa-user icon column full_delivery_order_icon').getElement();
 

@@ -419,10 +419,28 @@
 #full_delivery_order_header_navigation {
   display: flex;
   flex-direction: row;
-  position: relative;
 }
 
 #full_delivery_order_header_navigation .icon {
+  margin: 8px;
+}
+
+#full_completed_order {
+  width: 100%;
+  max-width: 35em;
+  margin: 5px auto;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+#full_completed_order_header_navigation {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+#full_completed_order_header_navigation .icon {
   left: 15px;
   top: 10px;
   position: absolute;

@@ -8,6 +8,7 @@ import { router } from '../../../controllers/main.js';
 export default new class DeliveryOrderView extends View {
   _parent = document.querySelector("#main_center");
   _rerender = true;
+  id = "full_completed_order";
   _backURL = "/delivery";
   title = "delivery order";
 
@@ -17,7 +18,7 @@ export default new class DeliveryOrderView extends View {
 
     const backBtn = new DOMElement("div")
       .setClass('icon fa-arrow-left')
-      .attributes(['title', 'add product'], ['href', this._backURL], ['role', 'link'])
+      .attributes(['href', this._backURL], ['role', 'link'])
       .on('click', event => { 
         
         event.preventDefault(); 

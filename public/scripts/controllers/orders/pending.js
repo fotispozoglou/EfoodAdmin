@@ -90,6 +90,8 @@ export const controlRenderPendingOrders = async () => {
 
     if ( error ) return showNotification("error loading orders", MESSAGE.MESSAGE_ERROR);
 
+    model.state.newOrdersCount = 0;
+
     PendingOrdersView.add( ...data.orders );
 
   }

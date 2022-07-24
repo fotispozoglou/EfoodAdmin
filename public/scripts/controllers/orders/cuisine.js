@@ -113,7 +113,9 @@ const controlRenderCuisineManagement = async () => {
 
     if ( error ) showNotification("error loading new orders");
 
-    if ( !error ) CuisineOrdersView.add( ...data.orders );
+    model.state.newOrdersCount = 0;
+
+    CuisineOrdersView.add( ...data.orders );
 
   }
 

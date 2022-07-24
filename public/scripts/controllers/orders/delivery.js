@@ -114,6 +114,8 @@ export const controlRenderDeliveryOrders = async () => {
 
     }
 
+    model.state.newOrdersCount = 0;
+
     DeliveryOrdersView.add( ...data.orders );
 
   }

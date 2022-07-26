@@ -8,6 +8,42 @@
   transform: translate(0%, -50%);
 }
 
+#admin_account_actions {
+  position: absolute;
+  background-color: #fff;
+  z-index: 10000;
+  right: 0;
+  font-size: 1.25em;
+  box-shadow: 0 0 4px 1px #33333342;
+  margin-top: calc( 100% + 0px );
+}
+
+#close_admin_actions_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.admin_actions_item {
+  display: flex;
+  flex-direction: row;
+  padding: 8px 10px 6px 5px;
+  text-decoration: none;
+}
+
+.admin_actions_item:hover {
+  cursor: pointer;
+  background-color: #3333330a;
+}
+
+.admin_actions_item_text {
+  padding-left: 6px;
+  text-decoration: none;
+  color: #333;
+}
+
 #mnavbar_header_admin_icon {
   display: flex;
   width: 2em;

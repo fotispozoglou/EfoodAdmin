@@ -72,13 +72,9 @@ export default class PendingOrder extends DOMElement {
 
     const address = new InfoIcon( 'location-dot', this._client.address ).getElement();
 
-    const phone = new InfoIcon( 'square-phone', this._client.phone ).getElement();
-
     const price = new InfoIcon( 'euro-sign', this._totalPrice.toFixed( 2 ) ).getElement();
 
-    const time = new InfoIcon( 'clock', `${ parseInt(Math.abs(Date.now() - this._sendAt) / 1000 / 60) } minutes ago` ).getElement();
-
-    const body = new DOMElement("table").append( name, address, price, time ).getElement();
+    const body = new DOMElement("table").append( name, address, price ).getElement();
 
     const acceptBtn = new DOMElement("button").setClass('pending_order_action success_btn').setText('accept').on('click', () => { onAccept( this._id ); }).getElement();
 

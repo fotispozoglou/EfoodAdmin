@@ -52,6 +52,7 @@ const adminRoutes = require('./routes/admins.js');
 const { isAdmin, isLoggedIn } = require('./middlewares/admin.js');
 const { GENERAL } = require('./config/statusCodes.js');
 const { SERVER_IP } = require('../EfoodClient/config/config.js');
+const { renderLimiter } = require('./middlewares/limiters.js');
 
 // EJS STUFF
 app.engine('ejs', ejsMate)
@@ -67,7 +68,7 @@ app.use(mongoSanitize());
 app.use( hpp() );
 app.use(expectCt({ enforce: true, maxAge: 123 }));
 
-const secret = 'thisshouldbeabettersecret!'; // process.env.SECRET
+const secret = process.env.SECRET;
 
 const sessionConfig = {
   secret,
@@ -89,7 +90,7 @@ app.use(function(req, res, next) {
   
   if ( toobusy() ) {
   
-    res.sendStatus(503, "Server Too Busy");
+    res.send(503, "Server Too Busy");
   
   } else {
   
@@ -165,13 +166,11 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', indexRoutes);
-
-app.get('/admin/login', admins.renderLogin );
+app.get('/admin/login', renderLimiter, admins.renderLogin );
 
 app.use('/admin', adminRoutes);
 
-app.get('/*', isLoggedIn, csrfProtection, ( req, res ) => {
+app.get('/*', renderLimiter, isLoggedIn, csrfProtection, ( req, res ) => {
 
   res.render('index', { csrfToken: req.csrfToken() });
   

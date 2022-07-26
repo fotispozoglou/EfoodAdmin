@@ -26,7 +26,8 @@
 
 <script>
 
-  window.api_token = "<%- csrfToken %>"
+  window.api_token = "<%= csrfToken %>"
+  window.token = "<%= currentUser.token %>"
 
 </script>
 

@@ -84,9 +84,10 @@ export const controlConfirmAction = async ( title, confirm, effectedItems, itemC
 
 const init = async () => {
 
-  setAPIToken( window.api_token );
+  setAPIToken( window.api_token, window.token );
 
   delete window.api_token;
+  delete window.token;
 
   await loadAdminInfo();
 

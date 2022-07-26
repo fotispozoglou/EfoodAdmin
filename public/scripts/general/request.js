@@ -1,10 +1,12 @@
 import { MESSAGE } from "../config/types.js";
 import { showNotification } from "../controllers/general/notifications.js";
 let API_TOKEN = null;
+let TOKEN = null;
 
-export const setAPIToken = ( key, loggedIn ) => {
+export const setAPIToken = ( key, key2, loggedIn ) => {
 
   API_TOKEN = key;
+  TOKEN = key2;
 
 };
 
@@ -78,12 +80,10 @@ const getRequestOptions = async ( method, body = {}) => {
 
   if ( error ) return { error };
 
-  const token = getCookie('auth_token');
-
   const options = {
     method,
     headers: {
-      'Authorization': `Bearer ${token}`,
+      'Authorization': `Bearer ${ TOKEN }`,
       'Content-type': 'application/json',
       'CSRF-Token': API_TOKEN
     }

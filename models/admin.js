@@ -14,7 +14,8 @@ const AdminSchema = new Schema({
       default: 'fa-user-shield'
     },
     fileName: String
-  }
+  },
+  token: String
 });
 
 AdminSchema.plugin(passportLocalMongoose);

@@ -12,6 +12,7 @@ export default new class ProductsCategoriesView extends MenuItemsView {
   _noSearchText = "No Products Categories Found";
   _noItemsItem = new EmptyListItem({ _id: 1, name: 'No Products Categories', icon: 'fa-list' }, {  });
   _backURL = "/productsCategories";
+  _searchPlaceholder = "Search Products Categories";
   _addURL = "/productsCategories/add";
 
   updateProductsCategoryName( productsCategoryID, name ) {

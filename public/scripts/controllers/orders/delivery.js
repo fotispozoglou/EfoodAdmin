@@ -72,6 +72,10 @@ export const controlNotifyEndOfCheck = async () => {
 
     DeliveryOrdersView.add( ...orders );
 
+    model.state.newOrdersCount = 0;
+
+    deliveryOrdersNumber.textContent = ``;
+
   }
 
 };

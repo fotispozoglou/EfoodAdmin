@@ -13,6 +13,7 @@ console.log("MENU ITEMS");
 class MenuItemsView extends ListView {
   _parent = document.querySelector("#main_center");
   _basicIconsContainer;
+  _searchPlaceholder = "Search Items";
   _addURL = "/products/add";
 
   selectAll() {
@@ -101,7 +102,7 @@ class MenuItemsView extends ListView {
 
     this._searchInput.build();
     
-    this._searchInput.setPlaceholder('Search Products').addClass('list_header_search');
+    this._searchInput.setPlaceholder( this._searchPlaceholder ).addClass('list_header_search');
 
     this._basicIconsContainer = new DOMElement("div").setClass('list_header_basic_icons_container max_height_md').append( this._addProductBtn.getElement() ).getElement();
 

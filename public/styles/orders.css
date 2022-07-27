@@ -68,7 +68,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #444444cf;
+  background-color: #444444e7;
   z-index: 4000;
   display: flex;
   flex-direction: column;
@@ -173,11 +173,14 @@
   max-width: 35em;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .cuisine_order_manage_btn {
   border-radius: 4px;
   margin-left: 10px;
+  flex: 1;
+  margin: 5px;
   transition: .25s color, .25s background-color;
 }
 

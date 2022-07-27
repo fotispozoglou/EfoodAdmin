@@ -24,6 +24,7 @@ export default new class ProductsView extends MenuItemsView {
   _searching = false;
   title = "products";
   _noSearchText = "No Products Found";
+  _searchPlaceholder = "Search Products";
   _availableBtn;
   _noItemsItem = new EmptyListItem({ _id: 1, name: 'No Products', icon: 'fa-burger' }, {  });
 

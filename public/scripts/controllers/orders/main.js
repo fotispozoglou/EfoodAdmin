@@ -24,39 +24,9 @@ export const setOrdersError = error => {
 
 export const hideOrdersError = () => { ordersErrorIcon.classList.add('hidden'); };
 
-const initialiazeListeners = () => {
-
-  // mobileNavbarCompletedOrdersBtn.addEventListener('click', () => {
-
-  //   setSelectedButton ( mobileNavbarCompletedOrdersBtn );
-
-  // });
-
-  // mobileNavbarPendingOrdersBtn.addEventListener('click', () => { 
-      
-  //   setSelectedButton ( mobileNavbarPendingOrdersBtn );
-  
-  // });
-
-  // mobileNavbarCuisineOrdersBtn.addEventListener('click', () => {
-
-  //   setSelectedButton( mobileNavbarCuisineOrdersBtn );
-
-  // });
-
-  // mobileNavbarDeliveryOrdersBtn.addEventListener('click', () => {
-
-  //   setSelectedButton( mobileNavbarDeliveryOrdersBtn );
-
-  // });
-
-};
-
 export const initOrders = async () => {
 
   initializeMakingOrders();
-
-  initialiazeListeners();
 
   start();
 

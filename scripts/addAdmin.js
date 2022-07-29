@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const Admin = require('./models/admin.js');
+const Admin = require('../models/admin.js');
 
-const { PERMISSIONS } = require('./config/permissions.js');
+const { PERMISSIONS } = require('../config/permissions.js');
 
 const dbUrl = 'mongodb://localhost:27017/efood-admin'; // process.env.DB_URL
 

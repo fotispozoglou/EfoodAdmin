@@ -27,7 +27,7 @@ const MongoDBStore = require("connect-mongo");
 const logger = require('./utils/logger.js');
 
 // MONGO STUFF 
-const dbUrl = 'mongodb://localhost:27017/efood-admin'; // process.env.DB_URL
+const dbUrl = process.env.MONGO_URL || 'mongodb://localhost:27017/efood';
 
 const admins = require('./controllers/admins.js');
 
@@ -68,7 +68,8 @@ app.use(mongoSanitize());
 app.use( hpp() );
 app.use(expectCt({ enforce: true, maxAge: 123 }));
 
-const secret = process.env.SECRET;
+const secret = process.env.SECRET || 'thisisthesecret#!ASFR$';
+const port = process.env.PORT || 8080;
 
 const sessionConfig = {
   secret,
@@ -76,6 +77,7 @@ const sessionConfig = {
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7
   },
@@ -115,7 +117,7 @@ app.use(helmet.contentSecurityPolicy({
     scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
     styleSrc: ["'self'", ...stylesSources],
     fontSrc: ["'self'"],
-    connectSrc: ["'self'", `http://${ SERVER_IP }:3000`]
+    connectSrc: ["'self'", `https://efoodapi.herokuapp.com`]
   }
 }));
 
@@ -189,8 +191,6 @@ app.use((err, req, res, next) => {
 });
 
 // LISTEN
-
-const port = process.env.PORT || 8080;
 
 app.listen(port, () => {
 

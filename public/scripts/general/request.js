@@ -10,50 +10,6 @@ export const setAPIToken = ( key, key2, loggedIn ) => {
 
 };
 
-const ensureAPIToken = async () => {
-
-  const localCookie = getCookie('auth_token');
-
-  if ( localCookie === undefined || localCookie === null ) {
-
-    const { token, error } = await generateAPIToken();
-
-    if ( error ) return { error: new Error("Cannot Generate Token") };
-
-  }
-
-  return { error: undefined };
-
-};
-
-const generateAPIToken = async () => {
-
-  const options = {
-    method: "POST",
-    headers: {
-      'Content-type': 'application/json'
-    }
-  }
-
-  const { data, error } = await fetch('/admin/generate/token', options);
-
-  if ( !error ) {
-
-    return { data };
-
-  }
-
-  return { error };
-
-};
-
-const getCookie = name => {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-}
-
-let hasInternet = true;
 let hasInternetError = false;
 
 const handleNoConnection = () => {

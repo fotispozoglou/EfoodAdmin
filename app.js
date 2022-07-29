@@ -51,7 +51,6 @@ const indexRoutes = require('./routes/index.js');
 const adminRoutes = require('./routes/admins.js');
 const { isAdmin, isLoggedIn } = require('./middlewares/admin.js');
 const { GENERAL } = require('./config/statusCodes.js');
-const { SERVER_IP } = require('../EfoodClient/config/config.js');
 const { renderLimiter } = require('./middlewares/limiters.js');
 
 // EJS STUFF

@@ -70,6 +70,8 @@ app.use(expectCt({ enforce: true, maxAge: 123 }));
 const secret = process.env.SECRET || 'thisisthesecret#!ASFR$';
 const port = process.env.PORT || 8080;
 
+app.set('trust proxy', 1);
+
 const sessionConfig = {
   secret,
   resave: false,

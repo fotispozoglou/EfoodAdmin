@@ -76,10 +76,6 @@ const getRequestOptions = async ( method, body = {}) => {
 
   hasInternetError = false;
 
-  const { error = undefined } = await ensureAPIToken();
-
-  if ( error ) return { error };
-
   const options = {
     method,
     headers: {

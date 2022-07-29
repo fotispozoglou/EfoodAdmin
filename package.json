@@ -3,14 +3,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "start": "concurrently --kill-others \"nodemon --delay 3 app.js\" "
-  },
-  "nodemonConfig": {
-    "ignore": [
-      "/home/fotis/Projects/Efood/EfoodAdmin/public/fontawesome/svgs/solid/*.svg",
-      "/home/fotis/Projects/Efood/EfoodAdmin/public/fontawesome/svgs/brands/*.svg",
-      "/home/fotis/Projects/Efood/EfoodAdmin/public/fontawesome/svgs/regular/*.svg"
-    ]
+    "start": "node app.js"
   },
   "author": "fotis",
   "license": "ISC",

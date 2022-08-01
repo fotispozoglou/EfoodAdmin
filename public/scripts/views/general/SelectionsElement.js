@@ -152,7 +152,7 @@ export default class SelectionsElement extends DOMElement {
 
   showEmptyMessage() {
 
-    console.log("EMPTY");
+    
 
   }
 

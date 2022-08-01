@@ -6,7 +6,6 @@ import ViewManager from "../../views/ViewManager.js";
 import { completedOrdersNumber, mobileNavbarCompletedOrdersBtn } from "./main.js";
 import { showNotification } from '../general/notifications.js';
 import { MESSAGE } from '../../config/types.js';
-import { controlRenderOrdersAnalytics } from "../analytics/orders.js";
 import CompletedOrderView from "../../views/orders/completed/CompletedOrderView.js";
 
 export const controlNotifyNewCompletedOrder = order => {
@@ -24,8 +23,6 @@ export const controlNotifyNewCompletedOrder = order => {
 };
 
 const controlLoadNextCompletedOrders = async () => {
-
-  console.log("INTERSECTED");
 
   setTimeout(async () => {
 
@@ -88,7 +85,6 @@ export const controlRenderCompletedOrders = async () => {
     items: [  ],
     methods: {
       onIntersect: controlLoadNextCompletedOrders,
-      onRenderAnalytics: () => { controlRenderOrdersAnalytics(); },
       loadAPIOrders: controlSearchCompletedOrders
     },
     itemMethods: {

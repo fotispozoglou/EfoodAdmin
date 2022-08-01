@@ -19,8 +19,6 @@ export const initializeMakingOrders = () => {
 
   if ( orders ) state.makingOrders.push( ...orders );
 
-  console.log(state);
-
 };
 
 export const loadOrder = async orderID => {

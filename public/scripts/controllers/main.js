@@ -8,14 +8,12 @@ import ConfirmActionView from "../views/general/ConfirmActionView.js";
 import { controlRenderAdminBar, controlRenderEditAdminInfo } from "./admin/admin.js";
 import { initMenu } from "./menu/main.js";
 import { initOrders } from "./orders/main.js";
-import { initAnalytics } from "./analytics/main.js";
 import ListItem from "../views/base/ListItem.js";
 import Router from "./Router.js";
 import { controlRenderCompletedOrder, controlRenderCompletedOrders } from "./orders/completed.js";
 import { controlRenderPendingOrders } from "./orders/pending.js";
 import { controlRenderCuisineOrders } from "./orders/cuisine.js";
 import { controlRenderDeliveryOrder, controlRenderDeliveryOrders } from "./orders/delivery.js";
-import { controlRenderOrdersAnalytics } from "./analytics/orders.js";
 import { setAPIToken } from "../general/request.js";
 import { controlRenderAddTier, controlRenderEditTier, controlRenderTiers } from "./menu/tiers.js";
 import { controlRenderAddIngredient, controlRenderEditIngredient, controlRenderIngredients } from "./menu/ingredients.js";
@@ -95,8 +93,6 @@ const init = async () => {
 
   await initOrders();
 
-  await initAnalytics();
-
   router.route(
     { path: '/products', render: controlRenderProducts },
     { path: '/products/add', render: controlRenderAddProduct },
@@ -116,7 +112,6 @@ const init = async () => {
     { path: '/cuisine', render: controlRenderCuisineOrders },
     { path: '/delivery', render: controlRenderDeliveryOrders },
     { path: '/delivery/:orderID', render: controlRenderDeliveryOrder },
-    { path: '/analytics', render: controlRenderOrdersAnalytics },
     { path: '/account', render: controlRenderEditAdminInfo }
   );
 

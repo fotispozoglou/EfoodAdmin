@@ -99,8 +99,6 @@ export default class ListElement extends DOMElement {
 
     if ( this._itemsELS.length < 1 ) {
 
-      console.log("EMPTY");
-
       this.append( this._noItemsItem );
 
     }

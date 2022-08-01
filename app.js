@@ -26,8 +26,10 @@ const MongoDBStore = require("connect-mongo");
 
 const logger = require('./utils/logger.js');
 
+const IS_PRODUCTION = process.env.NODE_ENV === "production";
+
 // MONGO STUFF 
-const dbUrl = process.env.MONGO_URL || 'mongodb://localhost:27017/efood';
+const dbUrl = IS_PRODUCTION ? process.env.MONGO_URL : 'mongodb://localhost:27017/efood';
 
 const admins = require('./controllers/admins.js');
 
@@ -39,7 +41,9 @@ mongoose.connect(dbUrl, {
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
-    console.log("Database connected");
+  
+  logger.info("Admin Database Connected");
+
 });
 
 const csrfProtection = csrf();
@@ -47,11 +51,11 @@ const csrfProtection = csrf();
 module.exports.csrfProtection = csrfProtection;
 
 // DEFINE APP ROUTES
-const indexRoutes = require('./routes/index.js');
 const adminRoutes = require('./routes/admins.js');
-const { isAdmin, isLoggedIn } = require('./middlewares/admin.js');
+const { isLoggedIn } = require('./middlewares/admin.js');
 const { GENERAL } = require('./config/statusCodes.js');
 const { renderLimiter } = require('./middlewares/limiters.js');
+const { API_URL, SERVER_URL } = require('./config/config.js');
 
 // EJS STUFF
 app.engine('ejs', ejsMate)
@@ -118,7 +122,7 @@ app.use(helmet.contentSecurityPolicy({
     scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
     styleSrc: ["'self'", ...stylesSources],
     fontSrc: ["'self'"],
-    connectSrc: ["'self'", `https://efoodapi.herokuapp.com`]
+    connectSrc: ["'self'", `${ API_URL }`]
   }
 }));
 
@@ -175,7 +179,14 @@ app.use('/admin', adminRoutes);
 
 app.get('/*', renderLimiter, isLoggedIn, csrfProtection, ( req, res ) => {
 
-  res.render('index', { csrfToken: req.csrfToken() });
+  res.render('index', { 
+    csrfToken: req.csrfToken(),
+    app: {
+      enviroment: process.env.NODE_ENV,
+      API_URL: API_URL,
+      SERVER_URL: SERVER_URL
+    }
+  });
   
 });
 
@@ -185,7 +196,7 @@ app.use((err, req, res, next) => {
 
   if (!err.message) err.message = 'Server Error';
 
-  console.log(err);
+  logger.error( err.stack );
   
   res.status( statusCode ).send(JSON.stringify({ status: GENERAL.ERROR }));
 
@@ -196,7 +207,5 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
 
   logger.info("Admin Server Started")
-
-  // console.log("Admin Server Started");
 
 });

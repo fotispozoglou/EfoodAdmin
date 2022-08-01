@@ -28,6 +28,10 @@
 
   window.api_token = "<%= csrfToken %>"
   window.token = "<%= currentUser.token %>"
+  
+  window.app = '<%- JSON.stringify( app ) %>';
+
+  window.app = JSON.parse( window.app );
 
 </script>
 

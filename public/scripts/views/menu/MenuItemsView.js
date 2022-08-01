@@ -8,8 +8,6 @@ const { ICONS } = classes;
 import InputElement from "../general/inputs/InputElement.js";
 import { router } from "../../controllers/main.js";
 
-console.log("MENU ITEMS");
-
 class MenuItemsView extends ListView {
   _parent = document.querySelector("#main_center");
   _basicIconsContainer;

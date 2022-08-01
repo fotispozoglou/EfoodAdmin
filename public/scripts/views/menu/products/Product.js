@@ -40,7 +40,7 @@ export default class Product extends ListItem {
 
   }
 
-  setSelected( selected ) { console.log("TRUE"); this._selection.update( selected ); }
+  setSelected( selected ) { this._selection.update( selected ); }
 
   updateAvailabilityColors(  ) {
 

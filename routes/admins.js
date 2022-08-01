@@ -15,15 +15,6 @@ router.route('/info')
 router.route('/all')
   .get( isAdmin, admins.getAllAdmins );
 
-router.route('/generate/token')
-  .post( isAdmin, admins.getAPIToken );
-
-router.route('/permissions/enable')
-  .post( isAdmin, canEditPermissions, admins.enablePermission );
-
-router.route('/permissions/disable')
-  .post( isAdmin, canEditPermissions, admins.disablePermission );
-
 router.get('/logout', isAdmin, admins.logout);
 
 module.exports = router;

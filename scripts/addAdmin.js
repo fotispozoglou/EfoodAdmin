@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const Admin = require('../models/admin.js');
 
-const { PERMISSIONS } = require('../config/permissions.js');
+const IS_PRODUCTION = process.env.NODE_ENV === "production";
 
-const dbUrl = 'mongodb://localhost:27017/efood-admin'; // process.env.DB_URL
+const dbUrl = IS_PRODUCTION ? process.env.MONGO_URL : 'mongodb://localhost:27017/efood';
 
 mongoose.connect(dbUrl, {
   useNewUrlParser: true,
@@ -14,21 +14,21 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
   
-  addAdmin("menu", "password", [ PERMISSIONS.MENU_READ, PERMISSIONS.MENU_BULK_READ, PERMISSIONS.MENU_MODIFY, PERMISSIONS.MENU_DELETE ]);
+  addAdmin("menu", "password" );
 
 });
 
-const addAdmin = async ( username, password, permissions ) => {
+const addAdmin = async ( username, password ) => {
 
-  await register(username, password, permissions).then(() => { mongoose.connection.close() });
+  await register(username, password ).then(() => { mongoose.connection.close() });
 
 };
 
-const register = async ( username, password, permissions ) => {
+const register = async ( username, password ) => {
 
   try {
 
-    const admin = new Admin({ username, password, permissions, isAdmin: true });
+    const admin = new Admin({ username, password, isAdmin: true });
     
     const registeredAdmin = await Admin.register(admin, password);
 

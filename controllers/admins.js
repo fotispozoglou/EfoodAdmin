@@ -15,7 +15,7 @@ module.exports.getAdminInfo = async ( req, res ) => {
 
   const isLoggedIn = req.isAuthenticated();
 
-  res.send(JSON.stringify( isLoggedIn ? { info: { username: user.username, id: user._id, image: user.image.url }, isLoggedIn } : { isLoggedIn }));
+  res.send(JSON.stringify( isLoggedIn ? { info: { username: user.username, id: user._id }, isLoggedIn } : { isLoggedIn }));
 
 };
 
@@ -29,7 +29,7 @@ module.exports.updateAdminInfo = async ( req, res ) => {
 
   const { username, id } = req.body;
 
-  await Admin.updateOne({ _id: id }, { $set: { username }}, { upsert: true });
+  // await Admin.updateOne({ _id: id }, { $set: { username }}, { upsert: true });
 
   res.send(JSON.stringify({ status: GENERAL.SUCCESS }));
 

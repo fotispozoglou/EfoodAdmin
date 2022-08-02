@@ -502,8 +502,6 @@ td {
 .list_header {
   display: flex;
   flex-direction: column;
-  position: sticky;
-  top: var( --navbar-height );
   margin: 10px auto 0 auto;
   background-color: #e8e8e8;
   width: 100%;

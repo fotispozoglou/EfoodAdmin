@@ -34,9 +34,19 @@ export default new class EditProductView extends EditItemView {
 
     const availableElement = new SwitchElement( selections ).build();
 
-    const minimumQuantityElement = new NumberInput( "minimum quantity", minQuantity, 1, 0, 10 ).build().setPlaceholder('minimum quantity that can be ordered');
+    const minimumQuantityElement = new NumberInput( "minimum quantity", minQuantity, 1, 0, 10 )
+      .build()
+      .setPlaceholder('minimum quantity that can be ordered');
 
-    const quantityElement = new NumberInput( "quantity", quantity, 1, 0, 10 ).build().setPlaceholder('initial quantity');
+    const quantityElement = new NumberInput( "quantity", quantity, 1, 0, 10 )
+      .build()
+      .setPlaceholder('initial quantity');
+
+    minimumQuantityElement.onChange( value => {
+
+      quantityElement.updateMinimumValue( value );
+
+    });
 
     const descriptionElement = new InputElement( "description", description ).build().setPlaceholder('description');
 

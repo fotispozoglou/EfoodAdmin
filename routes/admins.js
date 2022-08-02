@@ -12,9 +12,6 @@ router.route('/info')
   .get( isAdmin, admins.getAdminInfo )
   .put( isAdmin, admins.updateAdminInfo );
 
-router.route('/all')
-  .get( isAdmin, admins.getAllAdmins );
-
 router.get('/logout', isAdmin, admins.logout);
 
 module.exports = router;

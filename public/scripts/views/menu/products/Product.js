@@ -54,7 +54,7 @@ export default class Product extends ListItem {
 
     this._available = available;
 
-    if ( this._selection.isSelected() ) this.updateAvailabilityColors();
+    this.updateAvailabilityColors()
 
   }
 

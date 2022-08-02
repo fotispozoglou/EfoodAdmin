@@ -63,7 +63,7 @@ const controlAddProductsCategory = async () => {
 
   if ( error || data.status === ITEM.ADDING_ERROR ) return showNotification( "error adding products category", MESSAGE.MESSAGE_ERROR );
 
-  if ( status === GENERAL.SUCCESS ) {
+  if ( data.status === GENERAL.SUCCESS ) {
 
     const { newProductsCategory } = data;
 

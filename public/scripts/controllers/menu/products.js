@@ -24,7 +24,9 @@ const controlUpdateProduct = async productID => {
 
   if ( data.status === GENERAL.SUCCESS ) {
 
-    ProductsView.updateProductName( productID, productData.name );
+    ProductsView.updateProductName( productID, data.name );
+
+    ProductsView.updateProductAvailability( productID, data.available );
 
     EditProductView.onSuccess('product updated successfully');
 

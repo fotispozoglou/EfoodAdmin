@@ -6,7 +6,7 @@ const { canEditPermissions, isAdmin } = require('../middlewares/admin.js');
 const { loginLimiter } = require('../middlewares/limiters.js');
 
 router.route('/login')
-  .post( loginLimiter, passport.authenticate('local', { failureFlash: false, failureRedirect: '/admin/login' }), admins.login);
+  .post( /* loginLimiter, */ passport.authenticate('local', { failureFlash: false, failureRedirect: '/admin/login' }), admins.login);
 
 router.route('/info')
   .get( isAdmin, admins.getAdminInfo )

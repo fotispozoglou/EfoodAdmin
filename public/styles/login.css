@@ -70,3 +70,15 @@ form {
   margin: 10px auto;
   width: 200px;
 }
+
+#login_helper_container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  padding: 6px;
+  margin: 10px auto;
+}
+
+#login_helper_container p span {
+  font-weight: bolder;
+}

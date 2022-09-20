@@ -3,7 +3,7 @@ import View from '../../base/View.js';
 import ListElement from '../../base/ListElement.js';
 import DeliveryOrderProduct from './DeliveryOrderProduct.js';
 import InfoIcon from '../../general/InfoIcon.js';
-import { router } from '../../../controllers/main.js';
+import { router } from '../../../controllers/Router.js';
 
 export default new class DeliveryOrderView extends View {
   _parent = document.querySelector("#main_center");

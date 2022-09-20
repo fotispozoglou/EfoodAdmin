@@ -14,6 +14,7 @@ export default class ListView extends View {
   _items = [];
   _body;
   id = "";
+  _loading = true;
   _searching = false;
   _searchable = false;
   _hasRendered = false;
@@ -109,7 +110,17 @@ export default class ListView extends View {
 
   add( ...items ) {
 
+    if ( this._loading ) {
+
+      this._itemsContainer.innerHTML = '';
+
+      this._loading = false;
+
+    }
+
     if ( !this._hasRendered ) return;
+
+    console.log(items);
 
     for ( const item of items ) {
 
@@ -207,6 +218,22 @@ export default class ListView extends View {
 
   }
 
+  _generateItemsSkeleton() {
+
+    const items = [];
+
+    for ( let index = 0; index <= 6; index += 1 ) {
+
+      const itemElement = new this._itemComponent( { name: "" }, this._data.itemMethods || {  } );
+
+      items.push( itemElement.buildSkeleton() );
+
+    }
+
+    return items;
+
+  }
+
   intersectionObserverCallback( entries, onIntersect ) {
 
     if ( entries[0].isIntersecting ) {
@@ -247,11 +274,13 @@ export default class ListView extends View {
 
     if ( this._data.intersect ) this._intersect = true;
 
+    this._loading = this._data.loading;
+
     this._searchable = this._data.searchable;
 
     const header = this._generateHeader();
 
-    const items = this._generateItems();
+    const items = this._loading ? this._generateItemsSkeleton() : this._generateItems();
 
     this._itemsContainer = new DOMElement("div").setClass('list_body_items').append( ...items ).getElement();
 

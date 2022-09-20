@@ -1,4 +1,4 @@
-import { closeMobileNavbar, controlConfirmAction, setSelectedButton } from "../main.js";
+import { closeMobileNavbar, controlConfirmAction, setSelectedButton } from "../general.js";
 import * as model from "../../models/menu/ingredients.js";
 import EditIngredientView from '../../views/menu/ingredients/EditIngredientView.js';
 import { GENERAL, ITEM } from '../../config/statusCodes.js';
@@ -163,48 +163,59 @@ const controlUnselectAllIngredients = () => {
 
 };
 
+const controlRemoveIngredients = () => { 
+        
+  controlConfirmAction( 
+    `Delete ${ model.state.selectedIngredients.length } ingredients`, 
+    { 
+      text: "delete", 
+      confirmExec: () => { controlRemoveSelectedIngredients(  ); } 
+    },
+    model.state.ingredients.filter( i => model.state.selectedIngredients.includes( i._id ) ).map( i => { return { _id: i._id, name: i.name } } ) 
+  ); 
+
+};
+
+const controlRemoveIngredientAsk = id => { 
+        
+  controlConfirmAction(
+    `Delete ingredient`, 
+    {  
+      text: 'delete', 
+      confirmExec: () => { controlRemoveIngredient( id ); } 
+    },
+    [ model.state.ingredients.find( i => i._id === id ) ]
+  );
+
+};
+
 export const controlRenderIngredients = async () => {
 
   setSelectedButton( mobileNavbarIngredientsBtn );
 
-  if ( !model.state.loadedIngredients ) await model.loadIngredients();
-
   ViewManager.render( IngredientsView, {
     items: model.state.ingredients,
+    loading: !model.state.loadedIngredients,
     methods: {
       onAddItem: controlRenderAddIngredient,
-      onRemoveItems: () => { 
-        
-        controlConfirmAction( 
-          `Delete ${ model.state.selectedIngredients.length } ingredients`, 
-          { 
-            text: "delete", 
-            confirmExec: () => { controlRemoveSelectedIngredients(  ); } 
-          },
-          model.state.ingredients.filter( i => model.state.selectedIngredients.includes( i._id ) ).map( i => { return { _id: i._id, name: i.name } } ) 
-        ); 
-      
-      },
+      onRemoveItems: controlRemoveIngredients,
       onSelectAll: controlSelectAllIngredients,
       onUnselectAll: controlUnselectAllIngredients
     },
     itemMethods: {
       onClick: controlRenderEditIngredient,
-      onRemove: id => { 
-        
-        controlConfirmAction(
-          `Delete ingredient`, 
-          {  
-            text: 'delete', 
-            confirmExec: () => { controlRemoveIngredient( id ); } 
-          },
-          [ model.state.ingredients.find( i => i._id === id ) ]
-        );
-
-      },
+      onRemove: controlRemoveIngredientAsk,
       onSelect: controlIngredientSelect
     }
   }, true);
+
+  if ( !model.state.loadedIngredients ) { 
+    
+    await model.loadIngredients();
+
+    IngredientsView.add( ...model.state.ingredients );
+
+  }
 
   closeMobileNavbar();
 

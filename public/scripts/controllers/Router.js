@@ -1,6 +1,6 @@
 const pathToRegex = path => new RegExp(`^${ path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") }$`);
 
-export default class Router {
+class Router {
   _routes;
   _initalQueue = [  ];
   _goingBack = false;
@@ -118,3 +118,5 @@ export default class Router {
   }
 
 }
+
+export const router = new Router();

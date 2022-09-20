@@ -1,7 +1,7 @@
 import ListItem from "../../base/ListItem.js";
 import DOMElement from "../../base/DOMElement.js";
 import SelectionInput from "../../general/inputs/SelectionInput.js";
-import { router } from "../../../controllers/main.js";
+import { router } from "../../../controllers/Router.js";
 
 export default class ProductsCategory extends ListItem {
   _nameElement;
@@ -32,6 +32,12 @@ export default class ProductsCategory extends ListItem {
   }
 
   setSelected( selected ) { this._selection.update( selected ); }
+
+  buildSkeleton() {
+
+    return new DOMElement("div").setClass('skeleton item_skeleton').getElement();
+
+  }
 
   build() {
 

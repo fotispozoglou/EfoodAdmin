@@ -8,6 +8,20 @@
     <%- include('./partials/mobile_navbar.ejs'); %>
   </div>
   <div id="main_center">
+    <div class="items_skeleton first_render_phase hidden">
+      <div class="search_bar_skeleton skeleton"></div>
+      <div class="items_action_skeleton skeleton"></div>
+    </div>
+    <div class="orders_skeleton first_render_phase hidden">
+      <div class="search_bar_skeleton skeleton"></div>
+      <div class="orders_item_skeleton skeleton"></div>
+      <div class="orders_item_skeleton skeleton"></div>
+      <div class="orders_item_skeleton skeleton"></div>
+      <div class="orders_item_skeleton skeleton"></div>
+      <div class="orders_item_skeleton skeleton"></div>
+      <div class="orders_item_skeleton skeleton"></div>
+      <div class="orders_item_skeleton skeleton"></div>
+    </div>
   </div>
   <div id="main_right">
     
@@ -17,6 +31,28 @@
 <%- include('./partials/rootClose.ejs'); %>
 
 <%- include('./partials/scripts.ejs'); %>
+
+<script>
+
+  const itemsList = ["products", "ingredients", "productsCategories", "tiers"];
+
+  const ordersList = ["completed", "pending", "delivery"];
+
+  const pathname = location.pathname.split('/')[1];
+
+  const isItems = itemsList.includes( pathname );
+
+  if ( isItems ) {
+
+    document.querySelector('.items_skeleton').classList.remove('hidden');
+
+  } else if ( !isItems && pathname !== "cuisine" ) {
+
+    document.querySelector('.orders_skeleton').classList.remove('hidden');
+
+  }
+
+</script>
 
 <script type="module" src="/scripts/controllers/menu/main.js"></script>
 

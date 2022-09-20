@@ -1,6 +1,5 @@
 import View from "../base/View.js";
 import DOMElement from "../base/DOMElement.js";
-import { router } from "../../controllers/main.js";
 
 export default new class AdminBar extends View {
   _parent = document.querySelector("#mnavbar_header_admin");

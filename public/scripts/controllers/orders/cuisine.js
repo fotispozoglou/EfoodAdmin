@@ -1,6 +1,6 @@
 import * as model from '../../models/orders/cuisine.js';
 
-import { closeMobileNavbar, setSelectedButton } from '../main.js';
+import { closeMobileNavbar, setSelectedButton } from '../general.js';
 import CuisineOrdersView from '../../views/orders/cuisine/CuisineOrdersView.js';
 import ViewManager from '../../views/ViewManager.js';
 import { showNotification } from '../general/notifications.js';

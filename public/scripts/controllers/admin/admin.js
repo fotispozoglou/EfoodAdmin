@@ -2,7 +2,7 @@ import AdminInfoEdit from "../../views/admin/AdminInfoEdit.js";
 import AdminBar from "../../views/admin/AdminBar.js";
 
 import * as model from '../../models/admin/admin.js';
-import { closeMobileNavbar } from "../main.js";
+import { closeMobileNavbar } from "../general.js";
 import ViewManager from "../../views/ViewManager.js";
 import { showNotification } from "../general/notifications.js";
 import { MESSAGE } from "../../config/types.js";
@@ -34,6 +34,12 @@ export const controlRenderEditAdminInfo = () => {
 };
 
 export const controlRenderAdminBar = () => {
+
+  document.querySelectorAll('.admin_profile_phase').forEach( element => {
+
+    element.classList.add('hidden');
+
+  });
 
   AdminBar.render({
     info: model.state.info

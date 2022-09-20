@@ -1,7 +1,7 @@
 import CompletedOrdersView from "../../views/orders/completed/CompletedOrdersView.js";
 
 import * as model from '../../models/orders/completed.js';
-import { closeMobileNavbar, setSelectedButton } from "../main.js";
+import { closeMobileNavbar, setSelectedButton } from "../general.js";
 import ViewManager from "../../views/ViewManager.js";
 import { completedOrdersNumber, mobileNavbarCompletedOrdersBtn } from "./main.js";
 import { showNotification } from '../general/notifications.js';
@@ -83,6 +83,7 @@ export const controlRenderCompletedOrders = async () => {
 
   ViewManager.render( CompletedOrdersView, {
     items: [  ],
+    loading: !model.state.loadedCompletedOrders,
     methods: {
       onIntersect: controlLoadNextCompletedOrders,
       loadAPIOrders: controlSearchCompletedOrders

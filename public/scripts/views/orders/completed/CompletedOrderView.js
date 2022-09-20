@@ -1,8 +1,7 @@
-import { router } from '../../../controllers/main.js';
+import { router } from '../../../controllers/Router.js';
 import DOMElement from '../../base/DOMElement.js';
 import ListElement from '../../base/ListElement.js';
 import View from '../../base/View.js';
-import IconElement from '../../general/IconElement.js';
 import InfoIcon from '../../general/InfoIcon.js';
 import CompletedOrderProduct from './CompletedOrderProduct.js';
 

@@ -2,7 +2,7 @@ import ListItem from "../../base/ListItem.js";
 import DOMElement from "../../base/DOMElement.js";
 import SelectionInput from '../../general/inputs/SelectionInput.js';
 import SwitchElement from '../../general/SwitchElement.js';
-import { router } from "../../../controllers/main.js";
+import { router } from "../../../controllers/Router.js";
 
 export default class Product extends ListItem {
   _nameElement;
@@ -55,6 +55,12 @@ export default class Product extends ListItem {
     this._available = available;
 
     this.updateAvailabilityColors()
+
+  }
+
+  buildSkeleton() {
+
+    return new DOMElement("div").setClass('skeleton item_skeleton').getElement();
 
   }
 

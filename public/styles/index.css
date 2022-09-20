@@ -408,6 +408,7 @@ td {
 }
 
 #navbar {
+  min-height: 56px;
   display: flex;
   flex-direction: column;
   position: sticky;
@@ -1246,6 +1247,85 @@ canvas {
   margin: 20px auto 0 auto;
 }
 
+.skeleton {
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+.admin_profile_icon {
+  display: flex;
+  width: 2em;
+  height: 2em;
+  border-radius: 5px;
+  margin: auto 0px auto 0;
+}
+
+.items_skeleton {
+  width: 100%;
+  max-width: 35em;
+  margin: auto;
+  margin-top: 40px;
+}
+
+.search_bar_skeleton {
+  width: 95%;
+  margin: 10px auto;
+  height: 2rem;
+  border-radius: 4px;
+}
+
+.items_action_skeleton {
+  width: 2em;
+  height: 2em;
+  border-radius: 4px;
+  margin-left: 2.5%;
+}
+
+.orders_skeleton {
+  width: 100%;
+  max-width: 35em;
+  margin: auto;
+  margin-top: 40px;
+}
+
+.orders_item_skeleton {
+  width: 95%;
+  border-radius: 4px;
+  margin: 10px auto;
+  height: 4em;
+}
+
+.orders_skeleton .search_bar_skeleton {
+  margin: 10px auto !important;
+}
+
+.title_text {
+  text-align: center;
+  margin: auto auto 10px auto!important;
+  background-color: #c44b4b;
+  padding: 12px;
+  border-radius: 4px;
+  color: white;
+  font-weight: bolder;
+}
+
+.skeleton_title_text {
+  width: 120px;
+  height: 0.8rem;
+  padding: 6px;
+}
+
+@keyframes skeleton-loading {
+  
+  0% {
+    background-color: hsl( 200, 20%, 70% );
+  }
+
+  100% {
+    background-color: hsl( 200, 20%, 95% );
+  }
+
+}
+
 @media only screen and (max-width: 500px) {
 
   .list_item_name {
@@ -1278,6 +1358,10 @@ canvas {
 
   #navbar_title {
     margin: auto;
+  }
+
+  .title_text:empty {
+    margin: auto!important;
   }
 
   #navbar_logo_container {

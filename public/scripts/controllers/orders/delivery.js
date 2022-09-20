@@ -1,6 +1,6 @@
 import * as model from '../../models/orders/delivery.js';
 
-import { closeMobileNavbar, setSelectedButton } from '../main.js';
+import { closeMobileNavbar, setSelectedButton } from '../general.js';
 import DeliveryOrdersView from '../../views/orders/delivery/DeliveryOrdersView.js';
 import DeliveryOrderView from '../../views/orders/delivery/DeliveryOrderView.js';
 import ViewManager from '../../views/ViewManager.js';

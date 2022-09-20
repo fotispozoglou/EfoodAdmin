@@ -1,4 +1,4 @@
-import { router } from "../../../controllers/main.js";
+import { router } from "../../../controllers/Router.js";
 import DOMElement from "../../base/DOMElement.js";
 import InfoIcon from '../../general/InfoIcon.js';
 

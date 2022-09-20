@@ -180,6 +180,17 @@
   color: #a24646;
 }
 
+.item_skeleton {
+  height: 2em;
+  margin: 10px auto;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  max-width: 35em;
+  width: 95%;
+}
+
 @media only screen and (min-width: 500px) {
 
   

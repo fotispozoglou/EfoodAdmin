@@ -1,4 +1,4 @@
-import { router } from "../../../controllers/main.js";
+import { router } from "../../../controllers/Router.js";
 import DOMElement from "../../base/DOMElement.js";
 
 const getFormattedNumber = number => number.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});

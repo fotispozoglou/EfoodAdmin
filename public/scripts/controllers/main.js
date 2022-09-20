@@ -3,13 +3,8 @@ let openMobileNavbarBtn;
 const closeMobileNavbarBtn = document.querySelector("#close_mnavbar");
 const mnavbar = document.querySelector("#mnavbar");
 
-import { loadAdminInfo } from "../models/admin/admin.js";
-import ConfirmActionView from "../views/general/ConfirmActionView.js";
 import { controlRenderAdminBar, controlRenderEditAdminInfo } from "./admin/admin.js";
-import { initMenu } from "./menu/main.js";
-import { initOrders } from "./orders/main.js";
-import ListItem from "../views/base/ListItem.js";
-import Router from "./Router.js";
+import { router } from "./Router.js";
 import { controlRenderCompletedOrder, controlRenderCompletedOrders } from "./orders/completed.js";
 import { controlRenderPendingOrders } from "./orders/pending.js";
 import { controlRenderCuisineOrders } from "./orders/cuisine.js";
@@ -19,23 +14,10 @@ import { controlRenderAddTier, controlRenderEditTier, controlRenderTiers } from 
 import { controlRenderAddIngredient, controlRenderEditIngredient, controlRenderIngredients } from "./menu/ingredients.js";
 import { controlRenderAddProductsCategory, controlRenderEditProductsCategory, controlRenderProductsCategories } from "./menu/productsCategories.js";
 import { controlRenderAddProduct, controlRenderEditProduct, controlRenderProducts } from "./menu/products.js";
-
-export const openMobileNavbar = () => { mobileNavbar.style.left = '0%'; };
-export const closeMobileNavbar = () => { mobileNavbar.style.left = '-100%'; };
-
-export let selectedOption;
-
-export const router = new Router();
-
-export const setSelectedButton = toSelect => {
-
-  if ( selectedOption ) selectedOption.classList.remove('selected_mnavbar_sub_option');
-
-  selectedOption = toSelect;
-
-  selectedOption.classList.add('selected_mnavbar_sub_option');
-
-};
+import { loadAdminInfo } from "../models/admin/admin.js";
+import { initOrders } from "./orders/main.js";
+import { initMenu } from "./menu/main.js";
+import { openMobileNavbar, closeMobileNavbar } from "./general.js";
 
 const initialiazeListeners = () => {
 
@@ -65,20 +47,7 @@ const initialiazeListeners = () => {
 
   document.documentElement.style.setProperty('--navbar-height', `${navbar.getClientRects()[0].height}px`);
 
-};
-
-export const controlConfirmAction = async ( title, confirm, effectedItems, itemComponent = ListItem ) => {
-
-  document.querySelector("body").classList.add('hide_overflow');
-
-  ConfirmActionView.render({
-    title,
-    confirm,
-    effectedItems,
-    itemComponent
-  });
-
-} 
+}; 
 
 const init = async () => {
 
@@ -86,12 +55,6 @@ const init = async () => {
 
   delete window.api_token;
   delete window.token;
-
-  await loadAdminInfo();
-
-  await initMenu();
-
-  await initOrders();
 
   router.route(
     { path: '/products', render: controlRenderProducts },
@@ -115,7 +78,19 @@ const init = async () => {
     { path: '/account', render: controlRenderEditAdminInfo }
   );
 
+  document.querySelectorAll('.first_render_phase').forEach( element => {
+
+    element.classList.add('hidden')
+
+  });
+
   router.init();
+
+  await loadAdminInfo();
+
+  await initMenu();
+
+  await initOrders();
 
   controlRenderAdminBar();
 

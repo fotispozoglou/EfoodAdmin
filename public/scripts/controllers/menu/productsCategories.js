@@ -1,4 +1,4 @@
-import { closeMobileNavbar, controlConfirmAction, setSelectedButton } from "../main.js";
+import { closeMobileNavbar, controlConfirmAction, setSelectedButton } from "../general.js";
 import * as model from "../../models/menu/productsCategories.js";
 import EditProductsCategoryView from '../../views/menu/productsCategories/EditProductsCategoriesView.js';
 import { GENERAL, ITEM } from '../../config/statusCodes.js';
@@ -165,45 +165,59 @@ const controlUnselectAllProductsCategories = () => {
 
 };
 
+const controlRemoveProductsCategories = () => {
+
+  controlConfirmAction( 
+    `Delete ${ model.state.selectedProductsCategories.length } products categories`, 
+    { 
+      text: 'delete', 
+      confirmExec: () => { controlRemoveSelectedProductsCategories(  ); }  
+    },
+    model.state.productsCategories.filter( pc => model.state.selectedProductsCategories.includes( pc._id ) ).map( pc => { return { _id: pc._id, name: pc.name } } )
+  );
+
+};
+
+const controlRemoveProductsCategoryAsk = id => { 
+        
+  controlConfirmAction(
+    `Delete products category`, 
+    { 
+      text: 'delete', 
+      confirmExec: () => { controlRemoveProductsCategory( id ); } 
+    },
+    [ model.state.productsCategories.find( pc => pc._id === id ) ]
+  );
+
+};
+
 export const controlRenderProductsCategories = async () => {
 
   setSelectedButton( mobileNavbarProductsCategoriesBtn );
 
-  if ( !model.state.loadedProductsCategories ) await model.loadProductsCategories();
-
   ViewManager.render( ProductsCategoriesView, {
     items: model.state.productsCategories,
+    loding: !model.state.loadedProductsCategories,
     methods: {
       onAddItem: controlRenderAddProductsCategory,
-      onRemoveItems: () => { controlConfirmAction( 
-          `Delete ${ model.state.selectedProductsCategories.length } products categories`, 
-          { 
-            text: 'delete', 
-            confirmExec: () => { controlRemoveSelectedProductsCategories(  ); }  
-          },
-          model.state.productsCategories.filter( pc => model.state.selectedProductsCategories.includes( pc._id ) ).map( pc => { return { _id: pc._id, name: pc.name } } )
-        ) 
-      },
+      onRemoveItems: controlRemoveProductsCategories,
       onSelectAll: controlSelectAllProductsCategories,
       onUnselectAll: controlUnselectAllProductsCategories
     },
     itemMethods: {
       onClick: controlRenderEditProductsCategory,
-      onRemove: id => { 
-        
-        controlConfirmAction(
-          `Delete products category`, 
-          { 
-            text: 'delete', 
-            confirmExec: () => { controlRemoveProductsCategory( id ); } 
-          },
-          [ model.state.productsCategories.find( pc => pc._id === id ) ]
-        );
-
-      },
+      onRemove: controlRemoveProductsCategoryAsk,
       onSelect: controlProductsCategorySelect
     }
   }, true);
+
+  if ( !model.state.loadedProductsCategories ) {
+    
+    await model.loadProductsCategories();
+
+    ProductsCategoriesView.add( ...model.state.productsCategories );
+
+  }
 
   closeMobileNavbar();
 

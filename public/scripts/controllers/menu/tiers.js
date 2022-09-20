@@ -1,4 +1,4 @@
-import { closeMobileNavbar, controlConfirmAction, setSelectedButton } from "../main.js";
+import { closeMobileNavbar, controlConfirmAction, setSelectedButton } from "../general.js";
 import * as model from "../../models/menu/tiers.js";
 import EditTiersView from '../../views/menu/tiers/EditTiersView.js';
 
@@ -170,48 +170,59 @@ const controlUnselectAllTiers = () => {
 
 };
 
+const controlRemoveTiers = () => { 
+        
+  controlConfirmAction( 
+    `Delete ${ model.state.selectedTiers.length } tiers`, 
+    { 
+      text: 'delete', 
+      confirmExec: () => { controlRemoveSelectedTiers(  ); } 
+    },
+    model.state.tiers.filter( t => model.state.selectedTiers.includes( t._id ) ).map( t => { return { _id: t._id, name: t.name } } ) 
+  );
+
+};
+
+const controlRemoveTierAsk = id => { 
+        
+  controlConfirmAction(
+    `Delete tier`, 
+    { 
+      text: 'delete', 
+      confirmExec: () => { controlRemoveTier( id ); } 
+    },
+    [ model.state.tiers.find( t => t._id === id ) ]
+  );
+
+};
+
 export const controlRenderTiers = async () => {
 
   setSelectedButton( mobileNavbarTiersBtn );
 
-  if ( !model.state.loadedTiers ) await model.loadTiers();
-
   ViewManager.render( TiersView, {
     items: model.state.tiers,
+    loading: !model.state.loadedTiers,
     methods: {
       onAddItem: controlRenderAddTier,
-      onRemoveItems: () => { 
-        
-        controlConfirmAction( 
-          `Delete ${ model.state.selectedTiers.length } tiers`, 
-          { 
-            text: 'delete', 
-            confirmExec: () => { controlRemoveSelectedTiers(  ); } 
-          },
-          model.state.tiers.filter( t => model.state.selectedTiers.includes( t._id ) ).map( t => { return { _id: t._id, name: t.name } } ) 
-        );
-
-      },
+      onRemoveItems: controlRemoveTiers,
       onSelectAll: controlSelectAllTiers,
       onUnselectAll: controlUnselectAllTiers
     },
     itemMethods: {
       onClick: controlRenderEditTier,
-      onRemove: id => { 
-        
-        controlConfirmAction(
-          `Delete tier`, 
-          { 
-            text: 'delete', 
-            confirmExec: () => { controlRemoveTier( id ); } 
-          },
-          [ model.state.tiers.find( t => t._id === id ) ]
-        );
-
-      },
+      onRemove: controlRemoveTierAsk,
       onSelect: controlTierSelect
     }
   }, true);
+
+  if ( !model.state.loadedTiers ) {
+    
+    await model.loadTiers();
+
+    TiersView.add( ...model.state.tiers );
+
+  }
 
   closeMobileNavbar();
 

@@ -2,7 +2,7 @@ import View from "./View.js";
 import DOMElement from "./DOMElement.js";
 
 import { classes } from '../../config/strings.js';
-import { router } from "../../controllers/main.js";
+import { router } from "../../controllers/Router.js";
 
 const { ICONS } = classes;
 

@@ -1,4 +1,4 @@
-import { closeMobileNavbar, controlConfirmAction, setSelectedButton } from "../main.js";
+import { closeMobileNavbar, controlConfirmAction, setSelectedButton } from "../general.js";
 import * as model from "../../models/menu/products.js";
 
 import * as tiersState from '../../models/menu/tiers.js';
@@ -206,62 +206,75 @@ const controlSwitchSelectedAvailability = async (  ) => {
 
 };
 
+const controlRemoveProducts = async () => {
+
+  controlConfirmAction(
+    `Delete ${ model.state.selectedProducts.length } products`, 
+    { 
+      text: 'delete', 
+      confirmExec: () => { controlRemoveSelectedProducts(  ); }
+    },
+    model.state.products.filter( p => model.state.selectedProducts.includes( p._id ) ).map( p => { return { _id: p._id, name: p.name } } )
+  );
+
+};
+
+const controlSwitchProductsAvailability = () => {
+
+  controlConfirmAction(
+    `Switch Availability Of ${ model.state.selectedProducts.length } Products`, 
+    { 
+      text: 'delete', 
+      confirmExec: () => { controlSwitchSelectedAvailability(  ); },
+    },
+    model.state.products.filter( p => model.state.selectedProducts.includes( p._id ) ).map( p => { return { _id: p._id, name: p.name, available: p.available } } ),
+    ProductAvailabilityElement
+  );
+
+};
+
+const controlRemoveProductAsk = id => {
+
+  controlConfirmAction(
+    `Delete product`, 
+    { 
+      text: 'delete', 
+      confirmExec: () => { controlRemoveProduct( id ); } 
+    },
+    [ model.state.products.find( p => p._id === id ) ]
+  ); 
+
+};
+
 export const controlRenderProducts = async () => {
 
   setSelectedButton( mobileNavbarProductsBtn );
 
-  if ( !model.state.loadedProducts ) await model.loadProducts(); 
-
   ViewManager.render( ProductsView, {
     items: model.state.products,
+    loading: !model.state.loadedProducts,
     methods: {
       onAddItem: controlRenderAddProduct,
-      onRemoveItems: () => { 
-        
-        controlConfirmAction(
-          `Delete ${ model.state.selectedProducts.length } products`, 
-          { 
-            text: 'delete', 
-            confirmExec: () => { controlRemoveSelectedProducts(  ); }
-          },
-          model.state.products.filter( p => model.state.selectedProducts.includes( p._id ) ).map( p => { return { _id: p._id, name: p.name } } )
-        );
-
-      },
+      onRemoveItems: controlRemoveProducts,
       onSelectAll: controlSelectAllProducts,
       onUnselectAll: controlUnselectAllProducts,
-      onSwitchAvailability: () => { 
-        
-        controlConfirmAction(
-          `Switch Availability Of ${ model.state.selectedProducts.length } Products`, 
-          { 
-            text: 'delete', 
-            confirmExec: () => { controlSwitchSelectedAvailability(  ); },
-          },
-          model.state.products.filter( p => model.state.selectedProducts.includes( p._id ) ).map( p => { return { _id: p._id, name: p.name, available: p.available } } ),
-          ProductAvailabilityElement
-        );
-
-      }
+      onSwitchAvailability: controlSwitchProductsAvailability
     },
     itemMethods: {
       onClick: controlRenderEditProduct,
-      onRemove: id => { 
-        
-        controlConfirmAction(
-          `Delete product`, 
-          { 
-            text: 'delete', 
-            confirmExec: () => { controlRemoveProduct( id ); } 
-          },
-          [ model.state.products.find( p => p._id === id ) ]
-        ); 
-
-      },
+      onRemove: controlRemoveProductAsk,
       onSelect: controlProductSelect,
       onChangeAvailability: ( id, value ) => { controlChangeProductAvailability( id, value ); }
     }
   }, true);
+
+  if ( !model.state.loadedProducts ) {
+    
+    await model.loadProducts(); 
+
+    ProductsView.add( ...model.state.products );
+
+  }
 
   closeMobileNavbar();
 

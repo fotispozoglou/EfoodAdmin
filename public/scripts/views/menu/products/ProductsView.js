@@ -6,7 +6,7 @@ import Product from './Product.js';
 import InputElement from "../../general/inputs/InputElement.js";
 
 import { classes } from '../../../config/strings.js';
-import { router } from "../../../controllers/main.js";
+import { router } from "../../../controllers/Router.js";
 
 const { ICONS } = classes;
 

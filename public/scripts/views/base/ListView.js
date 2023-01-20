@@ -120,8 +120,6 @@ export default class ListView extends View {
 
     if ( !this._hasRendered ) return;
 
-    console.log(items);
-
     for ( const item of items ) {
 
       const itemElement = new this._itemComponent( item, this._data.itemMethods || {  } );
